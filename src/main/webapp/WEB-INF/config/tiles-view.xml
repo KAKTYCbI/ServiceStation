@@ -15,6 +15,10 @@
 		<put-attribute name="title" value="ServiceStation - Sign In" />
 		<put-attribute name="body" value="/WEB-INF/views/user/login.jsp" />
 	</definition>
+	<definition name="registration" extends="base.definition">
+		<put-attribute name="title" value="ServiceStation - Sign Out" />
+		<put-attribute name="body" value="/WEB-INF/views/user/registration.jsp" />
+	</definition>
 	
 	<definition name="denied" extends="base.definition">
 		<put-attribute name="title" value="Project Name - Access Denied" />

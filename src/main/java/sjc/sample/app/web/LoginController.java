@@ -33,6 +33,11 @@ public class LoginController {
 	public String denied() {
 		return "denied";
 	}
+	
+	@RequestMapping(value = { "/registration" }, method = { RequestMethod.GET })
+	public String getRegistration() {
+		return "registration";
+	}
 
 	@RequestMapping(value = "/login/failure", method = RequestMethod.GET)
 	public String loginerror(ModelMap model) {

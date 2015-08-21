@@ -35,4 +35,5 @@
 			<input name="submit" type="submit" class="btn btn-primary" value=" Sign In " />
 		</div>
 	</div>
+	<a href="registration">Sign Out</a>
 </form>
