@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<definition name="base.definition" template="/WEB-INF/tiles-base/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/tiles-base/footer.jsp" />
+	</definition>
+
+	<definition name="login" extends="base.definition">
+		<put-attribute name="title" value="Project Name - Sign In" />
+		<put-attribute name="body" value="/WEB-INF/views/user/login.jsp" />
+	</definition>
+	
+	<definition name="denied" extends="base.definition">
+		<put-attribute name="title" value="Project Name - Access Denied" />
+		<put-attribute name="body" value="/WEB-INF/views/user/denied.jsp" />
+		<put-attribute name="header" value="" />
+		<put-attribute name="menu" value="" />
+		<put-attribute name="footer" value="/WEB-INF/tiles-base/footer.jsp" />
+	</definition>
+	
+	<definition name="base.error" template="/WEB-INF/views/error.jsp"/>
+
+	<definition name="custom.error" template="/WEB-INF/views/error-custom.jsp"/>
+	
+	<definition name="profile" extends="base.definition">
+		<put-attribute name="title" value="User Profile ${user.name} - no support" />
+		<put-attribute name="body" value="/WEB-INF/views/user/profile.jsp" />
+	</definition>
+
+	<definition name="client.list" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="body" value="/WEB-INF/views/client/client-list.jsp" />
+	</definition>
+
+	<definition name="client.form" extends="base.definition">
+		<put-attribute name="title" expression="${clients.manager.title}" />
+		<put-attribute name="body" value="/WEB-INF/views/client/client-form.jsp" />
+	</definition>
+
+	<definition name="client.form.edit" extends="base.definition">
+		<put-attribute name="title" expression="${clients.manager.title}" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/client/client-form-edit.jsp" />
+	</definition>
+
+	<definition name="client.details" extends="base.definition">
+		<put-attribute name="title" expression="${clients.manager.title}" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/client/client-details.jsp" />
+	</definition>
+
+</tiles-definitions>
