@@ -12,7 +12,7 @@
 	</definition>
 
 	<definition name="login" extends="base.definition">
-		<put-attribute name="title" value="Project Name - Sign In" />
+		<put-attribute name="title" value="ServiceStation - Sign In" />
 		<put-attribute name="body" value="/WEB-INF/views/user/login.jsp" />
 	</definition>
 	

@@ -3,5 +3,5 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/footer.css"/>" />
 
 <div id="footer">
-	<p class="text-muted"> &copy; 2015 Java Training</p>
+	
 </div>

@@ -17,20 +17,23 @@
 
 	<title><tiles:insertAttribute name="title" ignore="true" /></title>
 	
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>" />
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap/bootstrap-theme.css"/>" />
- 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/layout.css"/>" />
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/layout.css"/>" />
  	
  	<script src="<c:url value="/resources/js/jquery.js" />"></script>
  	<script src="<c:url value="/resources/js/json2.js" />"></script>
- 	<script src="<c:url value="/resources/js/bootstrap.js" />"></script>
+ 	
 	<script src="<c:url value="/resources/js/main.js" />"></script>
 </head>
 <body>
+ 
+<div id="wrapper">
+   	
+   	<tiles:insertAttribute name="header" />
+		
+	<div id="wrapper1">
+	<div id="middle">
 	<div class="container">
-		<div class="row">
-			<tiles:insertAttribute name="header" />
-		</div>
+		<div id="content">
 		<div class="row" >
 			<security:authorize access="isAuthenticated()">
 				<div class="col-md-3">
@@ -50,9 +53,13 @@
 			</security:authorize>
 			
 		</div>
+		</div>
 	</div>
-	<div class="container">
-		<tiles:insertAttribute name="footer" />
 	</div>
+	</div>
+	</div>
+<tiles:insertAttribute name="footer" />
+	
+	
 </body>
 </html>

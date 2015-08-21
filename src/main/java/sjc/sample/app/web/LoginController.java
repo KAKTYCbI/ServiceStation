@@ -23,9 +23,9 @@ public class LoginController {
 
 	@RequestMapping(value = { "", "/", "/login" }, method = { RequestMethod.GET })
 	public String login() {
-		UserPrincipal user = userService.getUserByName("user");
+		/*UserPrincipal user = userService.getUserByName("user");
 		System.out.println("user: " + user.getClass().getCanonicalName());
-		System.out.println("role: " + user.getRole().toString());
+		System.out.println("role: " + user.getRole().toString());*/
 		return "login";
 	}
 

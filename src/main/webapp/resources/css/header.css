@@ -1,1 +1,17 @@
-.report {}
+#header {
+	height: 126px;
+	background-image:url(../img/bg.gif);
+	background-repeat:no-repeat;
+	
+}
+
+
+#gor-menu{
+	width:494px;
+	height:72px;
+	background-image:url(../img/bg-menu.gif);
+	float:right;
+	margin-top:-65px;
+	
+	}
+	
