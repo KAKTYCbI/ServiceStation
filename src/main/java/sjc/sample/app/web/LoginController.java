@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.common.util.concurrent.Service;
+
+import sjc.example.domain.model.Status;
 import sjc.example.domain.model.UserPrincipal;
 import sjc.example.domain.model.UserRole;
+import sjc.example.domain.service.DirectorService;
 import sjc.example.domain.service.UserService;
 
 @Controller
@@ -23,6 +27,9 @@ public class LoginController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private DirectorService directorService;
 
 	@RequestMapping(value = { "", "/", "/login" }, method = { RequestMethod.GET })
 	public String login() {
@@ -44,9 +51,8 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = { "/registration" }, method = { RequestMethod.POST })
-	public String registration(@ModelAttribute("user") UserPrincipal user,  Model model) {
+	public String registration(@ModelAttribute("user") UserPrincipal user,  Model model, HttpSession session) {
 	    
-		//user.setRole(UserRole.CLIENT);
 		
 		userService.saveUser(user);
 		return "login";
