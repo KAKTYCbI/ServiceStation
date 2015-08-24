@@ -6,7 +6,7 @@
 	<definition name="base.definition" template="/WEB-INF/tiles-base/layout.jsp">
 		<put-attribute name="title" value="" />
 		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="menu" value="" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/tiles-base/footer.jsp" />
 	</definition>
@@ -45,6 +45,7 @@
     <definition name="client.home" extends="base.definition">
 		<put-attribute name="title" expression="TEST: ${user.name}" />
 		<put-attribute name="body" value="/WEB-INF/views/client/client-home.jsp" />
+	    <put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
 	</definition>
 	
 	<definition name="client.form" extends="base.definition">

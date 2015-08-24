@@ -34,29 +34,24 @@
 	<div id="middle">
 	<div class="container">
 		<div id="content">
-		<div class="row" >
 			<security:authorize access="isAuthenticated()">
-				<div class="col-md-9 well">
-					<tiles:insertAttribute name="body" />
-				</div>
+					<tiles:insertAttribute name="body" />	
 			</security:authorize>
 			
 			<security:authorize access="isAnonymous()">
-				<div class="col-md-4"></div>
-				<div class="col-md-4 well">
-					<tiles:insertAttribute name="body" />
-				</div>
-				<div class="col-md-4"></div>
+					<tiles:insertAttribute name="body" />				
 			</security:authorize>
-			
-		</div>
 		</div>
 	</div>
-	</div>
-	</div>
-	</div>
-<tiles:insertAttribute name="footer" />
 	
+	<security:authorize access="isAuthenticated()">
 	
+	 <tiles:insertAttribute name="menu" />
+	
+	</security:authorize>
+	</div>
+	</div>
+	</div>
+<tiles:insertAttribute name="footer" />	
 </body>
 </html>
