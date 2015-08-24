@@ -11,8 +11,24 @@ height:12px;
 background-repeat:no-repeat;
 }
 .reviewcenter{
+
 background-image:url(../img/reviewcenter.png);
 background-repeat:repeat-y;
+}
+
+.reviewcenter ul{
+	margin-left:15px;
+}
+.rating{
+ width:35px;
+ height:34px;
+ background-image:url(../img/rating.png);
+ float:right;
+ margin-right:40px;
+}
+.rating ul{
+	margin-left:40px;
+	margin-top:7px;
 }
 .reviewbottom{
 

@@ -1,5 +1,9 @@
 package sjc.sample.app.web;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +38,7 @@ public class ClientController {
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/{id}/review", method = RequestMethod.GET)
-	public String getReview(@PathVariable("id") Client client,
-			HttpSession session, Model model){
+	public String getReview( HttpSession session, Model model){
 		model.addAttribute("reviews",userService.getReview());
 		return "client.reviews";
 	};
@@ -52,8 +55,14 @@ public class ClientController {
 	public ModelAndView  getHome(HttpSession session, Authentication auth){
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
-		System.out.println("Test test test    :"+user.getRole());
-		mav.addObject("user", user);
+		List<Review> reviews = new ArrayList<Review>();
+		Review review = new Review();
+		review.setDate(new java.util.Date());
+		review.setText("это и есть отзыв");
+		reviews.add(review);
+		reviews.add(review);
+		mav.addObject("reviews", reviews);
+		mav.addObject("user",user);
 		mav.setViewName("client.home");
 		return mav;
 	};
