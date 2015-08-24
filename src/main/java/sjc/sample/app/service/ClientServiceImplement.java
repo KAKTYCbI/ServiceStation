@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sjc.sample.app.repository.dao.ApplicationDao;
+import sjc.sample.app.repository.dao.ClientDao;
 import sjc.sample.app.repository.dao.MessageDao;
 import sjc.sample.app.repository.dao.ReviewDao;
 import sjc.sample.app.repository.dao.StoDao;
@@ -31,6 +32,9 @@ public class ClientServiceImplement implements ClientService{
 
 	@Autowired
 	private ApplicationDao applicationRepository;
+	
+	@Autowired
+	private ClientDao clientRepository;
 	
 	@Autowired
 	private ReviewDao reviewRepository;
@@ -91,6 +95,12 @@ public class ClientServiceImplement implements ClientService{
 			application.add(getMapper().map(ApplicationEntity, Application.class));
 		}
 		return application;
+	}
+
+	@Override
+	public void saveClient(Client client) {
+		
+		clientRepository.save(getMapper().map(client, ClientEntity.class));
 	}
 
 }

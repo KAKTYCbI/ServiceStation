@@ -1,5 +1,7 @@
 package sjc.sample.app.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,9 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.common.util.concurrent.Service;
 
+import sjc.example.domain.model.Client;
 import sjc.example.domain.model.Status;
 import sjc.example.domain.model.UserPrincipal;
 import sjc.example.domain.model.UserRole;
+import sjc.example.domain.service.ClientService;
 import sjc.example.domain.service.DirectorService;
 import sjc.example.domain.service.UserService;
 
@@ -27,6 +31,9 @@ public class LoginController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ClientService clientService;
 	
 	@Autowired
 	private DirectorService directorService;
@@ -46,16 +53,20 @@ public class LoginController {
 	
 	@RequestMapping(value = { "/registration" }, method = { RequestMethod.GET })
 	public String registration(Model model) {
-		model.addAttribute("user", new UserPrincipal());
+		model.addAttribute("client", new Client());
 		return "registration";
 	}
 	
 	@RequestMapping(value = { "/registration" }, method = { RequestMethod.POST })
-	public String registration(@ModelAttribute("user") UserPrincipal user,  Model model, HttpSession session) {
-	    
-		
-		userService.saveUser(user);
-		return "login";
+	public String registration(@ModelAttribute("client") Client user,  Model model, HttpSession session) {
+
+	    //userService.getUserByID(1l);
+		UserPrincipal user2 = userService.getUserByName(user.getName());
+        if (user2 == null){
+        user.setRole(UserRole.CLIENT);	
+		clientService.saveClient(user);
+        }
+	    return "login";
 	}
 
 	@RequestMapping(value = "/login/failure", method = RequestMethod.GET)
@@ -81,7 +92,7 @@ public class LoginController {
 
 		session.setAttribute("user", user);
 		mav.addObject("user", user);
-		mav.setViewName("redirect:client/list");
+		mav.setViewName("client.home");
 
 		return mav;
 	}

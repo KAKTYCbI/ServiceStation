@@ -11,7 +11,7 @@ import sjc.example.domain.model.Sto;
 public interface ClientService {
 
  // метод создает заказ с описанием проблемы и выбором СТО и механика
-	//c возмощностью обнавления заявки(выбора СТО)
+ //c возмощностью обнавления заявки(выбора СТО)
  void addOrUpdateApplication(Application application);
 
  //метод возращает уведомления определеного клиента
@@ -27,4 +27,5 @@ public interface ClientService {
  //метод возращает список СТО
  List<Sto> getAllSto();
  
+ void saveClient(Client client);
 }

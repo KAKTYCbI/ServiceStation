@@ -15,7 +15,7 @@ import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "client")
-@PrimaryKeyJoinColumn(name = "user_id")
+@PrimaryKeyJoinColumn(name = "users_user_id")
 public class ClientEntity extends UserPrincipalEntity {
 	
 	@Mapping("messages")

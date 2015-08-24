@@ -4,12 +4,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import sjc.example.domain.service.ClientService;
 import sjc.example.domain.service.UserService;
@@ -17,6 +19,7 @@ import sjc.example.domain.model.Application;
 import sjc.example.domain.model.Client;
 import sjc.example.domain.model.Guest;
 import sjc.example.domain.model.Review;
+import sjc.example.domain.model.UserPrincipal;
 
 @Controller
 @RequestMapping("/client")
@@ -43,6 +46,16 @@ public class ClientController {
 			HttpSession session, Model model){
 		clientService.addOrUpdateApplication(application);
 		return "client.order";
+	};
+	@PreAuthorize("isFullyAuthenticated()") 
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public ModelAndView  getHome(HttpSession session, Authentication auth){
+		ModelAndView mav = new ModelAndView();
+		UserPrincipal user = userService.getUserByName(auth.getName());
+		System.out.println("Test test test    :"+user.getRole());
+		mav.addObject("user", user);
+		mav.setViewName("client.home");
+		return mav;
 	};
 	
 	@PreAuthorize("isFullyAuthenticated()") 

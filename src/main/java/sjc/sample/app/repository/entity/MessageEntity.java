@@ -30,7 +30,7 @@ public class MessageEntity {
 	
 	@Mapping("client")
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "client_id", nullable = false )
+	@JoinColumn(name = "client_client_id", nullable = false )
     private ClientEntity client;
 	
 	@Mapping("mechanic")

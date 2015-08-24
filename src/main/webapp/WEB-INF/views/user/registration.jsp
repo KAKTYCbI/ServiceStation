@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <h3>Please sign out</h3>
-<form:form method = "post" action = "registration" commandName = "user">
+<form:form method = "post" action = "registration" commandName = "client">
     <table>
       <tr>
         <td>

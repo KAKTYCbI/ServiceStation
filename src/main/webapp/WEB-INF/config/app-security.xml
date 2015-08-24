@@ -19,7 +19,7 @@
 	 	
 		<form-login
                 login-page="/login"
-                default-target-url="/client/list"
+                default-target-url="/client/home"
                 authentication-failure-url="/login/failure"
                 username-parameter="username"
                 password-parameter="password" />

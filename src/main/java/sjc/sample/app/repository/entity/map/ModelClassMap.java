@@ -8,9 +8,11 @@ import org.springframework.stereotype.Component;
 import sjc.example.domain.model.Client;
 import sjc.example.domain.model.Director;
 import sjc.example.domain.model.Mechanic;
+import sjc.example.domain.model.UserPrincipal;
 import sjc.sample.app.repository.entity.ClientEntity;
 import sjc.sample.app.repository.entity.DirectorEntity;
 import sjc.sample.app.repository.entity.MechanicEntity;
+import sjc.sample.app.repository.entity.UserPrincipalEntity;
 
 @Component
 public class ModelClassMap {
@@ -20,6 +22,9 @@ public class ModelClassMap {
 	public ModelClassMap() {
 		modelClassMappings = new HashMap<Class<?>, Class<?>>();
 
+		modelClassMappings.put(UserPrincipalEntity.class, UserPrincipal.class);
+		modelClassMappings.put(UserPrincipal.class, UserPrincipalEntity.class);
+		
 		modelClassMappings.put(ClientEntity.class, Client.class);
 		modelClassMappings.put(Client.class, ClientEntity.class);
 

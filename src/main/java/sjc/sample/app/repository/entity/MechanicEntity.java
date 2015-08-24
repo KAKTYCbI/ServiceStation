@@ -17,7 +17,7 @@ import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name="mechanic")
-@PrimaryKeyJoinColumn(name = "user_id")
+@PrimaryKeyJoinColumn(name = "users_user_id")
 public class MechanicEntity extends UserPrincipalEntity{
 	
 	@Mapping("rating")

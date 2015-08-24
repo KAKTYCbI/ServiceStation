@@ -25,7 +25,7 @@
 
 <h1>User Profile: </h1>
 
-<security:authorize access="isAuthenticated()">
+<security:authorize access="isAuthenticated()" >
    ${user.name} (${user.login}) / ID: ${user.userId}
 </security:authorize> 
 

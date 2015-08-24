@@ -36,9 +36,6 @@
 		<div id="content">
 		<div class="row" >
 			<security:authorize access="isAuthenticated()">
-				<div class="col-md-3">
-					<tiles:insertAttribute name="menu" />
-				</div>
 				<div class="col-md-9 well">
 					<tiles:insertAttribute name="body" />
 				</div>
