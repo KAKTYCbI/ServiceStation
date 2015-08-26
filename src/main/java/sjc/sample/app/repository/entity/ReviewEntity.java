@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.dozer.Mapping;
@@ -42,7 +43,7 @@ public class ReviewEntity {
 	@Column(name="visible")
 	private Boolean visible;
     
-	@Mapping("client")
+	/*@Mapping("client")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn( name = "client_client_id", nullable = false)
 	private ClientEntity client;
@@ -50,7 +51,7 @@ public class ReviewEntity {
 	@Mapping("mechanic")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn( name = "mechanic_mechanic_id", nullable = false)
-    private MechanicEntity mechanic;
+    private MechanicEntity mechanic;*/
 	
 	@Mapping("sto")
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -97,7 +98,7 @@ public class ReviewEntity {
 		this.visible = visible;
 	}
 
-	public ClientEntity getClient() {
+	/*public ClientEntity getClient() {
 		return client;
 	}
 
@@ -111,7 +112,7 @@ public class ReviewEntity {
 
 	public void setMechanic(MechanicEntity mechanic) {
 		this.mechanic = mechanic;
-	}
+	}*/
 
 	public StoEntity getSto() {
 		return sto;

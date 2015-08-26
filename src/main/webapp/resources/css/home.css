@@ -1,3 +1,8 @@
+.reviews{
+	width: 595px;
+    margin-left: 10px;
+    margin-right: 20px;
+}
 .review{
 
 margin-left:10px;
@@ -19,6 +24,7 @@ background-repeat:repeat-y;
 .reviewcenter ul{
 	margin-left:15px;
 }
+
 .rating{
  width:35px;
  height:34px;

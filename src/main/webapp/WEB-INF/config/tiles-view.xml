@@ -42,15 +42,16 @@
 		<put-attribute name="body" value="/WEB-INF/views/client/client-list.jsp" />
 	</definition>
 
-    <definition name="client.home" extends="base.definition">
+    <definition name="home" extends="base.definition">
 		<put-attribute name="title" expression="TEST: ${user.name}" />
-		<put-attribute name="body" value="/WEB-INF/views/client/client-home.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/user/home.jsp" />
 	    <put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
 	</definition>
 	
-	<definition name="client.form" extends="base.definition">
-		<put-attribute name="title" expression="${clients.manager.title}" />
-		<put-attribute name="body" value="/WEB-INF/views/client/client-form.jsp" />
+	<definition name="client.addapplication" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/client/client-addapplication.jsp" />
 	</definition>
 
 	<definition name="client.form.edit" extends="base.definition">

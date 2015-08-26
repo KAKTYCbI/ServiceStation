@@ -44,28 +44,16 @@ public class ClientController {
 	};
 	
 	@PreAuthorize("isFullyAuthenticated()") 
-	@RequestMapping(value = "/{id}/setOrder", method = RequestMethod.GET)
-	public String setOrder(@PathVariable("id") Client client, @ModelAttribute Application application,
-			HttpSession session, Model model){
-		clientService.addOrUpdateApplication(application);
-		return "client.order";
-	};
-	@PreAuthorize("isFullyAuthenticated()") 
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	@RequestMapping(value = "/addapplication", method = RequestMethod.GET)
 	public ModelAndView  getHome(HttpSession session, Authentication auth){
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
-		List<Review> reviews = new ArrayList<Review>();
-		Review review = new Review();
-		review.setDate(new java.util.Date());
-		review.setText("это и есть отзыв");
-		reviews.add(review);
-		reviews.add(review);
-		mav.addObject("reviews", reviews);
-		mav.addObject("user",user);
-		mav.setViewName("client.home");
+        mav.addObject("user", user);
+        mav.addObject("client", new Client());
+		mav.setViewName("client.addapplication");
 		return mav;
 	};
+	
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/{id}/notice", method = RequestMethod.GET)

@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -109,4 +111,22 @@ public class LoginController {
 		return model;
 	}
 
+	@PreAuthorize("isFullyAuthenticated()") 
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public ModelAndView  getHome(HttpSession session, Authentication auth){
+		ModelAndView mav = new ModelAndView();
+		UserPrincipal user = userService.getUserByName(auth.getName());
+		
+		/*List<Review> reviews = userService.getReview();*/
+		/*Review review = new Review();
+		review.setDate(new java.util.Date());
+		review.setText("это и есть отзыв");
+		reviews.add(review);
+		reviews.add(review);
+		mav.addObject("reviews", reviews)*/
+		mav.addObject("reviews", userService.getReview());
+		mav.addObject("user",user);
+		mav.setViewName("home");
+		return mav;
+	};
 }

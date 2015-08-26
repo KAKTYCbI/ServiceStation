@@ -13,7 +13,7 @@
 		Дабро пожаловать
 		<security:authorize access="isAuthenticated()" >
         ${user.role} (${user.login}) / ID: ${user.userId}
-        <a href="../j_spring_security_logout">logout</a>
+        <a href="<c:url value='/j_spring_security_logout' />">logout</a>
          </security:authorize> 
          <security:authorize access="isAnonymous()" >
          Гость

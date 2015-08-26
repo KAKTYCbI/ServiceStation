@@ -34,10 +34,10 @@ public class MechanicEntity extends UserPrincipalEntity{
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	private List<SalaryEntity> salarys;
 	
-	@Mapping("reviews")
+	/*@Mapping("reviews")
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mechanic", orphanRemoval=true)
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
-	private List<ReviewEntity> reviews;
+	private List<ReviewEntity> reviews;*/
 	
 	@Mapping("sto")
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -68,13 +68,13 @@ public class MechanicEntity extends UserPrincipalEntity{
 		this.salarys = salarys;
 	}
 
-	public List<ReviewEntity> getReviews() {
+	/*public List<ReviewEntity> getReviews() {
 		return reviews;
 	}
 
 	public void setReviews(List<ReviewEntity> reviews) {
 		this.reviews = reviews;
-	}
+	}*/
 
 	public StoEntity getSto() {
 		return sto;

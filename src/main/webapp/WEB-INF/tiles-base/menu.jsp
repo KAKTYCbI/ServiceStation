@@ -26,10 +26,10 @@
 <li><a href="">Отзывы обо мне</a></li>
  </security:authorize> 
  <security:authorize access="hasRole('ROLE_CLIENT')" >
-<li><a href="">Оформить заявку</a></li>
-<li><a href="">Уведомление</a></li>
-<li><a href="">История заявок</a></li>
-<li><a href="">Список СТО</a></li>
+<li><a href="<c:url value='/client/addapplication' />">Оформить заявку</a></li>
+<li><a href="<c:url value='/client/messages' /> ">Уведомление</a></li>
+<li><a href="<c:url value='/client/getapplication' />">История заявок</a></li>
+<li><a href="<c:url value='/client/getsto' />">Список СТО</a></li>
  </security:authorize> 
 </ul>
 </div>

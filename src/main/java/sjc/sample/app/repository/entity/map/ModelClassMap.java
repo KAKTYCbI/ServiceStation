@@ -8,10 +8,12 @@ import org.springframework.stereotype.Component;
 import sjc.example.domain.model.Client;
 import sjc.example.domain.model.Director;
 import sjc.example.domain.model.Mechanic;
+import sjc.example.domain.model.Review;
 import sjc.example.domain.model.UserPrincipal;
 import sjc.sample.app.repository.entity.ClientEntity;
 import sjc.sample.app.repository.entity.DirectorEntity;
 import sjc.sample.app.repository.entity.MechanicEntity;
+import sjc.sample.app.repository.entity.ReviewEntity;
 import sjc.sample.app.repository.entity.UserPrincipalEntity;
 
 @Component
@@ -34,6 +36,9 @@ public class ModelClassMap {
 		modelClassMappings.put(DirectorEntity.class, Director.class);
 		modelClassMappings.put(Director.class, DirectorEntity.class);
 
+		modelClassMappings.put(ReviewEntity.class, Review.class);
+		modelClassMappings.put(Review.class, ReviewEntity.class);
+		
 	}
 
 	public Class<?> getModelClass(Class<?> entityClass) {
