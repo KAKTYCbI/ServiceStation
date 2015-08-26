@@ -46,9 +46,9 @@ public class ReviewEntity {
 	/*@Mapping("client")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn( name = "client_client_id", nullable = false)
-	private ClientEntity client;
+	private ClientEntity client;*/
 	
-	@Mapping("mechanic")
+	/*@Mapping("mechanic")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn( name = "mechanic_mechanic_id", nullable = false)
     private MechanicEntity mechanic;*/
@@ -104,9 +104,9 @@ public class ReviewEntity {
 
 	public void setClient(ClientEntity client) {
 		this.client = client;
-	}
+	}*/
 
-	public MechanicEntity getMechanic() {
+	/*public MechanicEntity getMechanic() {
 		return mechanic;
 	}
 

@@ -8,15 +8,20 @@ import sjc.example.domain.model.Client;
 import sjc.example.domain.service.ClientService;
  
 @Component
-public class StringToClientConverter implements Converter<String, Client> {
+public class StringToStoConverter implements Converter<String, Client> {
  
     @Autowired
 	private ClientService clientService;
 
+	@Override
+	public Client convert(String arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
      
-    @Override
+    /*@Override
     public Client convert(String clientId) {
-        return clientService.getCilentById(new Long(clientId));
-    }
+        return clientService.getClientByID(new Long(clientId));
+    }*/
  
 }

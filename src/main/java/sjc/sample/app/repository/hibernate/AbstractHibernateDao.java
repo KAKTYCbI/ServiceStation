@@ -38,6 +38,12 @@ public abstract class AbstractHibernateDao<T, PK extends Serializable> implement
 	public void update(T o) {
 		getSession().update(o);		
 	}
+	
+
+	@Override
+	public void saveOrUpdate(T obj){
+		getSession().saveOrUpdate(obj);
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override

@@ -16,8 +16,8 @@
                <div class="rating">
                  <ul>4.2</ul>
                </div>
-            <ul>Name, оставил отзыв</br>
-             О "СТО или Механик"</br>
+            <ul>Name, оставил отзыв ${user}</br>
+             О "СТО или Механик" ${reviews.sto}</br>
              ${reviews.text}.............................................................
              ..................................................</br>
              Дата отзыва:<fmt:formatDate value="${reviews.date}" pattern="dd-MM-yyyy" /></br>

@@ -116,7 +116,8 @@ public class LoginController {
 	public ModelAndView  getHome(HttpSession session, Authentication auth){
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
-		
+		Client client = clientService.getCilentById(3l);
+		System.out.println("client client client: " + client.getLogin());
 		/*List<Review> reviews = userService.getReview();*/
 		/*Review review = new Review();
 		review.setDate(new java.util.Date());

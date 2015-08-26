@@ -9,6 +9,8 @@ public interface GenericDao<T, PK extends Serializable> {
 	
 	void update(T obj);
 	
+	void saveOrUpdate(T obj);
+	
 	List<T> findAll();
 	
 	T findById(PK id);

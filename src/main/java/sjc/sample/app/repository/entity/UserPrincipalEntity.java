@@ -1,6 +1,7 @@
 package sjc.sample.app.repository.entity;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,7 @@ import sjc.example.domain.model.UserRole;
 @Entity()
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorValue("users")
 public class UserPrincipalEntity {
 	
 	@Id
@@ -46,7 +48,7 @@ public class UserPrincipalEntity {
 	@Column(name = "password")
 	private String password;
 
-	@Mapping("role")
+	
 	@Column(name = "role")
 	@Enumerated(EnumType.STRING)
 	private UserRole role;

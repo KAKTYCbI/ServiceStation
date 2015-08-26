@@ -19,17 +19,23 @@ import sjc.sample.app.repository.entity.ClientEntity;
 import sjc.sample.app.repository.entity.MessageEntity;
 import sjc.sample.app.repository.entity.ReviewEntity;
 import sjc.sample.app.repository.entity.StoEntity;
+import sjc.sample.app.repository.entity.UserPrincipalEntity;
+import sjc.sample.app.repository.entity.map.ModelClassMap;
 import sjc.example.domain.model.Application;
 import sjc.example.domain.model.Client;
 import sjc.example.domain.model.Message;
 import sjc.example.domain.model.Review;
 import sjc.example.domain.model.Sto;
+import sjc.example.domain.model.UserPrincipal;
 import sjc.example.domain.service.ClientService;
 
 @Service()
 @Transactional
 public class ClientServiceImplement implements ClientService{
 
+	@Autowired
+	private ModelClassMap modelClassMap;
+	
 	@Autowired
 	private ApplicationDao applicationRepository;
 	
@@ -53,7 +59,7 @@ public class ClientServiceImplement implements ClientService{
 	@Override
 	public void addOrUpdateApplication(Application application) {
 		
-		//applicationRepository.saveOrUpdate((getMapper().map(application, ApplicationEntity.class)));
+		applicationRepository.saveOrUpdate((getMapper().map(application, ApplicationEntity.class)));
 
 	}
 
@@ -101,6 +107,17 @@ public class ClientServiceImplement implements ClientService{
 	public void saveClient(Client client) {
 		
 		clientRepository.save(getMapper().map(client, ClientEntity.class));
+	}
+
+	@Override
+	public Client getCilentById(Long id) {
+		ClientEntity clientEntity = clientRepository.findById(id);
+		Client clientModel = null;
+		if (clientEntity != null) {
+			clientModel = (Client) getMapper().map(clientEntity,
+					modelClassMap.getModelClass(clientEntity.getClass()));
+		}
+		return clientModel;
 	}
 
 }

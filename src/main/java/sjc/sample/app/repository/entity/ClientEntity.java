@@ -2,6 +2,7 @@ package sjc.sample.app.repository.entity;
 
 import java.util.List;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -15,6 +16,7 @@ import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "client")
+@DiscriminatorValue("client")
 @PrimaryKeyJoinColumn(name = "users_user_id")
 public class ClientEntity extends UserPrincipalEntity {
 	

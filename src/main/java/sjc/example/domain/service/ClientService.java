@@ -27,5 +27,7 @@ public interface ClientService {
  //метод возращает список СТО
  List<Sto> getAllSto();
  
+ Client getCilentById(Long id);
+ 
  void saveClient(Client client);
 }
