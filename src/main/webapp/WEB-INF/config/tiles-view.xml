@@ -53,6 +53,30 @@
 		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/client/client-addapplication.jsp" />
 	</definition>
+	
+	<definition name="client.messages" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/client/client-messages.jsp" />
+	</definition>
+	
+	<definition name="client.stolist" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/client/client-stolist.jsp" />
+	</definition>
+	
+	<definition name="client.applicationlist" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/client/client-applicationlist.jsp" />
+	</definition>
+	
+	<definition name="client.applicationinfo" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/client/client-applicationinfo.jsp" />
+	</definition>
 
 	<definition name="client.form.edit" extends="base.definition">
 		<put-attribute name="title" expression="${clients.manager.title}" />

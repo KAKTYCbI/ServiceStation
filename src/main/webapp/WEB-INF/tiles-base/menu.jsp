@@ -10,6 +10,7 @@
 <div class="center">
 <ul>
 <security:authorize access="hasRole('ROLE_DIRECTOR')" >
+<li><a href="<c:url value='/home' />">Главная</a></li>
 <li><a href="">Список заявок</a></li>
 <li><a href="">Заявки на деталь</a></li>
 <li><a href="">Добавление деталей</a></li>
@@ -21,11 +22,13 @@
 <li><a href="">Добавление услуги</a></li>
  </security:authorize> 
  <security:authorize access="hasRole('ROLE_MECHANIC')" >
+ <li><a href="<c:url value='/home' />">Главная</a></li>
 <li><a href="">Список заявок</a></li>
 <li><a href="">Заявки на детали</a></li>
 <li><a href="">Отзывы обо мне</a></li>
  </security:authorize> 
  <security:authorize access="hasRole('ROLE_CLIENT')" >
+ <li><a href="<c:url value='/home' />">Главная</a></li>
 <li><a href="<c:url value='/client/addapplication' />">Оформить заявку</a></li>
 <li><a href="<c:url value='/client/messages' /> ">Уведомление</a></li>
 <li><a href="<c:url value='/client/getapplication' />">История заявок</a></li>

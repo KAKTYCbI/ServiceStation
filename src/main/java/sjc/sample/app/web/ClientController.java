@@ -45,7 +45,7 @@ public class ClientController {
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/addapplication", method = RequestMethod.GET)
-	public ModelAndView  getHome(HttpSession session, Authentication auth){
+	public ModelAndView  addapplication(HttpSession session, Authentication auth){
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
         mav.addObject("user", user);
@@ -54,43 +54,44 @@ public class ClientController {
 		return mav;
 	};
 	
-	
 	@PreAuthorize("isFullyAuthenticated()") 
-	@RequestMapping(value = "/{id}/notice", method = RequestMethod.GET)
-	public String notice(@PathVariable("id") Client client,
-			HttpSession session, Model model){
-		model.addAttribute("notice",clientService.getMessageByClient(client));
-		return "client.notice";
-	};
-	
-	@PreAuthorize("isFullyAuthenticated()") 
-	@RequestMapping(value = "/{id}/setreview", method = RequestMethod.GET)
-	public String setReview(@PathVariable("id") Client client,@ModelAttribute Review review,
-			HttpSession session, Model model){
-		clientService.addReview(review);
-		return "client.setreview";
+	@RequestMapping(value = "/messages", method = RequestMethod.GET)
+	public ModelAndView  getmessage(HttpSession session, Authentication auth){
+		ModelAndView mav = new ModelAndView();
+		UserPrincipal user = userService.getUserByName(auth.getName());
+        mav.addObject("user", user);
+		mav.setViewName("client.messages");
+		return mav;
 	};
 	
 	@PreAuthorize("isFullyAuthenticated()") 
-	@RequestMapping(value = "/{id}/listorder", method = RequestMethod.GET)
-	public String listOrder(@PathVariable("id") Client client,
-			HttpSession session, Model model){
-		model.addAttribute(clientService.getApplication(client));
-		return "client.listorder";
+	@RequestMapping(value = "/getsto", method = RequestMethod.GET)
+	public ModelAndView  getsto(HttpSession session, Authentication auth){
+		ModelAndView mav = new ModelAndView();
+		UserPrincipal user = userService.getUserByName(auth.getName());
+        mav.addObject("user", user);
+		mav.setViewName("client.stolist");
+		return mav;
 	};
 	
 	@PreAuthorize("isFullyAuthenticated()") 
-	@RequestMapping(value = "/{id}/liststo", method = RequestMethod.GET)
-	public String liststo(@PathVariable("id") Client client,
-			HttpSession session, Model model){
-		model.addAttribute(clientService.getAllSto());
-		return "client.listorder";
+	@RequestMapping(value = "/getapplication", method = RequestMethod.GET)
+	public ModelAndView  getapplicationlist(HttpSession session, Authentication auth){
+		ModelAndView mav = new ModelAndView();
+		UserPrincipal user = userService.getUserByName(auth.getName());
+        mav.addObject("user", user);
+		mav.setViewName("client.applicationlist");
+		return mav;
 	};
 	
-	@RequestMapping(value = "/guest", method = RequestMethod.GET)
-	public String setOrder(Guest guest, @ModelAttribute Application application,
-			HttpSession session, Model model){
-		clientService.addOrUpdateApplication(application);
-		return "guest.order";
+	@PreAuthorize("isFullyAuthenticated()") 
+	@RequestMapping(value = "/getapplicationinfo", method = RequestMethod.GET)
+	public ModelAndView  getapplicationinfo(HttpSession session, Authentication auth){
+		ModelAndView mav = new ModelAndView();
+		UserPrincipal user = userService.getUserByName(auth.getName());
+        mav.addObject("user", user);
+		mav.setViewName("client.applicationinfo");
+		return mav;
 	};
+	
 }
