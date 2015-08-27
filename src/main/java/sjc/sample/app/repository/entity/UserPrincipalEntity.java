@@ -19,7 +19,6 @@ import sjc.example.domain.model.UserRole;
 @Entity()
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorValue("users")
 public class UserPrincipalEntity {
 	
 	@Id

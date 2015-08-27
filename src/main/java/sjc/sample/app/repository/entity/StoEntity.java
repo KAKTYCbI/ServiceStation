@@ -40,16 +40,16 @@ public class StoEntity {
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	private List<ReviewEntity> reviews;
 	
-	@Mapping("mechanics")
+	/*@Mapping("mechanics")
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sto", orphanRemoval=true)
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
     private List<MechanicEntity> mechanics;
-	
-	@Mapping("orders")
+	*/
+	/*@Mapping("orders")
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sto", orphanRemoval=true)
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	private List<ApplicationEntity> orders;
-	
+	*/
 	public Long getStoId() {
 		return stoId;
 	}
@@ -82,21 +82,21 @@ public class StoEntity {
 		this.reviews = reviews;
 	}
 
-	public List<MechanicEntity> getMechanics() {
+	/*public List<MechanicEntity> getMechanics() {
 		return mechanics;
 	}
 
 	public void setMechanics(List<MechanicEntity> mechanics) {
 		this.mechanics = mechanics;
-	}
+	}*/
 
-	public List<ApplicationEntity> getOrders() {
+	/*public List<ApplicationEntity> getOrders() {
 		return orders;
 	}
 
 	public void setOrders(List<ApplicationEntity> orders) {
 		this.orders = orders;
-	}
+	}*/
 
 
 	

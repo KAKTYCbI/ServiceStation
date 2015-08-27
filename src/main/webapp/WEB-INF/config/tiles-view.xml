@@ -78,6 +78,36 @@
 		<put-attribute name="body" value="/WEB-INF/views/client/client-applicationinfo.jsp" />
 	</definition>
 
+     <definition name="mechanic.applicationlist" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/mechanic/mechanic-applicationlist.jsp" />
+	</definition>
+	
+	<definition name="mechanic.applicationdetail" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/mechanic/mechanic-applicationdetail.jsp" />
+	</definition>
+	
+	<definition name="mechanic.addapplicationdetail" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/mechanic/mechanic-addapplicationdetail.jsp" />
+	</definition>
+	
+	<definition name="mechanic.updateapplication" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/mechanic/mechanic-updateapplication.jsp" />
+	</definition>
+	
+	<definition name="mechanic.reviewbymechanic" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/mechanic/mechanic-reviewbymechanic.jsp" />
+	</definition>
+	
 	<definition name="client.form.edit" extends="base.definition">
 		<put-attribute name="title" expression="${clients.manager.title}" />
 		<put-attribute name="body"

@@ -8,22 +8,22 @@
 <h1>Отзывы</h1>
 </br>
  <div class="reviews">
-   <c:forEach items="${reviews}" var="reviews" >
+   
       <div class = "review">
          <div class = "reviewtop"></div>
             <div class = "reviewcenter">
 
                <div class="rating">
-                 <ul>${reviews.rating}</ul>
+                 <ul>4.2</ul>
                </div>
-            <ul>${reviews.client.name }, оставил отзыв</br>
-             О ${reviews.sto.name}</br>
-             ${reviews.text}.............................................................
+            <ul>Клиент, оставил отзыв</br>
+             О Механике</br>
+            текст отзыва.............................................................
              ..................................................</br>
-             Дата отзыва:<fmt:formatDate value="${reviews.date}" pattern="dd-MM-yyyy" /></br>
+             Дата отзыва:ХХ.ХХ.ХХ </br>
             </ul>
             </div>
           <div class = "reviewbottom"></div>
           </div>
-    </c:forEach>
+    
   </div>

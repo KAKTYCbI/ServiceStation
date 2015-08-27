@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.common.util.concurrent.Service;
 
 import sjc.example.domain.model.Client;
+import sjc.example.domain.model.Review;
 import sjc.example.domain.model.Status;
 import sjc.example.domain.model.UserPrincipal;
 import sjc.example.domain.model.UserRole;
@@ -116,16 +117,16 @@ public class LoginController {
 	public ModelAndView  getHome(HttpSession session, Authentication auth){
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
-		Client client = clientService.getCilentById(3l);
-		System.out.println("client client client: " + client.getLogin());
-		/*List<Review> reviews = userService.getReview();*/
+		List<Review> reviews = userService.getReview();
+		Review review = reviews.get(0);
+		System.out.println("Review review sto name  =  "+review.getSto().getName()); 
 		/*Review review = new Review();
 		review.setDate(new java.util.Date());
 		review.setText("это и есть отзыв");
 		reviews.add(review);
 		reviews.add(review);
 		mav.addObject("reviews", reviews)*/
-		mav.addObject("reviews", userService.getReview());
+		mav.addObject("reviews", reviews);
 		mav.addObject("user",user);
 		mav.setViewName("home");
 		return mav;

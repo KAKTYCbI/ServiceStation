@@ -70,7 +70,10 @@ public class ClientController {
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
         mav.addObject("user", user);
+        mav.addObject("sto", clientService.getAllSto());
 		mav.setViewName("client.stolist");
+		//Client client = clientService.getCilentById(3l);
+		//System.out.println("client client client: " + client.getLogin());
 		return mav;
 	};
 	

@@ -5,25 +5,19 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/home.css"/>" />
-<h1>Отзывы</h1>
+<h1>История заявок</h1>
+<a href="<c:url value='/mechanic/addapplicationdetail' />">Новая заявка на деталь</a>
 </br>
  <div class="reviews">
-   <c:forEach items="${reviews}" var="reviews" >
       <div class = "review">
          <div class = "reviewtop"></div>
             <div class = "reviewcenter">
-
-               <div class="rating">
-                 <ul>${reviews.rating}</ul>
-               </div>
-            <ul>${reviews.client.name }, оставил отзыв</br>
-             О ${reviews.sto.name}</br>
-             ${reviews.text}.............................................................
-             ..................................................</br>
-             Дата отзыва:<fmt:formatDate value="${reviews.date}" pattern="dd-MM-yyyy" /></br>
+            <ul>Название детали: ХХХХ</br>
+             Дата поступления детали: ХХ.ХХ.ХХ</br>
+             Статус:ХХХХ</br>
+             
             </ul>
             </div>
           <div class = "reviewbottom"></div>
           </div>
-    </c:forEach>
   </div>

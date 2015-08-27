@@ -23,9 +23,9 @@
  </security:authorize> 
  <security:authorize access="hasRole('ROLE_MECHANIC')" >
  <li><a href="<c:url value='/home' />">Главная</a></li>
-<li><a href="">Список заявок</a></li>
-<li><a href="">Заявки на детали</a></li>
-<li><a href="">Отзывы обо мне</a></li>
+<li><a href="<c:url value='/mechanic/getapplication' />">Список заявок</a></li>
+<li><a href="<c:url value='/mechanic/getapplicationdetail' />">Заявки на детали</a></li>
+<li><a href="<c:url value='/mechanic/getreviewbymechanic' />">Отзывы обо мне</a></li>
  </security:authorize> 
  <security:authorize access="hasRole('ROLE_CLIENT')" >
  <li><a href="<c:url value='/home' />">Главная</a></li>

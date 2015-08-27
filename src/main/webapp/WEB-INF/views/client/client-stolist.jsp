@@ -8,14 +8,16 @@
 <h1>Список СТО</h1>
 </br>
  <div class="reviews">
+ <c:forEach items="${sto}" var="sto" >
       <div class = "review">
          <div class = "reviewtop"></div>
             <div class = "reviewcenter">
                  <div class="rating">
-                 <ul>4.2</ul>
+                 <ul>${sto.rating}</ul>
                </div>
-            <ul>Name: имя сто</ul> </br>
+            <ul>Name: ${sto.name }</ul> </br>
             </div>
           <div class = "reviewbottom"></div>
           </div>
+          </c:forEach>
   </div>

@@ -43,10 +43,10 @@ public class ReviewEntity {
 	@Column(name="visible")
 	private Boolean visible;
     
-	/*@Mapping("client")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@Mapping("client")
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn( name = "client_client_id", nullable = false)
-	private ClientEntity client;*/
+	private ClientEntity client;
 	
 	/*@Mapping("mechanic")
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -54,7 +54,7 @@ public class ReviewEntity {
     private MechanicEntity mechanic;*/
 	
 	@Mapping("sto")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn( name = "sto_sto_id", nullable = false)
 	private StoEntity sto;
 	
@@ -98,13 +98,13 @@ public class ReviewEntity {
 		this.visible = visible;
 	}
 
-	/*public ClientEntity getClient() {
+	public ClientEntity getClient() {
 		return client;
 	}
 
 	public void setClient(ClientEntity client) {
 		this.client = client;
-	}*/
+	}
 
 	/*public MechanicEntity getMechanic() {
 		return mechanic;

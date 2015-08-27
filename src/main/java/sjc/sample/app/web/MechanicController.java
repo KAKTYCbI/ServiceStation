@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +17,7 @@ import sjc.example.domain.model.Application;
 import sjc.example.domain.model.ApplicationDetail;
 import sjc.example.domain.model.Client;
 import sjc.example.domain.model.Mechanic;
+import sjc.example.domain.model.UserPrincipal;
 import sjc.example.domain.service.MechanicService;
 import sjc.example.domain.service.UserService;
 
@@ -41,16 +43,56 @@ public class MechanicController {
 	}
 	
 	@PreAuthorize("isFullyAuthenticated()") 
-	@RequestMapping(value = "/{id}/applicationlist", method = RequestMethod.GET)
-	public ModelAndView getApplicationList(@PathVariable("id") Mechanic mechanic
-			,HttpSession session, Model model) {
-        
+	@RequestMapping(value = "/getapplication", method = RequestMethod.GET)
+	public ModelAndView  getapplicationlist(HttpSession session, Authentication auth){
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("application", mechanicService.getCurrentApplication(mechanic));
-		mav.setViewName("application.list");
+		UserPrincipal user = userService.getUserByName(auth.getName());
+        mav.addObject("user", user);
+		mav.setViewName("mechanic.applicationlist");
 		return mav;
-		
-	}
+	};
+	
+	@PreAuthorize("isFullyAuthenticated()") 
+	@RequestMapping(value = "/getapplicationdetail", method = RequestMethod.GET)
+	public ModelAndView  getapplicationdetail(HttpSession session, Authentication auth){
+		ModelAndView mav = new ModelAndView();
+		UserPrincipal user = userService.getUserByName(auth.getName());
+        mav.addObject("user", user);
+		mav.setViewName("mechanic.applicationdetail");
+		return mav;
+	};
+	
+	@PreAuthorize("isFullyAuthenticated()") 
+	@RequestMapping(value = "/addapplicationdetail", method = RequestMethod.GET)
+	public ModelAndView  addapplicationdetail(HttpSession session, Authentication auth){
+		ModelAndView mav = new ModelAndView();
+		UserPrincipal user = userService.getUserByName(auth.getName());
+		mav.addObject("applicationdetail", new ApplicationDetail());
+        mav.addObject("user", user);
+		mav.setViewName("mechanic.addapplicationdetail");
+		return mav;
+	};
+	
+	@PreAuthorize("isFullyAuthenticated()") 
+	@RequestMapping(value = "/updateapplication", method = RequestMethod.GET)
+	public ModelAndView  updateapplication(HttpSession session, Authentication auth){
+		ModelAndView mav = new ModelAndView();
+		UserPrincipal user = userService.getUserByName(auth.getName());
+		mav.addObject("application", new Application());
+        mav.addObject("user", user);
+		mav.setViewName("mechanic.updateapplication");
+		return mav;
+	};
+	
+	@PreAuthorize("isFullyAuthenticated()") 
+	@RequestMapping(value = "/getreviewbymechanic", method = RequestMethod.GET)
+	public ModelAndView  getreviewbymechanic(HttpSession session, Authentication auth){
+		ModelAndView mav = new ModelAndView();
+		UserPrincipal user = userService.getUserByName(auth.getName());
+        mav.addObject("user", user);
+		mav.setViewName("mechanic.reviewbymechanic");
+		return mav;
+	};
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/application/{id}", method = RequestMethod.GET)
