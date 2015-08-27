@@ -108,6 +108,66 @@
 		<put-attribute name="body" value="/WEB-INF/views/mechanic/mechanic-reviewbymechanic.jsp" />
 	</definition>
 	
+	<definition name="director.applicationlist" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/director/director-applicationlist.jsp" />
+	</definition>
+	
+	<definition name="director.mechanicslist" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/director/director-mechaniclist.jsp" />
+	</definition>
+	
+	<definition name="director.stolist" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/director/director-stolist.jsp" />
+	</definition>
+	
+	<definition name="director.addrent" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/director/director-addrent.jsp" />
+	</definition>
+	
+	<definition name="director.adddetail" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/director/director-adddetail.jsp" />
+	</definition>
+	
+	<definition name="director.addservice" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/director/director-addservice.jsp" />
+	</definition>
+	
+	<definition name="director.updateapplicationdetail" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/director/director-applicationdetail.jsp" />
+	</definition>
+	
+	<definition name="director.updateapplication" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/director/director-updateapplication.jsp" />
+	</definition>
+	
+	<definition name="director.mechaniclistbysto" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/director/director-mechaniclistbysto.jsp" />
+	</definition>
+	
+	<definition name="director.addmechanic" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/director/director-addmechanic.jsp" />
+	</definition>
+	
 	<definition name="client.form.edit" extends="base.definition">
 		<put-attribute name="title" expression="${clients.manager.title}" />
 		<put-attribute name="body"

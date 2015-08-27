@@ -5,7 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/home.css"/>" />
-<h1>История заявок</h1>
+<h1>История заявок на деталь</h1>
 <a href="<c:url value='/mechanic/addapplicationdetail' />">Новая заявка на деталь</a>
 </br>
  <div class="reviews">

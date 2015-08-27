@@ -15,10 +15,10 @@ import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name="director")
-@PrimaryKeyJoinColumn(name = "users_user_id")
+@PrimaryKeyJoinColumn(name = "user_id")
 public class DirectorEntity extends UserPrincipalEntity {
 
-	@Mapping("salary")
+	/*@Mapping("salary")
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "director", orphanRemoval=true)
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	private List<SalaryEntity> salarys;
@@ -29,7 +29,7 @@ public class DirectorEntity extends UserPrincipalEntity {
 
 	public void setSalarys(List<SalaryEntity> salarys) {
 		this.salarys = salarys;
-	}
+	}*/
 	
 
 

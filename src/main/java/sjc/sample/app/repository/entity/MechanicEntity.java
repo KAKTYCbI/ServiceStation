@@ -17,14 +17,14 @@ import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name="mechanic")
-@PrimaryKeyJoinColumn(name = "users_user_id")
+@PrimaryKeyJoinColumn(name = "user_id")
 public class MechanicEntity extends UserPrincipalEntity{
 	
 	@Mapping("rating")
 	@Column(name="rating")
 	private Float rating;
 	
-	@Mapping("messages")
+	/*@Mapping("messages")
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mechanic", orphanRemoval=true)
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	private List<MessageEntity> messages;
@@ -33,11 +33,11 @@ public class MechanicEntity extends UserPrincipalEntity{
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mechanic", orphanRemoval=true)
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	private List<SalaryEntity> salarys;
-	
-	/*@Mapping("reviews")
+	*/
+	@Mapping("reviews")
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mechanic", orphanRemoval=true)
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
-	private List<ReviewEntity> reviews;*/
+	private List<ReviewEntity> reviews;
 	
 	@Mapping("sto")
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -52,7 +52,7 @@ public class MechanicEntity extends UserPrincipalEntity{
 		this.rating = rating;
 	}
 
-	public List<MessageEntity> getMessages() {
+	/*public List<MessageEntity> getMessages() {
 		return messages;
 	}
 
@@ -66,15 +66,15 @@ public class MechanicEntity extends UserPrincipalEntity{
 
 	public void setSalarys(List<SalaryEntity> salarys) {
 		this.salarys = salarys;
-	}
+	}*/
 
-	/*public List<ReviewEntity> getReviews() {
+	public List<ReviewEntity> getReviews() {
 		return reviews;
 	}
 
 	public void setReviews(List<ReviewEntity> reviews) {
 		this.reviews = reviews;
-	}*/
+	}
 
 	public StoEntity getSto() {
 		return sto;

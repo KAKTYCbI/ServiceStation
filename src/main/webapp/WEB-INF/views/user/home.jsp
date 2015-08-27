@@ -17,7 +17,7 @@
                  <ul>${reviews.rating}</ul>
                </div>
             <ul>${reviews.client.name }, оставил отзыв</br>
-             О ${reviews.sto.name}</br>
+             О ${reviews.sto.name} и ${reviews.mechanic.name}</br>
              ${reviews.text}.............................................................
              ..................................................</br>
              Дата отзыва:<fmt:formatDate value="${reviews.date}" pattern="dd-MM-yyyy" /></br>

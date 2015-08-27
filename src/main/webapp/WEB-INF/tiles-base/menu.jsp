@@ -11,15 +11,15 @@
 <ul>
 <security:authorize access="hasRole('ROLE_DIRECTOR')" >
 <li><a href="<c:url value='/home' />">Главная</a></li>
-<li><a href="">Список заявок</a></li>
-<li><a href="">Заявки на деталь</a></li>
-<li><a href="">Добавление деталей</a></li>
-<li><a href="">Добавление механиков</a></li>
-<li><a href="">Аренда</a></li>
-<li><a href="">Отчет</a></li>
-<li><a href="">Список механиков</a></li>
-<li><a href="">Список СТО</a></li>
-<li><a href="">Добавление услуги</a></li>
+<li><a href="<c:url value='/director/getapplication' />">Список заявок</a></li>
+<li><a href="<c:url value='/director/getapplicationdetail' />">Заявки на деталь</a></li>
+<li><a href="<c:url value='/director/adddetail' />">Добавление деталей</a></li>
+<li><a href="<c:url value='/director/addmechanic' />">Добавление механиков</a></li>
+<li><a href="<c:url value='/director/addrent' />">Аренда</a></li>
+<li><a href="<c:url value='/director/getreport' />">Отчет</a></li>
+<li><a href="<c:url value='/director/getmechanics' />">Список механиков</a></li>
+<li><a href="<c:url value='/director/getsto' />">Список СТО</a></li>
+<li><a href="<c:url value='/director/addservice' />">Добавление услуги</a></li>
  </security:authorize> 
  <security:authorize access="hasRole('ROLE_MECHANIC')" >
  <li><a href="<c:url value='/home' />">Главная</a></li>

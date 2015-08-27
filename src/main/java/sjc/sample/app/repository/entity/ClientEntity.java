@@ -19,7 +19,7 @@ import org.hibernate.annotations.CascadeType;
 
 
 @Entity
-@Table(name = "client1")
+@Table(name = "client")
 @PrimaryKeyJoinColumn(name = "user_id")
 public class ClientEntity extends UserPrincipalEntity {
 		

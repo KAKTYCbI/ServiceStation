@@ -48,10 +48,10 @@ public class ReviewEntity {
 	@JoinColumn( name = "client_client_id", nullable = false)
 	private ClientEntity client;
 	
-	/*@Mapping("mechanic")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@Mapping("mechanic")
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn( name = "mechanic_mechanic_id", nullable = false)
-    private MechanicEntity mechanic;*/
+    private MechanicEntity mechanic;
 	
 	@Mapping("sto")
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -106,13 +106,13 @@ public class ReviewEntity {
 		this.client = client;
 	}
 
-	/*public MechanicEntity getMechanic() {
+	public MechanicEntity getMechanic() {
 		return mechanic;
 	}
 
 	public void setMechanic(MechanicEntity mechanic) {
 		this.mechanic = mechanic;
-	}*/
+	}
 
 	public StoEntity getSto() {
 		return sto;

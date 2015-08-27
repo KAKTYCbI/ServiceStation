@@ -5,25 +5,19 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/home.css"/>" />
-<h1>Отзывы обо мне</h1>
+<h1>История заявок</h1>
 </br>
  <div class="reviews">
-   
       <div class = "review">
          <div class = "reviewtop"></div>
             <div class = "reviewcenter">
-
-               <div class="rating">
-                 <ul>4.2</ul>
-               </div>
-            <ul>Клиент, оставил отзыв</br>
-             О Механике</br>
-            текст отзыва.............................................................
-             ..................................................</br>
-             Дата отзыва:ХХ.ХХ.ХХ </br>
+            <ul>№: ХХХХ</br>
+             От кого: "Name"</br>
+             Кому название СТО</br>
+             Дата заявки:XX.XX.XX</br>
+             <a href="<c:url value='/director/updateapplication' />">Подробости</a>
             </ul>
             </div>
           <div class = "reviewbottom"></div>
           </div>
-    
   </div>
