@@ -2,6 +2,7 @@ package sjc.example.domain.model;
 
 import java.util.List;
 
+
 public class Sto {
 	
 	private Long id;
@@ -16,6 +17,15 @@ public class Sto {
 	
 	private List<Application> orders;
 
+	/*public Sto(Long id, String name, Double rating, List<Mechanic> mechanics, List<Review> reviews, List<Application> orders  ){
+		this.id = id;
+		this.name = name;
+		this.rating = rating;
+		this.mechanics = mechanics;
+		this.reviews = reviews;
+		this.orders = orders;
+	}*/
+	
 	public Long getId() {
 		return id;
 	}

@@ -8,16 +8,18 @@
 <h1>Список механиков</h1>
 </br>
  <div class="reviews">
-
+ <c:forEach items="${mechanic}" var="mechanic" >
       <div class = "review">
          <div class = "reviewtop"></div>
             <div class = "reviewcenter">
-            <ul>Имя: имя механика&nbsp;&nbsp;
-            СТО:название сто&nbsp;&nbsp;
+            <ul>Имя: ${mechanic.name} &nbsp;&nbsp;
+            СТО:${mechanic.sto.name}&nbsp;&nbsp;
              <a href="<c:url value='/director/mechanicinfo' />">Подробости</a>
             </ul>
             </div>
+            
           <div class = "reviewbottom"></div>
           </div>
+ </c:forEach>
   
   </div>

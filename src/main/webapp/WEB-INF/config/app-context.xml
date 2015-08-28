@@ -32,6 +32,8 @@
 			<list>
 				<bean class="sjc.sample.app.web.converters.StringToClientConverter" />
 				<bean class="sjc.sample.app.web.converters.StringToUserPrincipalConverter" />
+			    <bean class="sjc.sample.app.web.converters.StringToStoConverter" />
+			
 			</list>
 		</property>
 	</bean>

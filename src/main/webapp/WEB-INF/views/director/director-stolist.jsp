@@ -8,17 +8,19 @@
 <h1>Список СТО</h1>
 </br>
  <div class="reviews">
+ <c:forEach items="${sto}" var="sto" >
       <div class = "review">
          <div class = "reviewtop"></div>
             <div class = "reviewcenter">
                  <div class="rating">
-                 <ul>4.2</ul>
+                 <ul>${sto.rating }</ul>
                </div>
                </br>
-            <ul>Название:СТО&nbsp;
+            <ul>Название:${sto.name}&nbsp;
             Стоимость аренда:XXXXX&nbsp;
-            <a href="<c:url value='/director/mechaniclistbysto' />">Список механиков</a></ul> </br>
+            <a href="<c:url value="/director/mechaniclistbysto/${sto.id }" />">Список механиков</a></ul> </br>
             </div>
           <div class = "reviewbottom"></div>
           </div>
+  </c:forEach>
   </div>

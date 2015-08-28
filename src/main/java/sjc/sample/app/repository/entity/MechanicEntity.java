@@ -24,23 +24,23 @@ public class MechanicEntity extends UserPrincipalEntity{
 	@Column(name="rating")
 	private Float rating;
 	
-	/*@Mapping("messages")
+	@Mapping("messages")
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mechanic", orphanRemoval=true)
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	private List<MessageEntity> messages;
 	
-	@Mapping("salarys")
+	/*@Mapping("salarys")
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mechanic", orphanRemoval=true)
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
-	private List<SalaryEntity> salarys;
-	*/
+	private List<SalaryEntity> salarys;*/
+	
 	@Mapping("reviews")
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mechanic", orphanRemoval=true)
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	private List<ReviewEntity> reviews;
 	
 	@Mapping("sto")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn( name = "sto_id", nullable = false)
 	private StoEntity sto;
 	
@@ -52,7 +52,7 @@ public class MechanicEntity extends UserPrincipalEntity{
 		this.rating = rating;
 	}
 
-	/*public List<MessageEntity> getMessages() {
+	public List<MessageEntity> getMessages() {
 		return messages;
 	}
 
@@ -60,14 +60,14 @@ public class MechanicEntity extends UserPrincipalEntity{
 		this.messages = messages;
 	}
 
-	public List<SalaryEntity> getSalarys() {
+	/*public List<SalaryEntity> getSalarys() {
 		return salarys;
 	}
 
 	public void setSalarys(List<SalaryEntity> salarys) {
 		this.salarys = salarys;
 	}*/
-
+	
 	public List<ReviewEntity> getReviews() {
 		return reviews;
 	}

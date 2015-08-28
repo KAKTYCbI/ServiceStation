@@ -23,6 +23,7 @@ import sjc.sample.app.repository.entity.MechanicEntity;
 import sjc.sample.app.repository.entity.RentEntity;
 import sjc.sample.app.repository.entity.ServiceEntity;
 import sjc.sample.app.repository.entity.StoEntity;
+import sjc.sample.app.repository.entity.UserPrincipalEntity;
 import sjc.sample.app.repository.entity.map.ModelClassMap;
 import sjc.example.domain.model.Application;
 import sjc.example.domain.model.ApplicationDetail;
@@ -30,6 +31,7 @@ import sjc.example.domain.model.Detail;
 import sjc.example.domain.model.Mechanic;
 import sjc.example.domain.model.Rent;
 import sjc.example.domain.model.Sto;
+import sjc.example.domain.model.UserPrincipal;
 import sjc.example.domain.service.DirectorService;
 
 @Service()
@@ -122,7 +124,7 @@ public class DirectorServiceImplement implements DirectorService{
 
 	@Override
 	public void saveOrUpdateMechanic(Mechanic mechanic) {
-		//mechanicRepository.saveOrUpdate((getMapper().map(mechanic, MechanicEntity.class)));
+		mechanicRepository.saveOrUpdate((getMapper().map(mechanic, MechanicEntity.class)));
 		
 	}
 
@@ -157,6 +159,37 @@ public class DirectorServiceImplement implements DirectorService{
 		  
 		applicationRepository.update((getMapper().map(application, ApplicationEntity.class)));
 		
+	}
+	@Override
+	public Sto getStoByName(String name) {
+		StoEntity stoEntity = stoRepository.findByName(name);
+		Sto stoModel = null;
+		if (stoEntity != null) {
+			stoModel = (Sto) getMapper().map(stoEntity,
+					modelClassMap.getModelClass(stoEntity.getClass()));
+		}
+		return stoModel;
+	}
+	
+	@Override
+	public Mechanic getMechanicById(Long id) {
+		MechanicEntity mechanicEntity = mechanicRepository.getMechanicById(id);
+		Mechanic mechanicModel = null;
+		if (mechanicEntity != null) {
+			mechanicModel = (Mechanic) getMapper().map(mechanicEntity,
+					modelClassMap.getModelClass(mechanicEntity.getClass()));
+		}
+		return mechanicModel;
+	}
+	@Override
+	public Sto getStoById(Long id) {
+		StoEntity stoEntity = stoRepository.getStoById(id);
+		Sto stoModel = null;
+		if (stoEntity != null) {
+			stoModel = (Sto) getMapper().map(stoEntity,
+					modelClassMap.getModelClass(stoEntity.getClass()));
+		}
+		return stoModel;
 	}
 
 }

@@ -13,9 +13,6 @@
 	<div class="review">
 		<div class="reviewtop"></div>
 		<div class="reviewcenter">
-		
-			
-
 			<form:form method="post" action="addmechanic" commandName="mechanic">
 				<table>
 					<tr>
@@ -35,16 +32,17 @@
 					</tr>
 					<tr>
 						<td><form:label path="sto">СТО:</form:label></td>
-						<td><form:select multiple="multiple" path="sto">
-								<option>СТО 1</option>
-								<option>СТО 2</option>
+						<td><form:select  path="sto">
+						  <c:forEach items="${stos}" var="stos" >
+								<option path ="sto">${stos.name}</option>	
+						  </c:forEach>
 							</form:select></td>
 					</tr>
 
-					<tr>
+					<!--  <tr>
 						<td><form:label path="salarys">зарплата:</form:label></td>
 						<td><form:input path="salarys" /></td>
-					</tr>
+					</tr>-->
 
 					<tr>
 						<td><form:label path="password">пароль:</form:label></td>

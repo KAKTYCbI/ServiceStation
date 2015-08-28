@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import sjc.sample.app.repository.dao.MechanicDao;
 import sjc.sample.app.repository.entity.MechanicEntity;
 import sjc.sample.app.repository.entity.StoEntity;
+import sjc.sample.app.repository.entity.UserPrincipalEntity;
 import sjc.sample.app.repository.hibernate.AbstractHibernateDao;
 
 @Repository
@@ -24,6 +25,15 @@ AbstractHibernateDao<MechanicEntity, Long> implements MechanicDao{
 		Criteria criteria = getSession().createCriteria(MechanicEntity.class).add(
 				Restrictions.eq("sto", sto));
 		return (List<MechanicEntity>) criteria.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public MechanicEntity getMechanicById(Long id) {
+		Criteria cr = getSession().createCriteria(UserPrincipalEntity.class,
+				"users").add(Restrictions.eq("user_id", id));
+		return (MechanicEntity) cr.uniqueResult();
+
 	}
 	
 	
