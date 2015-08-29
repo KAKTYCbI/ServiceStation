@@ -72,7 +72,6 @@ public class ClientController {
         Status status = clientService.getStatusByName("zajavka ozhidaet obrabotku");
         System.out.println("тест тест тест " + status.getStatus());
         application.setStatus(status);
-	   
         clientService.addOrUpdateApplication(application);
 	    return "redirect:/home";
 	}

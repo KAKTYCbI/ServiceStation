@@ -11,5 +11,7 @@ public interface MechanicDao extends GenericDao<MechanicEntity, Long> {
 	List<MechanicEntity> findBySto(StoEntity sto);
 	
 	MechanicEntity getMechanicById(Long id);
+	
+	MechanicEntity getMechanicByName(String name);
 
 }

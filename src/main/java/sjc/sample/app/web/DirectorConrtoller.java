@@ -25,9 +25,11 @@ import sjc.example.domain.model.Director;
 import sjc.example.domain.model.Mechanic;
 import sjc.example.domain.model.Rent;
 import sjc.example.domain.model.Service;
+import sjc.example.domain.model.Status;
 import sjc.example.domain.model.Sto;
 import sjc.example.domain.model.UserPrincipal;
 import sjc.example.domain.model.UserRole;
+import sjc.example.domain.service.ClientService;
 import sjc.example.domain.service.DirectorService;
 import sjc.example.domain.service.MechanicService;
 import sjc.example.domain.service.UserService;
@@ -43,6 +45,9 @@ public class DirectorConrtoller {
 	private MechanicService mechanicService;
 
 	@Autowired
+	private ClientService clientService;
+	
+	@Autowired
 	private UserService userService;
 	
 	
@@ -51,7 +56,9 @@ public class DirectorConrtoller {
 	public ModelAndView  getapplicationlist(HttpSession session, Authentication auth){
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
+		Status status = clientService.getStatusByName("zajavka ozhidaet obrabotku");
         mav.addObject("user", user);
+        mav.addObject("application", directorService.getApplicationByStatus(status));
 		mav.setViewName("director.applicationlist");
 		return mav;
 	};

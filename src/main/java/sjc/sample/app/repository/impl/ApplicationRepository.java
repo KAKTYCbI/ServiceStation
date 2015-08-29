@@ -6,10 +6,12 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+
 import sjc.sample.app.repository.dao.ApplicationDao;
 import sjc.sample.app.repository.entity.ApplicationEntity;
 import sjc.sample.app.repository.entity.ClientEntity;
 import sjc.sample.app.repository.entity.MechanicEntity;
+import sjc.sample.app.repository.entity.StatusEntity;
 import sjc.sample.app.repository.entity.StoEntity;
 import sjc.sample.app.repository.hibernate.AbstractHibernateDao;
 
@@ -59,5 +61,14 @@ AbstractHibernateDao<ApplicationEntity, Long> implements ApplicationDao{
 						Restrictions.between("dateCompletion", dateStart, dateFinish));
 		return (List<ApplicationEntity>) criteria.list();
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ApplicationEntity> getApplicationByStatus(StatusEntity status) {
+		Criteria criteria = getSession().createCriteria(ApplicationEntity.class).add(
+				Restrictions.eq("status", status));
+		return (List<ApplicationEntity>) criteria.list();
+	}
+
 
 }

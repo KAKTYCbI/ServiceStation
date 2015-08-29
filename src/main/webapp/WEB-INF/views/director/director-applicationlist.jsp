@@ -8,16 +8,18 @@
 <h1>История заявок</h1>
 </br>
  <div class="reviews">
+ <c:forEach items="${application}" var="application" >
       <div class = "review">
          <div class = "reviewtop"></div>
             <div class = "reviewcenter">
-            <ul>№: ХХХХ</br>
-             От кого: "Name"</br>
-             Кому название СТО</br>
-             Дата заявки:XX.XX.XX</br>
-             <a href="<c:url value='/director/updateapplication' />">Подробости</a>
+             <ul>№: ${application.id} </br>
+             От кого: ${application.client.name }</br>
+             Кому: ${application.sto.name }</br>
+             Дата заявки:<fmt:formatDate value="${application.dateOrder }" pattern="dd-MM-yyyy" /></br>
+             <a href="<c:url value="/director/updateapplication/${application.id }" />">Подробости</a>
             </ul>
             </div>
           <div class = "reviewbottom"></div>
           </div>
+</c:forEach>
   </div>

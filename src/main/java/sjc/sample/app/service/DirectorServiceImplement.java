@@ -22,6 +22,7 @@ import sjc.sample.app.repository.entity.DetailEntity;
 import sjc.sample.app.repository.entity.MechanicEntity;
 import sjc.sample.app.repository.entity.RentEntity;
 import sjc.sample.app.repository.entity.ServiceEntity;
+import sjc.sample.app.repository.entity.StatusEntity;
 import sjc.sample.app.repository.entity.StoEntity;
 import sjc.sample.app.repository.entity.UserPrincipalEntity;
 import sjc.sample.app.repository.entity.map.ModelClassMap;
@@ -30,6 +31,7 @@ import sjc.example.domain.model.ApplicationDetail;
 import sjc.example.domain.model.Detail;
 import sjc.example.domain.model.Mechanic;
 import sjc.example.domain.model.Rent;
+import sjc.example.domain.model.Status;
 import sjc.example.domain.model.Sto;
 import sjc.example.domain.model.UserPrincipal;
 import sjc.example.domain.service.DirectorService;
@@ -191,5 +193,30 @@ public class DirectorServiceImplement implements DirectorService{
 		}
 		return stoModel;
 	}
+	@Override
+	public List<Application> getApplicationByStatus(Status status) {
+		List<Application> application = new ArrayList<Application>();
+		List<ApplicationEntity> applicationEntities = applicationRepository.getApplicationByStatus((getMapper().map(status,StatusEntity.class)));
+		for(ApplicationEntity ApplicationEntity : applicationEntities) {
+			application.add(getMapper().map(ApplicationEntity, Application.class));
+		}
+		return application;
+	}
+	@Override
+	public Mechanic getMechanicByName(String name) {
+		MechanicEntity mechanicEntity = mechanicRepository.getMechanicByName(name);
+		Mechanic mechanicModel = null;
+		if (mechanicEntity != null) {
+			mechanicModel = (Mechanic) getMapper().map(mechanicEntity,
+					modelClassMap.getModelClass(mechanicEntity.getClass()));
+		}
+		return mechanicModel;
+	}
+	
+	
+	
+	
+	
+	
 
 }

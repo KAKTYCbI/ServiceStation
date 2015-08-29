@@ -35,6 +35,14 @@ AbstractHibernateDao<MechanicEntity, Long> implements MechanicDao{
 		return (MechanicEntity) cr.uniqueResult();
 
 	}
+
+	@Override
+	public MechanicEntity getMechanicByName(String name) {
+		Criteria cr = getSession().createCriteria(MechanicEntity.class).add(
+				Restrictions.eq("name", name));
+		return (MechanicEntity) cr.uniqueResult();
+
+	}
 	
 	
 	
