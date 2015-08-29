@@ -17,12 +17,8 @@
      <ul>
       <table>
       <tr>
-        <td>
-          <form:label path = "id">№:</form:label>
-        </td>
-        <td>
-          XXXX
-        </td>
+        <td><form:label path="id">№:</form:label></td>
+						<td><form:input path="id" value="${application.id }"/></td>
       </tr>
        
        <tr>
@@ -30,7 +26,7 @@
           Name:
         </td>
         <td>
-          имя клиента
+          ${application.client.name }
         </td>
       </tr>
        <tr>
@@ -38,7 +34,7 @@
           Email:
         </td>
         <td>
-          email
+          ${application.client.email }
         </td>
       </tr>
        <tr>
@@ -46,7 +42,7 @@
           Контакт:
         </td>
         <td>
-          контак
+          ${application.client.contact }
         </td>
       </tr> 
        <tr>
@@ -54,10 +50,14 @@
           <form:label path = "mechanic">Механик:</form:label>
         </td>
         <td>
-          <form:select path="status">
-          <option>Механик 1</option>
-          <option>Механик 2</option>
-  </form:select>
+          <form:select path="mechanic">
+          <form:option value="mechanic" label="${application.mechanic.name }" />
+          <c:forEach items="${mechanics}" var="mechanics" >
+          <c:if test="${application.mechanic.name ne mechanics.name}">
+								<option path ="mechanic">${mechanics.name}</option>	
+		  </c:if>
+		  </c:forEach>
+          </form:select>
         </td>
       </tr>   
       <tr>
@@ -66,9 +66,13 @@
         </td>
         <td>
           <form:select path="status">
-          <option>Статус 1</option>
-          <option>Статус 2</option>
-  </form:select>
+          <form:option value="status" label="${application.status.status }" />
+          <c:forEach items="${statuss}" var="statuss" >
+          <c:if test="${application.status.status ne statuss.status}">
+			<option path ="status">${statuss.status}</option>	
+		</c:if>
+		 </c:forEach>
+        </form:select>
         </td>
       </tr> 
       <tr>
@@ -76,7 +80,7 @@
           <form:label path = "sto">сто:</form:label>
         </td>
         <td>
-          сто
+          ${application.sto.name }
         </td>
       </tr>
       <tr>
@@ -84,7 +88,9 @@
           <form:label path = "services">Услуги:</form:label>
         </td>
         <td>
-          список услуг
+          <c:forEach items="${application.services}" var="service" > 
+             ${service.name}</br>
+           </c:forEach></br> 
         </td>
       </tr>
       <tr>
@@ -92,15 +98,18 @@
           <form:label path = "details">Детали:</form:label>
         </td>
         <td>
-          список деталей
+          <c:forEach items="${application.details}" var="detail" > 
+             ${detail.name}</br>
+             </c:forEach></br> 
         </td>
       </tr>
       <tr>
         <td>
-          <form:label path = "dateOrder">Дата заявки:</form:label>
+          Дата заявки
         </td>
         <td>
-         дата подачи заявки
+        <fmt:formatDate value="${application.dateOrder }" pattern="dd-MM-yyyy" />
+         
         </td>
       </tr>
       <tr>
@@ -108,7 +117,7 @@
           <form:label path = "dateCompletion">Дата выполнение заявки:</form:label>
         </td>
         <td>
-          дата выполнения заявки
+          <fmt:formatDate value="${application.dateCompletion }" pattern="dd-MM-yyyy" />
         </td>
       </tr>
       <tr>
@@ -116,7 +125,7 @@
           <form:label path = "price">стоимость:</form:label>
         </td>
         <td>
-          хххххх
+          ${application.price }
         </td>
       </tr>
       <tr>

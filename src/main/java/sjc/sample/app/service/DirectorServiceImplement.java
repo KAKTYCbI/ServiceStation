@@ -15,6 +15,7 @@ import sjc.sample.app.repository.dao.DetailDao;
 import sjc.sample.app.repository.dao.MechanicDao;
 import sjc.sample.app.repository.dao.RentDao;
 import sjc.sample.app.repository.dao.ServiceDao;
+import sjc.sample.app.repository.dao.StatusDao;
 import sjc.sample.app.repository.dao.StoDao;
 import sjc.sample.app.repository.entity.ApplicationDetailEntity;
 import sjc.sample.app.repository.entity.ApplicationEntity;
@@ -54,6 +55,9 @@ public class DirectorServiceImplement implements DirectorService{
 	
 	@Autowired
 	private ServiceDao serviceRepository;
+	
+	@Autowired
+	private StatusDao statusRepository;
 	
 	@Autowired
 	private RentDao rentRepository;
@@ -211,6 +215,15 @@ public class DirectorServiceImplement implements DirectorService{
 					modelClassMap.getModelClass(mechanicEntity.getClass()));
 		}
 		return mechanicModel;
+	}
+	@Override
+	public List<Status> getStatus() {
+		List<Status> status = new ArrayList<Status>();
+		List<StatusEntity> StatusEntities = statusRepository.findAll();
+		for(StatusEntity StatusEntity : StatusEntities) {
+			status.add(getMapper().map(StatusEntity, Status.class));
+		}
+		return status;
 	}
 	
 	

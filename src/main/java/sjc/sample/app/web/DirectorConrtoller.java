@@ -185,7 +185,7 @@ public class DirectorConrtoller {
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/getapplicationdetail", method = RequestMethod.GET)
-	public ModelAndView  getapplicationdetail(HttpSession session, Authentication auth){
+	public ModelAndView  getapplicationdetail(HttpSession session, Authentication auth, Model model){
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
         mav.addObject("user", user);
@@ -195,14 +195,28 @@ public class DirectorConrtoller {
 	};
 	
 	@PreAuthorize("isFullyAuthenticated()") 
-	@RequestMapping(value = "/updateapplication", method = RequestMethod.GET)
-	public ModelAndView  updateapplication(HttpSession session, Authentication auth){
+	@RequestMapping(value = "/updateapplication/{id}", method = RequestMethod.GET)
+	public ModelAndView  updateapplication(@PathVariable Long id, HttpSession session, Authentication auth){
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
-		mav.addObject("application", new Application());
+		Application application = mechanicService.getApplicationById(id);
+		mav.addObject("application", application);
+		mav.addObject("statuss", directorService.getStatus());
+		mav.addObject("mechanics", directorService.getMechanicsOnSto(application.getSto()));
         mav.addObject("user", user);
 		mav.setViewName("director.updateapplication");
 		return mav;
 	};
+	
+	@RequestMapping(value = { "/updateapplication/{id}" }, method = { RequestMethod.POST })
+	public String updateapplication(@ModelAttribute("application") Application application,  Model model, HttpSession session) {
+        Application application1 = mechanicService.getApplicationById(application.getId());
+       // System.out.println("test test tes"+application.getId());
+        application1.setMechanic(application.getMechanic());
+        application1.setStatus(application.getStatus());
+	    clientService.addOrUpdateApplication(application1);
+        
+	    return "redirect:/home";
+	}
 	
 	}

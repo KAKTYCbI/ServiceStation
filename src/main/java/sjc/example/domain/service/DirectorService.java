@@ -30,6 +30,7 @@ public interface DirectorService {
 	//метод возращает список  всех СТО
     List<Sto> getSto();
     
+    List<Status> getStatus();
     //метод дабавляет делать
     void addDetail(Detail detail);
     

@@ -43,7 +43,7 @@ public class ApplicationEntity {
 	private Date dateCompletion;
 	
 	@Mapping("status")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn( name = "status_status_id", nullable = false)
 	private StatusEntity status;
 	
