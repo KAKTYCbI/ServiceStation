@@ -1,9 +1,11 @@
 package sjc.example.domain.service;
 import java.util.List;
+
 import sjc.example.domain.model.Application;
 import sjc.example.domain.model.ApplicationDetail;
 import sjc.example.domain.model.Mechanic;
 import sjc.example.domain.model.Message;
+import sjc.example.domain.model.Review;
 
 public interface MechanicService {
 
@@ -25,5 +27,5 @@ public interface MechanicService {
 	 //метод создает сообщение
 	 void notification(Message message);
      
-	 
+	 List<Review> getReviewByMechanic(Mechanic mechanic);
 	}

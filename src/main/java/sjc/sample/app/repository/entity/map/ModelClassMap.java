@@ -5,16 +5,24 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import sjc.example.domain.model.Application;
 import sjc.example.domain.model.Client;
+import sjc.example.domain.model.Detail;
 import sjc.example.domain.model.Director;
 import sjc.example.domain.model.Mechanic;
 import sjc.example.domain.model.Review;
+import sjc.example.domain.model.Service;
+import sjc.example.domain.model.Status;
 import sjc.example.domain.model.Sto;
 import sjc.example.domain.model.UserPrincipal;
+import sjc.sample.app.repository.entity.ApplicationEntity;
 import sjc.sample.app.repository.entity.ClientEntity;
+import sjc.sample.app.repository.entity.DetailEntity;
 import sjc.sample.app.repository.entity.DirectorEntity;
 import sjc.sample.app.repository.entity.MechanicEntity;
 import sjc.sample.app.repository.entity.ReviewEntity;
+import sjc.sample.app.repository.entity.ServiceEntity;
+import sjc.sample.app.repository.entity.StatusEntity;
 import sjc.sample.app.repository.entity.StoEntity;
 import sjc.sample.app.repository.entity.UserPrincipalEntity;
 
@@ -43,6 +51,18 @@ public class ModelClassMap {
 		
 		modelClassMappings.put(StoEntity.class, Sto.class);
 		modelClassMappings.put(Sto.class, StoEntity.class);
+		
+		modelClassMappings.put(ServiceEntity.class, Service.class);
+		modelClassMappings.put(Service.class, ServiceEntity.class);
+		
+		modelClassMappings.put(DetailEntity.class, Detail.class);
+		modelClassMappings.put(Detail.class, DetailEntity.class);
+		
+		modelClassMappings.put(StatusEntity.class, Status.class);
+		modelClassMappings.put(Status.class, StatusEntity.class);
+		
+		modelClassMappings.put(ApplicationEntity.class, Application.class);
+		modelClassMappings.put(Application.class, ApplicationEntity.class);
 		
 	}
 

@@ -11,53 +11,55 @@
       <div class = "review">
          <div class = "reviewtop"></div>
             <div class = "reviewcenter">
-<form:form method = "post" action = "addapplication" commandName = "client">
+<form:form method = "post" action = "addapplication" commandName = "application">
     <table>
       <tr>
         <td>
-          <form:label path = "name">Имя</form:label>
+          Имя:
         </td>
         <td>
-          <form:input path="name"/>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <form:label path = "login">Email</form:label>
-        </td>
-        <td>
-          <form:input path="login" />
+          ${user.name }
         </td>
       </tr>
       <tr>
         <td>
-          <form:label path = "password">Контакт</form:label>
+          Email
         </td>
         <td>
-          <form:input path="password"/>
+         ${user.email }
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Контакт
+        </td>
+        <td>
+          ${user.contact }
         </td>
       </tr>
             <tr>
         <td>
-          <form:label path = "email">СТО</form:label>
+          <form:label path = "sto">СТО</form:label>
         </td>
         <td>
-          <form:select path="email">
-          <option>СТО 1</option>
-          <option>СТО 2</option>
-  </form:select>
+          <form:select path="sto">
+          <c:forEach items="${stos}" var="stos" >
+          <option path ="sto">${stos.name}</option>	
+          </c:forEach>
+          </form:select>
         </td>
       
       </tr>
             <tr>
         <td>
-          <form:label path = "contact">Услуга</form:label>
+          <form:label path = "services">Услуга</form:label>
         </td>
         <td>
-          <form:select multiple="multiple" path="contact">
-          <option>Услуга 1</option>
-          <option>Услуна 2</option>
-  </form:select>
+          <form:select multiple="multiple" path="services">
+          <<c:forEach items="${service}" var="service" >
+          <option path ="services">${service.name}</option>	
+          </c:forEach>
+          </form:select>
         </td>
 
       </tr>

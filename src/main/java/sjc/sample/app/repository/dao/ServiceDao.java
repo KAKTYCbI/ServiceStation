@@ -5,4 +5,5 @@ import sjc.sample.app.repository.entity.ServiceEntity;
 
 public interface ServiceDao extends GenericDao<ServiceEntity, Long>{
 
+	ServiceEntity getServiceByName(String name);
 }

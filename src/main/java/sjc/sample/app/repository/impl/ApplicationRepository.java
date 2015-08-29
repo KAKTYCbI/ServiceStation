@@ -36,7 +36,7 @@ AbstractHibernateDao<ApplicationEntity, Long> implements ApplicationDao{
 	@Override
 	public ApplicationEntity getApplicationByID(Long applicationId) {
 		Criteria cr = getSession().createCriteria(ApplicationEntity.class,
-				"users").add(Restrictions.eq("application_id", applicationId));
+				"application").add(Restrictions.eq("id", applicationId));
 		return (ApplicationEntity) cr.uniqueResult();
 	}
 
@@ -46,7 +46,7 @@ AbstractHibernateDao<ApplicationEntity, Long> implements ApplicationDao{
 			Date dateFinish) {
 		Criteria criteria = getSession().createCriteria(ApplicationEntity.class).add(
 				Restrictions.eq("sto", sto)).add(
-						Restrictions.between("date_completion", dateStart, dateFinish));
+						Restrictions.between("dateCompletion", dateStart, dateFinish));
 		return (List<ApplicationEntity>) criteria.list();
 	}
 
@@ -56,7 +56,7 @@ AbstractHibernateDao<ApplicationEntity, Long> implements ApplicationDao{
 			Date dateStart, Date dateFinish) {
 		Criteria criteria = getSession().createCriteria(ApplicationEntity.class).add(
 				Restrictions.eq("mechanic", mechanic)).add(
-						Restrictions.between("date_completion", dateStart, dateFinish));
+						Restrictions.between("dateCompletion", dateStart, dateFinish));
 		return (List<ApplicationEntity>) criteria.list();
 	}
 

@@ -1,5 +1,7 @@
 package sjc.sample.app.web;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +62,7 @@ public class DirectorConrtoller {
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
         mav.addObject("user", user);
+        mav.addObject("mechanic", directorService.getMechanics());
 		mav.setViewName("director.mechanicslist");
 		return mav;
 	};
@@ -96,9 +99,18 @@ public class DirectorConrtoller {
 		UserPrincipal user = userService.getUserByName(auth.getName());
         mav.addObject("user", user);
         mav.addObject("rent", new Rent());
+        mav.addObject("stos", directorService.getSto());
 		mav.setViewName("director.addrent");
 		return mav;
 	};
+	
+	@RequestMapping(value = { "/addrent" }, method = { RequestMethod.POST })
+	public String addrent(@ModelAttribute("rent") Rent rent,  Model model, HttpSession session) {
+        rent.setDateStart(new Date());
+	    directorService.addRent(rent);
+        
+	    return "redirect:/home";
+	}
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/adddetail", method = RequestMethod.GET)

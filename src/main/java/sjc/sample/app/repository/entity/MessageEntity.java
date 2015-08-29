@@ -29,12 +29,12 @@ public class MessageEntity {
 	private String text;
 	
 	@Mapping("client")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "client_id", nullable = false )
     private ClientEntity client;
 	
 	@Mapping("mechanic")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "mechanic_id", nullable = false)
 	private MechanicEntity mechanic;
 

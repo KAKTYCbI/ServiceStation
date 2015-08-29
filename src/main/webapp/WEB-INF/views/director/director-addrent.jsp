@@ -21,19 +21,13 @@
         </td>
         <td>
           <form:select path="sto">
-          <option>СТО 1</option>
-          <option>СТО 2</option>
+          <c:forEach items="${stos}" var="stos" >
+          <option path ="sto">${stos.name}</option>	
+          </c:forEach>
   </form:select>
         </td>
       </tr>
-      <tr>
-        <td>
-          <form:label path = "dateStart">Дата начала аренды:</form:label>
-        </td>
-        <td>
-          <form:input path="dateStart" />
-        </td>
-      </tr>
+      
       <tr>
         <td>
           <form:label path = "price">Стоимость:</form:label>

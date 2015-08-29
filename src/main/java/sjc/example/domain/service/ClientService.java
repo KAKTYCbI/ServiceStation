@@ -4,8 +4,11 @@ import java.util.List;
 
 import sjc.example.domain.model.Application;
 import sjc.example.domain.model.Client;
+import sjc.example.domain.model.Detail;
 import sjc.example.domain.model.Message;
 import sjc.example.domain.model.Review;
+import sjc.example.domain.model.Service;
+import sjc.example.domain.model.Status;
 import sjc.example.domain.model.Sto;
 
 public interface ClientService {
@@ -24,10 +27,20 @@ public interface ClientService {
  // авторизованного клиента
  List<Application> getApplication(Client client);
  
+ List<Service> getService();
+ 
+ List<Detail> getDetail();
+ 
  //метод возращает список СТО
  List<Sto> getAllSto();
  
  Client getCilentById(Long id);
  
  void saveClient(Client client);
+ 
+ Service getServiceByName(String name);
+ 
+ Detail getDetailByName(String name);
+ 
+ Status getStatusByName(String name);
 }

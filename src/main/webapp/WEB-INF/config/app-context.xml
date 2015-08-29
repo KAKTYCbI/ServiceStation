@@ -33,6 +33,8 @@
 				<bean class="sjc.sample.app.web.converters.StringToClientConverter" />
 				<bean class="sjc.sample.app.web.converters.StringToUserPrincipalConverter" />
 			    <bean class="sjc.sample.app.web.converters.StringToStoConverter" />
+			    <bean class="sjc.sample.app.web.converters.StringToServiceConverter" />
+			    <bean class="sjc.sample.app.web.converters.StringToDetailConverter" />
 			
 			</list>
 		</property>

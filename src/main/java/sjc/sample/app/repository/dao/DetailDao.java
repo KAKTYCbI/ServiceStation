@@ -6,4 +6,5 @@ import sjc.sample.app.repository.entity.DetailEntity;
 
 public interface DetailDao extends GenericDao<DetailEntity, Long>{
 
+	 DetailEntity getDetailByName(String Name);
 }

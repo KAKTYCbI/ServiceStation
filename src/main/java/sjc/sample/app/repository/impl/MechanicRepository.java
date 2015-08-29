@@ -30,8 +30,8 @@ AbstractHibernateDao<MechanicEntity, Long> implements MechanicDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public MechanicEntity getMechanicById(Long id) {
-		Criteria cr = getSession().createCriteria(UserPrincipalEntity.class,
-				"users").add(Restrictions.eq("user_id", id));
+		Criteria cr = getSession().createCriteria(MechanicEntity.class).add(
+				Restrictions.eq("userId", id));
 		return (MechanicEntity) cr.uniqueResult();
 
 	}

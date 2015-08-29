@@ -12,15 +12,18 @@ import org.springframework.transaction.annotation.Transactional;
 import sjc.sample.app.repository.dao.ApplicationDao;
 import sjc.sample.app.repository.dao.ApplicationDetailDao;
 import sjc.sample.app.repository.dao.MessageDao;
+import sjc.sample.app.repository.dao.ReviewDao;
 import sjc.sample.app.repository.entity.ApplicationDetailEntity;
 import sjc.sample.app.repository.entity.ApplicationEntity;
 import sjc.sample.app.repository.entity.MechanicEntity;
 import sjc.sample.app.repository.entity.MessageEntity;
+import sjc.sample.app.repository.entity.ReviewEntity;
 import sjc.sample.app.repository.entity.map.ModelClassMap;
 import sjc.example.domain.model.Application;
 import sjc.example.domain.model.ApplicationDetail;
 import sjc.example.domain.model.Mechanic;
 import sjc.example.domain.model.Message;
+import sjc.example.domain.model.Review;
 import sjc.example.domain.service.MechanicService;
 
 @Service()
@@ -35,6 +38,9 @@ public class MechanicServiceImplement implements MechanicService{
 	
 	@Autowired
 	private ApplicationDetailDao applicationDetailRepository;
+	
+	@Autowired
+	private ReviewDao reviewRepository;
 	
 	@Autowired
 	private ModelClassMap modelClassMap;
@@ -93,6 +99,17 @@ public class MechanicServiceImplement implements MechanicService{
 		messageRepository.save((getMapper().map(message, MessageEntity.class)));
 
 		
+	}
+
+	@Override
+	public List<Review> getReviewByMechanic(Mechanic mechanic) {
+		
+		List<Review> review = new ArrayList<Review>();
+		List<ReviewEntity> reviewEntities = reviewRepository.getReviewByMechanic((getMapper().map(mechanic,MechanicEntity.class)));
+		for(ReviewEntity ReviewEntity : reviewEntities) {
+			review.add(getMapper().map(ReviewEntity, Review.class));
+		}
+		return review;
 	}
 
 }

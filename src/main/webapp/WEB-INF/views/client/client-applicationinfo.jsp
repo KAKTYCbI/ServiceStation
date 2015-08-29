@@ -13,18 +13,22 @@
          <div class = "reviewtop"></div>
             <div class = "reviewcenter">
             <ul>
-             №: XXXX</br>
-             Name: имя клиента</br>
-             Email: email</br>
-             Контакт: контакт</br>
-             Механик: механик</br>
-             СТО:сто</br>
-             Услуги:список услуг..</br>
-             Детали:список деталей..</br>
-             Дата:ХХ.ХХ.ХХ</br>
+             №: ${application.id }</br>
+             Name: ${application.client.name }</br>
+             Email: ${application.client.email }</br>
+             Контакт: ${application.client.contact }</br>
+             Механик: ${application.mechanic.name }</br>
+             СТО:${application.sto.name }</br>
+             Услуги:
+             <c:forEach items="${application.services}" var="service" > 
+             ${service.name}</br>
+             </c:forEach></br> 
+             Детали:</br>
+             Дата:<fmt:formatDate value="${application.dateOrder }" pattern="dd-MM-yyyy" /></br>
+             Стоимость:${application.price }</br>
             </ul>
             </div>
           <div class = "reviewbottom"></div>
           </div>
-    
+
   </div>

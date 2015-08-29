@@ -18,6 +18,7 @@ import sjc.example.domain.model.ApplicationDetail;
 import sjc.example.domain.model.Client;
 import sjc.example.domain.model.Mechanic;
 import sjc.example.domain.model.UserPrincipal;
+import sjc.example.domain.service.DirectorService;
 import sjc.example.domain.service.MechanicService;
 import sjc.example.domain.service.UserService;
 
@@ -27,6 +28,9 @@ public class MechanicController {
 	
 	@Autowired
 	private MechanicService mechanicService;
+	
+	@Autowired
+	private DirectorService directorService;
 	
 	@Autowired
 	private UserService userService;
@@ -89,7 +93,10 @@ public class MechanicController {
 	public ModelAndView  getreviewbymechanic(HttpSession session, Authentication auth){
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
-        mav.addObject("user", user);
+		Mechanic mechanic = directorService.getMechanicById(user.getUserId());
+        System.out.println("test test test"+ mechanic.getName());
+		mav.addObject("user", user);
+        mav.addObject("reviews", mechanicService.getReviewByMechanic(mechanic));
 		mav.setViewName("mechanic.reviewbymechanic");
 		return mav;
 	};

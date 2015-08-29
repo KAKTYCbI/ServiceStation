@@ -118,14 +118,8 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
 		List<Review> reviews = userService.getReview();
-		Review review = reviews.get(0);
-		System.out.println("Review review sto name  =  "+review.getSto().getName()); 
-		/*Review review = new Review();
-		review.setDate(new java.util.Date());
-		review.setText("это и есть отзыв");
-		reviews.add(review);
-		reviews.add(review);
-		mav.addObject("reviews", reviews)*/
+		//Review review = reviews.get(0);
+		//System.out.println("Review review sto name  =  "+review.getSto().getName()); 
 		mav.addObject("reviews", reviews);
 		mav.addObject("user",user);
 		mav.setViewName("home");

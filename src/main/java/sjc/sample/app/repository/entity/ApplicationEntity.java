@@ -66,17 +66,17 @@ public class ApplicationEntity {
 	private List<DetailEntity> details;
 	
 	@Mapping("client")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn( name = "client_client_id", nullable = false)
 	private ClientEntity client;
 	
 	@Mapping("mechanic")
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn( name = "mechanic_mechanic_id", nullable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn( name = "mechanic_mechanic_id", nullable = true)
 	private MechanicEntity mechanic;
 	
 	@Mapping("sto")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn( name = "sto_sto_id", nullable = false)
 	private StoEntity sto;
 	
