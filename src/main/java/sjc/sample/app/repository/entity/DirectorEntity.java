@@ -2,6 +2,7 @@ package sjc.sample.app.repository.entity;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -18,6 +19,10 @@ import org.hibernate.annotations.CascadeType;
 @PrimaryKeyJoinColumn(name = "user_id")
 public class DirectorEntity extends UserPrincipalEntity {
 
+	@Mapping("salarys")
+	@Column(name="salary")
+	private Long salary;
+	
 	@Mapping("salary")
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "director", orphanRemoval=true)
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
@@ -30,6 +35,15 @@ public class DirectorEntity extends UserPrincipalEntity {
 	public void setSalarys(List<SalaryEntity> salarys) {
 		this.salarys = salarys;
 	}
+
+	public Long getSalary() {
+		return salary;
+	}
+
+	public void setSalary(Long salary) {
+		this.salary = salary;
+	}
+	
 	
 
 

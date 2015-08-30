@@ -3,6 +3,7 @@ package sjc.sample.app.repository.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -23,7 +24,7 @@ AbstractHibernateDao<ReviewEntity, Long> implements ReviewDao {
 	@Override
 	public List<ReviewEntity> getReviewByMechanic(MechanicEntity mechanic) {
 			Criteria criteria = getSession().createCriteria(ReviewEntity.class).add(
-					Restrictions.eq("mechanic", mechanic));
+					Restrictions.eq("mechanic", mechanic)).addOrder(Order.desc("id"));
 			return (List<ReviewEntity>) criteria.list();
 		
 	}

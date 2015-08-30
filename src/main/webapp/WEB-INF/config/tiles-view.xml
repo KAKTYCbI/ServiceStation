@@ -54,6 +54,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/client/client-addapplication.jsp" />
 	</definition>
 	
+	<definition name="client.addreview" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/client/client-addreview.jsp" />
+	</definition>
+	
 	<definition name="client.messages" extends="base.definition">
 		<put-attribute name="title" expression="TEST: ${user.name}" />
 		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
@@ -144,10 +150,16 @@
 		<put-attribute name="body" value="/WEB-INF/views/director/director-addservice.jsp" />
 	</definition>
 	
-	<definition name="director.updateapplicationdetail" extends="base.definition">
+	<definition name="director.applicationdetail" extends="base.definition">
 		<put-attribute name="title" expression="TEST: ${user.name}" />
 		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/director/director-applicationdetail.jsp" />
+	</definition>
+	
+	<definition name="director.updateapplicationdetail" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/director/director-updateapplicationdetail.jsp" />
 	</definition>
 	
 	<definition name="director.updateapplication" extends="base.definition">
@@ -160,6 +172,12 @@
 		<put-attribute name="title" expression="TEST: ${user.name}" />
 		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/director/director-mechaniclistbysto.jsp" />
+	</definition>
+	
+	<definition name="director.updatemechanic" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/director/director-mechanicinfo.jsp" />
 	</definition>
 	
 	<definition name="director.addmechanic" extends="base.definition">

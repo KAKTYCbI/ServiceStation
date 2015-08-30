@@ -85,7 +85,7 @@ public class DirectorServiceImplement implements DirectorService{
 	@Override
 	public List<ApplicationDetail> getApplicationDetail() {
 		List<ApplicationDetail> applicationDetail = new ArrayList<ApplicationDetail>();
-		List<ApplicationDetailEntity> applicationDetailEntities = applicationDetailRepository.findAll();
+		List<ApplicationDetailEntity> applicationDetailEntities = applicationDetailRepository.getAllApplicationDetail();
 		for(ApplicationDetailEntity ApplicationDetailEntity : applicationDetailEntities) {
 			applicationDetail.add(getMapper().map(ApplicationDetailEntity, ApplicationDetail.class));
 		}
@@ -155,7 +155,7 @@ public class DirectorServiceImplement implements DirectorService{
 
 	@Override
 	public void saveApplicationDetail(ApplicationDetail applicationDetail) {
-		applicationDetailRepository.update((getMapper().map(applicationDetail, ApplicationDetailEntity.class)));
+		applicationDetailRepository.saveOrUpdate((getMapper().map(applicationDetail, ApplicationDetailEntity.class)));
 
 		
 	}
@@ -224,6 +224,16 @@ public class DirectorServiceImplement implements DirectorService{
 			status.add(getMapper().map(StatusEntity, Status.class));
 		}
 		return status;
+	}
+	@Override
+	public ApplicationDetail getApplicationDetailById(Long id) {
+		ApplicationDetailEntity applicationDetailEntity = applicationDetailRepository.getApplicationDetailById(id);
+		ApplicationDetail applicationDetailModel = null;
+		if (applicationDetailEntity != null) {
+			applicationDetailModel = (ApplicationDetail) getMapper().map(applicationDetailEntity,
+					modelClassMap.getModelClass(applicationDetailEntity.getClass()));
+		}
+		return applicationDetailModel;
 	}
 	
 	

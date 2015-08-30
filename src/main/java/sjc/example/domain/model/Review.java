@@ -20,6 +20,8 @@ public class Review {
 	
 	private Boolean visible;
 
+	private String whom;
+	
 	public Long getId() {
 		return id;
 	}
@@ -82,6 +84,14 @@ public class Review {
 
 	public void setSto(Sto sto) {
 		this.sto = sto;
+	}
+
+	public String getWhom() {
+		return whom;
+	}
+
+	public void setWhom(String whom) {
+		this.whom = whom;
 	}
 	
 	

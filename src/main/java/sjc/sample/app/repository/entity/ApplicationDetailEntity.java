@@ -26,7 +26,7 @@ public class ApplicationDetailEntity {
     private Long applicationDetailId;
 	
 	@Mapping("status")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn( name = "status_status_id", nullable = false)
 	private StatusEntity status;
 	
@@ -43,7 +43,7 @@ public class ApplicationDetailEntity {
 	private Date dateDelivery;
 	
 	@Mapping("application")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn( name = "application_application_id", nullable = false)
 	private ApplicationEntity application;
 

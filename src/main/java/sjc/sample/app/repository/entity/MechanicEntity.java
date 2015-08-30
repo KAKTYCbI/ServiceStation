@@ -20,6 +20,10 @@ import org.hibernate.annotations.CascadeType;
 @PrimaryKeyJoinColumn(name = "user_id")
 public class MechanicEntity extends UserPrincipalEntity{
 	
+	@Mapping("salary")
+	@Column(name="salary")
+	private Long salary;
+	
 	@Mapping("rating")
 	@Column(name="rating")
 	private Float rating;
@@ -84,7 +88,15 @@ public class MechanicEntity extends UserPrincipalEntity{
 		this.sto = sto;
 	}
 
+	public Long getSalary() {
+		return salary;
+	}
 
+	public void setSalary(Long salary) {
+		this.salary = salary;
+	}
+
+    
 
 	
 	

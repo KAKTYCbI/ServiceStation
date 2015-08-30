@@ -7,14 +7,18 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/home.css"/>" />
-<H1>Добавление механика</H1>
+<H1>Информация о механике</H1>
 </br>
 <div class="reviews">
 	<div class="review">
 		<div class="reviewtop"></div>
 		<div class="reviewcenter">
-			<form:form method="post" action="addmechanic" commandName="mechanic">
+			<form:form method="post" action="updatemechanic" commandName="mechanic">
 				<table>
+				    <tr>
+				        <td><form:label path="userId">№:</form:label></td>
+		                <td><form:input readonly="true" type="text" path="userId" value="${mechanic.userId }" /></td>
+                    </tr>
 					<tr>
 						<td><form:label path="name">Имя:</form:label></td>
 						<td><form:input path="name" /></td>
@@ -51,7 +55,7 @@
 
 
 					<tr>
-						<td colspan="2"><input type="SUBMIT" value="addmechanic"></td>
+						<td colspan="2"><input type="SUBMIT" value="updatemechanic"></td>
 					</tr>
 
 				</table>

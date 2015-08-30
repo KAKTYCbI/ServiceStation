@@ -18,7 +18,7 @@
       <table>
       <tr>
         <td><form:label path="id">№:</form:label></td>
-						<td><form:input path="id" value="${application.id }"/></td>
+		<td><form:input path="id" value="${application.id }" readonly="true"/></td>
       </tr>
        
        <tr>
