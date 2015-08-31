@@ -28,14 +28,6 @@
         </td>
       </tr>
       
-      <tr>
-        <td>
-          <form:label path = "price">Стоимость:</form:label>
-        </td>
-        <td>
-          <form:input path="price"/>
-        </td>
-      </tr>
       
       <tr>
         <td colspan="2"><input type="SUBMIT" value="addrent"></td>

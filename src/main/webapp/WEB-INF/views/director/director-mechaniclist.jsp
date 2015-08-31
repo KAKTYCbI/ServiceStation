@@ -11,11 +11,15 @@
 <c:forEach items="${mechanic}" var="mechanic" >
       <div class = "review">
          <div class = "reviewtop"></div>
+          
             <div class = "reviewcenter">
+            <div class="rating">
+                 <ul>${mechanic.rating }</ul>
+               </div>
             <ul>Имя: ${mechanic.name }&nbsp;&nbsp;
             СТО:${mechanic.sto.name }&nbsp;&nbsp;
              <a href="<c:url value='/director/updatemechanic/${mechanic.userId}' />"/>Подробости</a>
-            </ul>
+            </ul></br>
             </div>
           <div class = "reviewbottom"></div>
           </div>

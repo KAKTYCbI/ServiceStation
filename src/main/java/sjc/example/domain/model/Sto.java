@@ -17,7 +17,7 @@ public class Sto {
 	private String name;
 	
 	@NotEmpty @Min(0) @Max(5)
-	private Double rating;
+	private Float rating;
 	
 	private Long price;
 	
@@ -44,11 +44,11 @@ public class Sto {
 		this.name = name;
 	}
 
-	public Double getRating() {
+	public Float getRating() {
 		return rating;
 	}
 
-	public void setRating(Double rating) {
+	public void setRating(Float rating) {
 		this.rating = rating;
 	}
 

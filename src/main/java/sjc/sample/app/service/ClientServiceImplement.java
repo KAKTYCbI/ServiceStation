@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sjc.sample.app.repository.dao.ApplicationDao;
 import sjc.sample.app.repository.dao.ClientDao;
 import sjc.sample.app.repository.dao.DetailDao;
+import sjc.sample.app.repository.dao.MechanicDao;
 import sjc.sample.app.repository.dao.MessageDao;
 import sjc.sample.app.repository.dao.ReviewDao;
 import sjc.sample.app.repository.dao.ServiceDao;
@@ -21,6 +22,7 @@ import sjc.sample.app.repository.dao.StoDao;
 import sjc.sample.app.repository.entity.ApplicationEntity;
 import sjc.sample.app.repository.entity.ClientEntity;
 import sjc.sample.app.repository.entity.DetailEntity;
+import sjc.sample.app.repository.entity.MechanicEntity;
 import sjc.sample.app.repository.entity.MessageEntity;
 import sjc.sample.app.repository.entity.ReviewEntity;
 import sjc.sample.app.repository.entity.ServiceEntity;
@@ -31,12 +33,15 @@ import sjc.sample.app.repository.entity.map.ModelClassMap;
 import sjc.example.domain.model.Application;
 import sjc.example.domain.model.Client;
 import sjc.example.domain.model.Detail;
+import sjc.example.domain.model.Mechanic;
 import sjc.example.domain.model.Message;
 import sjc.example.domain.model.Review;
 import sjc.example.domain.model.Status;
 import sjc.example.domain.model.Sto;
 import sjc.example.domain.model.UserPrincipal;
 import sjc.example.domain.service.ClientService;
+import sjc.example.domain.service.DirectorService;
+import sjc.example.domain.service.MechanicService;
 
 @Service()
 @Transactional
@@ -47,6 +52,9 @@ public class ClientServiceImplement implements ClientService{
 	
 	@Autowired
 	private ApplicationDao applicationRepository;
+	
+	@Autowired
+	private MechanicDao mechanicRepository;
 	
 	@Autowired
 	private ClientDao clientRepository;
@@ -71,6 +79,11 @@ public class ClientServiceImplement implements ClientService{
 	@Autowired
 	private MessageDao messageRepository;
 	
+	@Autowired
+	private MechanicService mechanicService;
+	
+	@Autowired
+	private DirectorService directorService;
 	
 	private Mapper getMapper() {
 		return DozerBeanMapperSingletonWrapper.getInstance();
@@ -103,8 +116,19 @@ public class ClientServiceImplement implements ClientService{
 			messageRepository.saveOrUpdate((getMapper().map(message, MessageEntity.class)));   
 			
 		}
-		
-		
+		Long sum = 0l;
+		for(sjc.example.domain.model.Service service: application.getServices() )
+		{
+			sum += service.getPrice();
+		}
+		if (application.getDetails() != null)
+		{
+	    for(Detail detail:application.getDetails())
+		 {
+			sum+=detail.getPrice();
+		 }
+		}
+		application.setPrice(sum);
 		applicationRepository.saveOrUpdate((getMapper().map(application, ApplicationEntity.class)));
        
 	}
@@ -125,7 +149,8 @@ public class ClientServiceImplement implements ClientService{
 	public void addReview(Review review) {
 	
 		reviewRepository.save((getMapper().map(review, ReviewEntity.class)));
-
+       
+		
 	}
 
 

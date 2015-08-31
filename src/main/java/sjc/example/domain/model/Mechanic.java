@@ -15,7 +15,7 @@ public class Mechanic extends UserPrincipal{
 	private List<Message> messages;
 	
 	@NotNull @Min(1) @Max(5)
-	private Double rating;
+	private Float rating;
 	
 	private List<Review> reviews;
 	
@@ -30,11 +30,11 @@ public class Mechanic extends UserPrincipal{
 		this.messages = messages;
 	}
 
-	public Double getRating() {
+	public Float getRating() {
 		return rating;
 	}
 
-	public void setRating(Double rating) {
+	public void setRating(Float rating) {
 		this.rating = rating;
 	}
 

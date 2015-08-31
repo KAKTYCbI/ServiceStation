@@ -18,12 +18,14 @@ import sjc.sample.app.repository.entity.ApplicationEntity;
 import sjc.sample.app.repository.entity.MechanicEntity;
 import sjc.sample.app.repository.entity.MessageEntity;
 import sjc.sample.app.repository.entity.ReviewEntity;
+import sjc.sample.app.repository.entity.StoEntity;
 import sjc.sample.app.repository.entity.map.ModelClassMap;
 import sjc.example.domain.model.Application;
 import sjc.example.domain.model.ApplicationDetail;
 import sjc.example.domain.model.Mechanic;
 import sjc.example.domain.model.Message;
 import sjc.example.domain.model.Review;
+import sjc.example.domain.model.Sto;
 import sjc.example.domain.service.MechanicService;
 
 @Service()
@@ -110,6 +112,17 @@ public class MechanicServiceImplement implements MechanicService{
 			review.add(getMapper().map(ReviewEntity, Review.class));
 		}
 		return review;
+	}
+
+	@Override
+	public List<Review> getReviewBySto(Sto sto) {
+		List<Review> review = new ArrayList<Review>();
+		List<ReviewEntity> reviewEntities = reviewRepository.getReviewBySto(getMapper().map(sto,StoEntity.class));
+		for(ReviewEntity ReviewEntity : reviewEntities) {
+			review.add(getMapper().map(ReviewEntity, Review.class));
+		}
+		return review;
+
 	}
 
 }

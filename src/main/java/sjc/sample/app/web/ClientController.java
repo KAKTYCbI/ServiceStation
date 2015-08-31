@@ -30,6 +30,7 @@ import sjc.example.domain.model.Review;
 import sjc.example.domain.model.Status;
 import sjc.example.domain.model.Sto;
 import sjc.example.domain.model.UserPrincipal;
+import sjc.sample.app.repository.entity.MechanicEntity;
 
 @Controller
 @RequestMapping("/client")
@@ -108,6 +109,36 @@ public class ClientController {
         	review.setMechanic(mechanic);
         }
         clientService.addReview(review);
+        
+        if (review.getWhom().equals("mechanic"))
+        {
+		
+        	Mechanic mechanic = review.getMechanic();
+        	List<Review> reviews = mechanicService.getReviewByMechanic(mechanic);
+        	Float sum = (float)0;
+        	
+        	for(Review review1:reviews)
+        	{
+        	  sum+=review1.getRating();	
+        	}
+        	Float rating = sum/reviews.size();
+        	mechanic.setRating(rating);
+        	directorService.saveOrUpdateMechanic(mechanic);
+		}else
+		{
+			Sto sto = review.getSto();
+			List<Review> reviews=mechanicService.getReviewBySto(sto);
+            Float sum = (float)0;
+        	
+        	for(Review review1:reviews)
+        	{
+        	  sum+=review1.getRating();	
+        	}
+        	Float rating = sum/reviews.size();
+			sto.setRating(rating);
+			directorService.addSto(sto);
+		}
+        
 	    return "redirect:/home";
 	}
 	

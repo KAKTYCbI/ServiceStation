@@ -60,8 +60,8 @@ public class ApplicationEntity {
 	@ManyToMany(fetch = FetchType.LAZY/*, cascade = CascadeType.ALL*/)
 	@JoinTable(name = "application_has_detail", 
 			joinColumns = { 
-				@JoinColumn(name = "application_application_id", nullable = false) }, 
-				inverseJoinColumns = { @JoinColumn(name = "detail_detail_id", nullable = false) })
+				@JoinColumn(name = "application_application_id", nullable = true) }, 
+				inverseJoinColumns = { @JoinColumn(name = "detail_detail_id", nullable = true) })
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	private List<DetailEntity> details;
 	

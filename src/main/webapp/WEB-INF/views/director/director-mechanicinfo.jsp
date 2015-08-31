@@ -13,7 +13,7 @@
 	<div class="review">
 		<div class="reviewtop"></div>
 		<div class="reviewcenter">
-			<form:form method="post" action="updatemechanic" commandName="mechanic">
+		<ul>	<form:form method="post" action="updatemechanic" commandName="mechanic">
 				<table>
 				    <tr>
 				        <td><form:label path="userId">№:</form:label></td>
@@ -55,12 +55,14 @@
 
 
 					<tr>
-						<td colspan="2"><input type="SUBMIT" value="updatemechanic"></td>
+						<td><input type="SUBMIT" value="updatemechanic"></td>
+						<td><a href="<c:url value='/director/addsalary/${mechanic.userId }' />">Выдать зарплату</a></td>
+						
 					</tr>
 
 				</table>
 
-			</form:form>
+			</form:form></ul>
 		</div>
 	<div class = "reviewbottom"></div>
 	</div>

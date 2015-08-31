@@ -14,6 +14,7 @@ import sjc.sample.app.repository.entity.ApplicationEntity;
 import sjc.sample.app.repository.entity.ClientEntity;
 import sjc.sample.app.repository.entity.MechanicEntity;
 import sjc.sample.app.repository.entity.ReviewEntity;
+import sjc.sample.app.repository.entity.StoEntity;
 import sjc.sample.app.repository.hibernate.AbstractHibernateDao;
 
 @Repository
@@ -25,6 +26,15 @@ AbstractHibernateDao<ReviewEntity, Long> implements ReviewDao {
 	public List<ReviewEntity> getReviewByMechanic(MechanicEntity mechanic) {
 			Criteria criteria = getSession().createCriteria(ReviewEntity.class).add(
 					Restrictions.eq("mechanic", mechanic)).addOrder(Order.desc("id"));
+			return (List<ReviewEntity>) criteria.list();
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ReviewEntity> getReviewBySto(StoEntity sto) {
+			Criteria criteria = getSession().createCriteria(ReviewEntity.class).add(
+					Restrictions.eq("sto", sto)).addOrder(Order.desc("id"));
 			return (List<ReviewEntity>) criteria.list();
 		
 	}

@@ -6,6 +6,7 @@ import sjc.example.domain.model.ApplicationDetail;
 import sjc.example.domain.model.Mechanic;
 import sjc.example.domain.model.Message;
 import sjc.example.domain.model.Review;
+import sjc.example.domain.model.Sto;
 
 public interface MechanicService {
 
@@ -28,4 +29,6 @@ public interface MechanicService {
 	 void notification(Message message);
      
 	 List<Review> getReviewByMechanic(Mechanic mechanic);
-	}
+	
+     List<Review> getReviewBySto(Sto sto);
+}

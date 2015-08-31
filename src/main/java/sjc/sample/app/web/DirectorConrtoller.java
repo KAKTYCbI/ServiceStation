@@ -28,6 +28,7 @@ import sjc.example.domain.model.Detail;
 import sjc.example.domain.model.Director;
 import sjc.example.domain.model.Mechanic;
 import sjc.example.domain.model.Rent;
+import sjc.example.domain.model.Salary;
 import sjc.example.domain.model.Service;
 import sjc.example.domain.model.Status;
 import sjc.example.domain.model.Sto;
@@ -127,8 +128,27 @@ public class DirectorConrtoller {
 	@RequestMapping(value = { "/addrent" }, method = { RequestMethod.POST })
 	public String addrent(@ModelAttribute("rent") Rent rent,  Model model, HttpSession session) {
         rent.setDateStart(new Date());
+        rent.setPrice(rent.getSto().getPrice());
 	    directorService.addRent(rent);
         
+	    return "redirect:/home";
+	}
+	
+	@RequestMapping(value = { "/addsalary/{id}" }, method = { RequestMethod.GET })
+	public String addsalaryByMechanic(@PathVariable Long id,  Model model, HttpSession session) {
+        Mechanic mechanic = directorService.getMechanicById(id);
+        Salary salary= new Salary();
+        salary.setMechanic(mechanic);
+        salary.setSumma(new Float(mechanic.getSalary()));
+        salary.setDate(new Date());
+        directorService.addSalary(salary);
+	    return "redirect:/home";
+	}
+	
+	@RequestMapping(value = { "/deletemechanic/{id}" }, method = { RequestMethod.GET })
+	public String deleteMechanic(@PathVariable Long id,  Model model, HttpSession session) {
+        Mechanic mechanic = directorService.getMechanicById(id);
+        directorService.deleteMechanic(mechanic);
 	    return "redirect:/home";
 	}
 	
@@ -164,7 +184,7 @@ public class DirectorConrtoller {
 	
 	@RequestMapping(value = { "/addsto" }, method = { RequestMethod.POST })
 	public String addsto(@ModelAttribute("sto") Sto sto,  Model model, HttpSession session) {
-        sto.setRating(0.0);
+        sto.setRating((float)0);
 	    directorService.addSto(sto);
 	    return "redirect:/home";
 	}
@@ -239,7 +259,7 @@ public class DirectorConrtoller {
 		System.out.println("test test test name sto  =  " + mechanic.getSto().getName());
 		Mechanic mechanic1 = directorService.getMechanicById(mechanic.getUserId());
 		mechanic.setLogin(mechanic.getName());
-		mechanic.setRating(0.0);
+		mechanic.setRating(mechanic1.getRating());
 		mechanic.setRole(UserRole.MECHANIC);
 	    directorService.saveOrUpdateMechanic(mechanic);
         
@@ -252,7 +272,7 @@ public class DirectorConrtoller {
 		System.out.println("test test test name mechanic  =  " + mechanic.getName());
 		System.out.println("test test test name sto  =  " + mechanic.getSto().getName());
 		mechanic.setLogin(mechanic.getName());
-		mechanic.setRating(0.0);
+		mechanic.setRating((float)0);
 		mechanic.setRole(UserRole.MECHANIC);
 	    directorService.saveOrUpdateMechanic(mechanic);
         

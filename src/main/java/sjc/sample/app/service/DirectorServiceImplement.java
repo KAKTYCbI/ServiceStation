@@ -14,6 +14,7 @@ import sjc.sample.app.repository.dao.ApplicationDetailDao;
 import sjc.sample.app.repository.dao.DetailDao;
 import sjc.sample.app.repository.dao.MechanicDao;
 import sjc.sample.app.repository.dao.RentDao;
+import sjc.sample.app.repository.dao.SalaryDao;
 import sjc.sample.app.repository.dao.ServiceDao;
 import sjc.sample.app.repository.dao.StatusDao;
 import sjc.sample.app.repository.dao.StoDao;
@@ -22,6 +23,7 @@ import sjc.sample.app.repository.entity.ApplicationEntity;
 import sjc.sample.app.repository.entity.DetailEntity;
 import sjc.sample.app.repository.entity.MechanicEntity;
 import sjc.sample.app.repository.entity.RentEntity;
+import sjc.sample.app.repository.entity.SalaryEntity;
 import sjc.sample.app.repository.entity.ServiceEntity;
 import sjc.sample.app.repository.entity.StatusEntity;
 import sjc.sample.app.repository.entity.StoEntity;
@@ -32,10 +34,12 @@ import sjc.example.domain.model.ApplicationDetail;
 import sjc.example.domain.model.Detail;
 import sjc.example.domain.model.Mechanic;
 import sjc.example.domain.model.Rent;
+import sjc.example.domain.model.Salary;
 import sjc.example.domain.model.Status;
 import sjc.example.domain.model.Sto;
 import sjc.example.domain.model.UserPrincipal;
 import sjc.example.domain.service.DirectorService;
+
 
 @Service()
 @Transactional
@@ -52,6 +56,9 @@ public class DirectorServiceImplement implements DirectorService{
 	
 	@Autowired
 	private StoDao stoRepository;
+	
+	@Autowired
+	private SalaryDao salaryRepository;
 	
 	@Autowired
 	private ServiceDao serviceRepository;
@@ -242,9 +249,12 @@ public class DirectorServiceImplement implements DirectorService{
 		
 	}
 	
-	
-	
-	
+	@Override
+	public void addSalary(Salary salary) {
+		salaryRepository.save((getMapper().map(salary, SalaryEntity.class)));
+		
+	}
+		
 	
 	
 
