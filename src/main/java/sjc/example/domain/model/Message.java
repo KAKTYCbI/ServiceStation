@@ -1,6 +1,8 @@
 package sjc.example.domain.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
+import javax.validation.constraints.Size;
 
 public class Message {
 
@@ -10,8 +12,10 @@ public class Message {
 	
 	private Mechanic mechanic;
 	
+	@DateTimeFormat(pattern="dd/mm/yyyy")
 	private Date date;
 	
+	@Size(min=15, max=150) 
 	private String text;
 
 	public Long getId() {

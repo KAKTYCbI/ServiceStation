@@ -3,14 +3,20 @@ package sjc.example.domain.model;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Application {
 	
 	private Long id;
 	
+	@NotEmpty
 	private Long price;
 	
+	@DateTimeFormat(pattern="dd/mm/yyyy")
 	private Date dateOrder;
 	
+	@DateTimeFormat(pattern="dd/mm/yyyy")
 	private Date dateCompletion;
 	
 	private Status status;

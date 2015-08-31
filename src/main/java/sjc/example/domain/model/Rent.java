@@ -1,12 +1,17 @@
 package sjc.example.domain.model;
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Rent {
 	
 	private Long id;
 	
+	@DateTimeFormat(pattern="dd/mm/yyyy")
 	private Date dateStart;
 	
+	@NotEmpty
 	private Long price;
 	
 	private Sto sto;

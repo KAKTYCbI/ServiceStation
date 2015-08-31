@@ -2,6 +2,13 @@ package sjc.example.domain.model;
 
 import java.util.Date;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Review {
 
 	private Long id;
@@ -12,10 +19,13 @@ public class Review {
 	
 	private Sto sto;
 	
+	@DateTimeFormat(pattern="dd/mm/yyyy")
 	private Date date;
 	
+	@NotEmpty @Size(min=1, max=150)
 	private String text;
 	
+	@NotEmpty @Min(1) @Max(5)
 	private int rating;
 	
 	private Boolean visible;

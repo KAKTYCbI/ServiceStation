@@ -2,13 +2,21 @@ package sjc.example.domain.model;
 
 import java.util.List;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 
 public class Sto {
 	
 	private Long id;
 	
+	@NotEmpty @Size(min=1, max=30)
 	private String name;
 	
+	@NotEmpty @Min(0) @Max(5)
 	private Double rating;
 	
 	private List<Review> reviews;

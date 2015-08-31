@@ -1,12 +1,18 @@
 package sjc.example.domain.model;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Service {
 
 	
 	private Long id;
 	
+	@NotEmpty @Size(min=1,max=30)
 	private String name;
 	
+	@NotEmpty
 	private Long price;
 	
 	public Long getId() {

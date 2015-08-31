@@ -1,17 +1,31 @@
 package sjc.example.domain.model;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
+
 public class UserPrincipal {
 
 	private Long userId;
 
+	@NotEmpty
+	@Pattern(regexp = "[a-zA-Z0-9 ]*")
+	@Size(min=1, max=32)
 	private String name;
 
 	private String login;
-
+    
+	
+	@Size(min=8, max=32)
 	private String password;
 	
+	@NotEmpty @Email
 	private String email;
 	
+	@NotEmpty
 	private String contact;
 
 	private UserRole role;

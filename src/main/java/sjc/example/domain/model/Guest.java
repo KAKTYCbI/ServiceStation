@@ -1,13 +1,20 @@
 package sjc.example.domain.model;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class Guest {
 	
 	private Long id;
 	
+	@NotEmpty @Email
 	private String email;
 	
+	@NotEmpty @Size(min=5, max=50)
 	private String contact;
 	
+	@NotEmpty @Size(min=1, max=30)
 	private String name;
 
 	public Long getId() {

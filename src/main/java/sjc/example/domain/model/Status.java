@@ -1,8 +1,12 @@
 package sjc.example.domain.model;
+
+import javax.validation.constraints.Size;
+
 public class Status {
 	
 	private Long id;
 	
+	@Size(min=15, max=150)
 	private String status;
 
 	public Long getId() {

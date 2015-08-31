@@ -2,12 +2,17 @@ package sjc.example.domain.model;
 
 import java.util.List;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 public class Mechanic extends UserPrincipal{
 	
 	private List<Salary> salarys;
 	
 	private List<Message> messages;
 	
+	@NotNull @Min(1) @Max(5)
 	private Double rating;
 	
 	private List<Review> reviews;

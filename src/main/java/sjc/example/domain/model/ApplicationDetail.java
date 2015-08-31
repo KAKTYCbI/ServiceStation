@@ -2,16 +2,22 @@ package sjc.example.domain.model;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class ApplicationDetail {
 	
 	private Long id;
 	
 	private Status status;
 	
+	@NotEmpty
 	private String name;
 	
+	@DateTimeFormat(pattern="dd/mm/yyyy")
 	private Date dateOrder;
 	
+	@DateTimeFormat(pattern="dd/mm/yyyy")
 	private Date dateDelivery;
 	
 	private Application application;
