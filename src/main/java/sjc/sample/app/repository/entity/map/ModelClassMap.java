@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 
 import sjc.example.domain.model.Application;
+import sjc.example.domain.model.ApplicationDetail;
 import sjc.example.domain.model.Client;
 import sjc.example.domain.model.Detail;
 import sjc.example.domain.model.Director;
@@ -15,6 +16,7 @@ import sjc.example.domain.model.Service;
 import sjc.example.domain.model.Status;
 import sjc.example.domain.model.Sto;
 import sjc.example.domain.model.UserPrincipal;
+import sjc.sample.app.repository.entity.ApplicationDetailEntity;
 import sjc.sample.app.repository.entity.ApplicationEntity;
 import sjc.sample.app.repository.entity.ClientEntity;
 import sjc.sample.app.repository.entity.DetailEntity;
@@ -64,6 +66,9 @@ public class ModelClassMap {
 		modelClassMappings.put(ApplicationEntity.class, Application.class);
 		modelClassMappings.put(Application.class, ApplicationEntity.class);
 		
+		
+		modelClassMappings.put(ApplicationDetailEntity.class, ApplicationDetail.class);
+		modelClassMappings.put(ApplicationDetail.class, ApplicationDetailEntity.class);
 	}
 
 	public Class<?> getModelClass(Class<?> entityClass) {

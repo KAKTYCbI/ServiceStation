@@ -14,6 +14,19 @@
             <ul>
    <form:form method = "post" action = "addapplicationdetail" commandName = "applicationdetail">
     <table>
+    <tr>
+        <td>
+          <form:label path = "application">Статус:</form:label>
+        </td>
+        <td>
+          <form:select path="application">
+          <c:forEach items="${applications}" var="applications" >
+			<option path ="application">${applications.id}</option>	
+		  </c:forEach>
+        </form:select>
+        </td>
+      </tr> 
+    
       <tr>
         <td>
           <form:label path = "name">Название детали:</form:label>
@@ -22,6 +35,7 @@
           <form:input path="name"/>
         </td>
       </tr>
+      
       <tr>
         <td colspan="2"><input type="SUBMIT" value="addapplicationdetail"></td>
       </tr>

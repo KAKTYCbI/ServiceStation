@@ -17,15 +17,21 @@
              Name: ${application.client.name }</br>
              Email: ${application.client.email }</br>
              Контакт: ${application.client.contact }</br>
+             Статус: ${application.status.status}</br>
              Механик: ${application.mechanic.name }</br>
              СТО:${application.sto.name }</br>
              Услуги:
              <c:forEach items="${application.services}" var="service" > 
              ${service.name}</br>
              </c:forEach></br> 
-             Детали:</br>
-             Дата:<fmt:formatDate value="${application.dateOrder }" pattern="dd-MM-yyyy" /></br>
+             Детали:
+             <c:forEach items="${application.details}" var="detail" > 
+             ${detail.name}</br>
+             </c:forEach></br> 
+             Дата заявки:<fmt:formatDate value="${application.dateOrder }" pattern="dd-MM-yyyy" /></br>
+             Дата выполнения:<fmt:formatDate value="${application.dateCompletion }" pattern="dd-MM-yyyy" /></br>
              Стоимость:${application.price }</br>
+             <a href="<c:url value="/client/addreview" />">Оставить отзыв</a>
             </ul>
             </div>
           <div class = "reviewbottom"></div>

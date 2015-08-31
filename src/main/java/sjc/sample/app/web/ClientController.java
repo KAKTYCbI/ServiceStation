@@ -77,6 +77,27 @@ public class ClientController {
 	}
 	
 	@PreAuthorize("isFullyAuthenticated()") 
+	@RequestMapping(value = "/addreview", method = RequestMethod.GET)
+	public ModelAndView  addreview(HttpSession session, Authentication auth){
+		ModelAndView mav = new ModelAndView();
+		UserPrincipal user = userService.getUserByName(auth.getName());
+        mav.addObject("user", user);
+        mav.addObject("review", new Review());
+		mav.setViewName("client.addreview");
+		return mav;
+	};
+	
+	@PreAuthorize("isFullyAuthenticated()") 
+	@RequestMapping(value = { "/addreview" }, method = { RequestMethod.POST })
+	public String addreview(@ModelAttribute("review") Review review,  Model model, HttpSession session, Authentication auth) {
+        
+        UserPrincipal user = userService.getUserByName(auth.getName());
+        System.out.println("test test test"+review.getWhom());
+        System.out.println("test test test"+review.getRating());
+	    return "redirect:/home";
+	}
+	
+	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/messages", method = RequestMethod.GET)
 	public ModelAndView  getmessage(HttpSession session, Authentication auth){
 		ModelAndView mav = new ModelAndView();

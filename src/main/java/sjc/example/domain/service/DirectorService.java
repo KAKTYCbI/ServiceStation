@@ -52,6 +52,8 @@ public interface DirectorService {
     //метод обнавлет(сохраняет) заявку на деталь
     void saveApplicationDetail(ApplicationDetail applicationDetail);
 
+    ApplicationDetail getApplicationDetailById(Long id);
+    
     Sto getStoByName(String name);
     
     Sto getStoById(Long id);

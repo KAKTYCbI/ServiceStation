@@ -9,15 +9,17 @@
 <a href="<c:url value='/mechanic/addapplicationdetail' />">Новая заявка на деталь</a>
 </br>
  <div class="reviews">
+    <c:forEach items="${applicationdetail}" var="applicationdetail" >
       <div class = "review">
          <div class = "reviewtop"></div>
             <div class = "reviewcenter">
-            <ul>Название детали: ХХХХ</br>
-             Дата поступления детали: ХХ.ХХ.ХХ</br>
-             Статус:ХХХХ</br>
+            <ul>Название детали: ${applicationdetail.name }</br>
+             Дата поступления детали: ${applicationdetail.dateDelivery}</br>
+             Статус:${applicationdetail.status.status }</br>
              
             </ul>
             </div>
           <div class = "reviewbottom"></div>
           </div>
+     </c:forEach>
   </div>

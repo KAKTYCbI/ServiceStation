@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -23,7 +24,7 @@ AbstractHibernateDao<ApplicationEntity, Long> implements ApplicationDao{
 	@Override
 	public List<ApplicationEntity> findByClient(ClientEntity client) {
 		Criteria criteria = getSession().createCriteria(ApplicationEntity.class).add(
-				Restrictions.eq("client", client));
+				Restrictions.eq("client", client)).addOrder(Order.desc("id"));
 		return (List<ApplicationEntity>) criteria.list();
 	}
 	
@@ -31,7 +32,7 @@ AbstractHibernateDao<ApplicationEntity, Long> implements ApplicationDao{
 	@Override
 	public List<ApplicationEntity> findByMechanic(MechanicEntity mechanic) {
 		Criteria criteria = getSession().createCriteria(ApplicationEntity.class).add(
-				Restrictions.eq("mechanic", mechanic));
+				Restrictions.eq("mechanic", mechanic)).addOrder(Order.desc("id"));
 		return (List<ApplicationEntity>) criteria.list();
 	}
 
@@ -66,7 +67,7 @@ AbstractHibernateDao<ApplicationEntity, Long> implements ApplicationDao{
 	@Override
 	public List<ApplicationEntity> getApplicationByStatus(StatusEntity status) {
 		Criteria criteria = getSession().createCriteria(ApplicationEntity.class).add(
-				Restrictions.eq("status", status));
+				Restrictions.eq("status", status)).addOrder(Order.desc("id"));
 		return (List<ApplicationEntity>) criteria.list();
 	}
 

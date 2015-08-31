@@ -9,53 +9,23 @@
 <h1>Заявки на детали</h1>
 </br>
  <div class="reviews">
+  <c:forEach items="${applicationdetail}" var="applicationdetail" >
       <div class = "review">
          <div class = "reviewtop"></div>
             <div class = "reviewcenter">
-            <ul>
-<form:form method = "post" action = "updateapplicationdetail" commandName = "applicationdetail">
-    <table>
-      <tr>
-        <td>
-          <form:label path = "name">Название детали</form:label>
-        </td>
-        <td>
-          Название детали
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <form:label path = "dateDelivery">Дата поступления:</form:label>
-        </td>
-        <td>
-          <form:input path="dateDelivery" />
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <form:label path = "dateOrder">Дата заявки:</form:label>
-        </td>
-        <td>
-          Дата заявки
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <form:label path = "status">Статус:</form:label>
-        </td>
-        <td>
-          <form:select path="status">
-          <option>Статус1</option>
-          <option>Статус2</option>
-  </form:select>
-        </td>
-      </tr>
-      
-      <tr>
-        <td colspan="2"><input type="SUBMIT" value="updateapplicationdetail"></td>
-      </tr>
-    </table>
-  </form:form></ul>
+            
+            <ul>Название детали: ${applicationdetail.name }</br>
+             Дата заявки:  <fmt:formatDate value="${applicationdetail.dateOrder }" pattern="dd-MM-yyyy" /></br> 
+             Дата поступления детали:  <fmt:formatDate value="${applicationdetail.dateDelivery }" pattern="dd-MM-yyyy" /></br>
+             Статус:${applicationdetail.status.status }</br>
+             <a href="<c:url value="/director/updateapplicationdetail/${applicationdetail.id }" />">Обновить</a></ul> </br>
+            
+             
+            
+            </ul>
+  </div>
   <div class = "reviewbottom"></div>
-          </div>
+          
+ </div>
+ </c:forEach>         
   </div>

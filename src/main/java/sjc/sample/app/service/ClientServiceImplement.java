@@ -1,6 +1,7 @@
 package sjc.sample.app.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.dozer.DozerBeanMapperSingletonWrapper;
@@ -50,6 +51,7 @@ public class ClientServiceImplement implements ClientService{
 	@Autowired
 	private ClientDao clientRepository;
 	
+	
 	@Autowired
 	private ReviewDao reviewRepository;
 	
@@ -76,9 +78,19 @@ public class ClientServiceImplement implements ClientService{
 	
 	@Override
 	public void addOrUpdateApplication(Application application) {
+		Status status = application.getStatus();
+		Message message = new Message();
+		message.setClient(application.getClient());
+		message.setMechanic(application.getMechanic());
+		message.setDate(new Date());
+		if(status.getStatus() == "zajavka vypolnena"){
+			message.setText("Ваша заявка выполнена");
+			messageRepository.saveOrUpdate((getMapper().map(message, MessageEntity.class)));   
+			
+		}
 		
 		applicationRepository.saveOrUpdate((getMapper().map(application, ApplicationEntity.class)));
-
+       
 	}
 
 	@Override

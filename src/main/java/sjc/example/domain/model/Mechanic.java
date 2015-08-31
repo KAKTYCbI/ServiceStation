@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 
 public class Mechanic extends UserPrincipal{
 	
+	private Long salary;
+	
 	private List<Salary> salarys;
 	
 	private List<Message> messages;
@@ -58,6 +60,14 @@ public class Mechanic extends UserPrincipal{
 
 	public void setSalarys(List<Salary> salarys) {
 		this.salarys = salarys;
+	}
+
+	public Long getSalary() {
+		return salary;
+	}
+
+	public void setSalary(Long salary) {
+		this.salary = salary;
 	}
 	
 	

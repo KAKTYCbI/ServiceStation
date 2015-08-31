@@ -14,7 +14,7 @@
             <div class = "reviewcenter">
             <ul>Имя: ${mechanic.name }&nbsp;&nbsp;
             СТО:${mechanic.sto.name }&nbsp;&nbsp;
-             <a href="<c:url value='/director/mechanicinfo' />">Подробости</a>
+             <a href="<c:url value='/director/updatemechanic/${mechanic.userId}' />"/>Подробости</a>
             </ul>
             </div>
           <div class = "reviewbottom"></div>

@@ -23,5 +23,6 @@ public interface ApplicationDao extends GenericDao<ApplicationEntity, Long> {
 	ApplicationEntity getApplicationByID(Long applicationId);
 	
 	List<ApplicationEntity> getApplicationByStatus(StatusEntity status);
+	
 
 }

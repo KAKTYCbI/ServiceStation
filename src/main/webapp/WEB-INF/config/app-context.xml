@@ -36,7 +36,7 @@
 			    <bean class="sjc.sample.app.web.converters.StringToServiceConverter" />
 			    <bean class="sjc.sample.app.web.converters.StringToDetailConverter" />
 			    <bean class="sjc.sample.app.web.converters.StringToMechanicConverter" />
-			    
+			     <bean class="sjc.sample.app.web.converters.StringToApplicationConverter" />
 			    <bean class="sjc.sample.app.web.converters.StringToStatusConverter" />
 			</list>
 		</property>

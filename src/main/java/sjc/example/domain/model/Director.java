@@ -4,6 +4,8 @@ import java.util.List;
 
 public class Director extends UserPrincipal{
 	
+	private Long salarys;
+	
 	private List<Salary> salary;
 
 
@@ -15,6 +17,16 @@ public class Director extends UserPrincipal{
 		this.salary = salary;
 	
 	}
+
+	public Long getSalarys() {
+		return salarys;
+	}
+
+	public void setSalarys(Long salarys) {
+		this.salarys = salarys;
+	}
+	
+	
 
 
 	

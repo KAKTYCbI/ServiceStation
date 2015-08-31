@@ -1,14 +1,18 @@
 package sjc.sample.app.web;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,6 +54,15 @@ public class DirectorConrtoller {
 	@Autowired
 	private UserService userService;
 	
+	@InitBinder
+    public void initBinder(WebDataBinder binder) 
+    {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+       
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(
+                dateFormat, true));
+    }
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/getapplication", method = RequestMethod.GET)
@@ -170,6 +183,32 @@ public class DirectorConrtoller {
 		return mav;
 	};
 	
+	@PreAuthorize("isFullyAuthenticated()") 
+	@RequestMapping(value = "/updatemechanic/{id}", method = RequestMethod.GET)
+	public ModelAndView  updatemechanic(@PathVariable Long id, HttpSession session, Authentication auth){
+		ModelAndView mav = new ModelAndView();
+		UserPrincipal user = userService.getUserByName(auth.getName());
+        mav.addObject("user", user);
+        mav.addObject("mechanic", directorService.getMechanicById(id));
+        mav.addObject("stos", directorService.getSto());
+		mav.setViewName("director.updatemechanic");
+		return mav;
+	};
+	
+	@RequestMapping(value = { "/updatemechanic/{id}" }, method = { RequestMethod.POST })
+	public String updatemechanic(@ModelAttribute("mechanic") Mechanic mechanic,  Model model, HttpSession session) {
+        
+		System.out.println("test test test name mechanic  =  " + mechanic.getName());
+		System.out.println("test test test name sto  =  " + mechanic.getSto().getName());
+		Mechanic mechanic1 = directorService.getMechanicById(mechanic.getUserId());
+		mechanic.setLogin(mechanic.getName());
+		mechanic.setRating(0.0);
+		mechanic.setRole(UserRole.MECHANIC);
+	    directorService.saveOrUpdateMechanic(mechanic);
+        
+	    return "redirect:/home";
+	}
+	
 	@RequestMapping(value = { "/addmechanic" }, method = { RequestMethod.POST })
 	public String addmechanic(@ModelAttribute("mechanic") Mechanic mechanic,  Model model, HttpSession session) {
         
@@ -189,10 +228,33 @@ public class DirectorConrtoller {
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
         mav.addObject("user", user);
-        mav.addObject("applicationdetail", new ApplicationDetail());
+        mav.addObject("applicationdetail", directorService.getApplicationDetail());
+		mav.setViewName("director.applicationdetail");
+		return mav;
+	};
+	
+	@PreAuthorize("isFullyAuthenticated()") 
+	@RequestMapping(value = "/updateapplicationdetail/{id}", method = RequestMethod.GET)
+	public ModelAndView  updateapplicationdetail(@PathVariable Long id, HttpSession session, Authentication auth){
+		ModelAndView mav = new ModelAndView();
+		UserPrincipal user = userService.getUserByName(auth.getName());
+		mav.addObject("statuss", directorService.getStatus());
+		mav.addObject("applicationdetail", directorService.getApplicationDetailById(id));
+        mav.addObject("user", user);
 		mav.setViewName("director.updateapplicationdetail");
 		return mav;
 	};
+	
+	@RequestMapping(value = { "/updateapplicationdetail/{id}" }, method = { RequestMethod.POST })
+	public String updateapplicationdetail(@ModelAttribute("applicationdetails") ApplicationDetail applicationDetail,  Model model, HttpSession session) {
+        ApplicationDetail applicationDetail1= directorService.getApplicationDetailById(applicationDetail.getId());
+        applicationDetail1.setStatus(applicationDetail.getStatus());
+        applicationDetail1.setDateDelivery(applicationDetail.getDateDelivery());
+       // applicationDetail.setId(1l);
+	    directorService.saveApplicationDetail(applicationDetail1);
+        
+	    return "redirect:/home";
+	}
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/updateapplication/{id}", method = RequestMethod.GET)
