@@ -138,6 +138,18 @@
 		<put-attribute name="body" value="/WEB-INF/views/director/director-addrent.jsp" />
 	</definition>
 	
+	<definition name="director.addsto" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/director/director-addsto.jsp" />
+	</definition>
+	
+	<definition name="director.updatesto" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/director/director-updatesto.jsp" />
+	</definition>
+	
 	<definition name="director.adddetail" extends="base.definition">
 		<put-attribute name="title" expression="TEST: ${user.name}" />
 		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />

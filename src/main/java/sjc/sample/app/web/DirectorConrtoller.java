@@ -150,7 +150,44 @@ public class DirectorConrtoller {
         
 	    return "redirect:/home";
 	}
+    
+	@PreAuthorize("isFullyAuthenticated()") 
+	@RequestMapping(value = "/addsto", method = RequestMethod.GET)
+	public ModelAndView  addsto(HttpSession session, Authentication auth){
+		ModelAndView mav = new ModelAndView();
+		UserPrincipal user = userService.getUserByName(auth.getName());
+        mav.addObject("user", user);
+        mav.addObject("sto", new Sto());
+		mav.setViewName("director.addsto");
+		return mav;
+	};
 	
+	@RequestMapping(value = { "/addsto" }, method = { RequestMethod.POST })
+	public String addsto(@ModelAttribute("sto") Sto sto,  Model model, HttpSession session) {
+        sto.setRating(0.0);
+	    directorService.addSto(sto);
+	    return "redirect:/home";
+	}
+	
+	@PreAuthorize("isFullyAuthenticated()") 
+	@RequestMapping(value = "/updatesto/{id}", method = RequestMethod.GET)
+	public ModelAndView  updatesto(@PathVariable Long id, HttpSession session, Authentication auth){
+		ModelAndView mav = new ModelAndView();
+		UserPrincipal user = userService.getUserByName(auth.getName());
+        mav.addObject("user", user);
+        mav.addObject("sto", directorService.getStoById(id));
+		mav.setViewName("director.updatesto");
+		return mav;
+	};
+	
+	@RequestMapping(value = { "/updatesto/{id}" }, method = { RequestMethod.POST })
+	public String updatesto(@PathVariable Long id,@ModelAttribute("sto") Sto sto,  Model model, HttpSession session) {
+        Sto sto1 = directorService.getStoById(id);
+        sto1.setName(sto.getName());
+        sto1.setPrice(sto.getPrice());
+	    directorService.addSto(sto1);
+	    return "redirect:/home";
+	}
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/addservice", method = RequestMethod.GET)

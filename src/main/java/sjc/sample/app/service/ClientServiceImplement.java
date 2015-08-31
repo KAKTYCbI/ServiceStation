@@ -83,11 +83,27 @@ public class ClientServiceImplement implements ClientService{
 		message.setClient(application.getClient());
 		message.setMechanic(application.getMechanic());
 		message.setDate(new Date());
-		if(status.getStatus() == "zajavka vypolnena"){
-			message.setText("Ваша заявка выполнена");
+		if(status.getStatus().equals( "zajavka vypolnena")){
+			message.setText("Ваша заявка № " +application.getId() +"выполнена");
 			messageRepository.saveOrUpdate((getMapper().map(message, MessageEntity.class)));   
 			
 		}
+		if(status.getStatus().equals( "zajavka vypolniaetsia")){
+			message.setText("Ваша заявка № " +application.getId() +"выполненяется");
+			messageRepository.saveOrUpdate((getMapper().map(message, MessageEntity.class)));   
+			
+		}
+		if(status.getStatus().equals( "zajavka na obrabotke u mechanika")){
+			message.setText("Ваша заявка № " +application.getId() +"поступила на обрабутку механику " + application.getMechanic().getName());
+			messageRepository.saveOrUpdate((getMapper().map(message, MessageEntity.class)));   
+			
+		}
+		if(status.getStatus().equals( "net nuznych detaley")){
+			message.setText("На заявка № " +application.getId() +"нет нужных деталей, детали были заказаны, в связи с этим исполение заявки переноситься на " + application.getDateCompletion());
+			messageRepository.saveOrUpdate((getMapper().map(message, MessageEntity.class)));   
+			
+		}
+		
 		
 		applicationRepository.saveOrUpdate((getMapper().map(application, ApplicationEntity.class)));
        

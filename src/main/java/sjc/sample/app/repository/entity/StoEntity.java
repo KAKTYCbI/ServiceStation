@@ -44,12 +44,16 @@ public class StoEntity {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sto", orphanRemoval=true)
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
     private List<MechanicEntity> mechanics;
-	*/
-	/*@Mapping("orders")
+	
+	@Mapping("orders")
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sto", orphanRemoval=true)
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	private List<ApplicationEntity> orders;
 	*/
+	@Mapping("price")
+	@Column(name="salary")
+	private  Long price;
+	
 	public Long getStoId() {
 		return stoId;
 	}
@@ -88,15 +92,23 @@ public class StoEntity {
 
 	public void setMechanics(List<MechanicEntity> mechanics) {
 		this.mechanics = mechanics;
-	}*/
+	}
 
-	/*public List<ApplicationEntity> getOrders() {
+	public List<ApplicationEntity> getOrders() {
 		return orders;
 	}
 
 	public void setOrders(List<ApplicationEntity> orders) {
 		this.orders = orders;
 	}*/
+
+	public Long getPrice() {
+		return price;
+	}
+
+	public void setPrice(Long price) {
+		this.price = price;
+	}
 
 
 	

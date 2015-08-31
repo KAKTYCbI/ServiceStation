@@ -20,6 +20,7 @@
 <li><a href="<c:url value='/director/getmechanics' />">Список механиков</a></li>
 <li><a href="<c:url value='/director/getsto' />">Список СТО</a></li>
 <li><a href="<c:url value='/director/addservice' />">Добавление услуги</a></li>
+<li><a href="<c:url value='/director/addsto' />">Добавление СТО</a></li>
  </security:authorize> 
  <security:authorize access="hasRole('ROLE_MECHANIC')" >
  <li><a href="<c:url value='/home' />">Главная</a></li>

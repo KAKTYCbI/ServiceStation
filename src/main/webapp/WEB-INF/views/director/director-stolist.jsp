@@ -17,8 +17,10 @@
                </div>
                </br>
             <ul>Название:${sto.name}&nbsp;
-            Стоимость аренда:XXXXX&nbsp;
+            Стоимость аренда:${sto.price }&nbsp;
             <a href="<c:url value="/director/mechaniclistbysto/${sto.id }" />">Список механиков</a></ul> </br>
+            <a href="<c:url value="/director/updatesto/${sto.id }" />">Обновить</a></ul> </br>
+            
             </div>
           <div class = "reviewbottom"></div>
           </div>

@@ -19,20 +19,14 @@ public class Sto {
 	@NotEmpty @Min(0) @Max(5)
 	private Double rating;
 	
+	private Long price;
+	
 	private List<Review> reviews;
 	
 	private List<Mechanic> mechanics;
 	
 	private List<Application> orders;
 
-	/*public Sto(Long id, String name, Double rating, List<Mechanic> mechanics, List<Review> reviews, List<Application> orders  ){
-		this.id = id;
-		this.name = name;
-		this.rating = rating;
-		this.mechanics = mechanics;
-		this.reviews = reviews;
-		this.orders = orders;
-	}*/
 	
 	public Long getId() {
 		return id;
@@ -80,6 +74,22 @@ public class Sto {
 
 	public void setOrders(List<Application> orders) {
 		this.orders = orders;
+	}
+
+	public Long getPrice() {
+		return price;
+	}
+
+	public void setPrice(Long price) {
+		this.price = price;
+	}
+
+	public List<Mechanic> getMechanics() {
+		return mechanics;
+	}
+
+	public void setMechanics(List<Mechanic> mechanics) {
+		this.mechanics = mechanics;
 	}
 
 	

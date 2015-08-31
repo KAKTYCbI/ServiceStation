@@ -43,6 +43,8 @@ public interface DirectorService {
     //метод дабавляет услугу
     void addService(Service service);
     
+    void addSto(Sto sto);
+    
     //метод удалет механика
     void deleteMechanic(Mechanic mechanic);
     

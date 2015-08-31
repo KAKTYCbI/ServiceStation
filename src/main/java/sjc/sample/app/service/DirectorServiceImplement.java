@@ -49,7 +49,7 @@ public class DirectorServiceImplement implements DirectorService{
 	
 	@Autowired
 	private MechanicDao mechanicRepository;
-
+	
 	@Autowired
 	private StoDao stoRepository;
 	
@@ -234,6 +234,12 @@ public class DirectorServiceImplement implements DirectorService{
 					modelClassMap.getModelClass(applicationDetailEntity.getClass()));
 		}
 		return applicationDetailModel;
+	}
+	@Override
+	public void addSto(Sto sto) {
+	    
+		stoRepository.saveOrUpdate((getMapper().map(sto, StoEntity.class)));
+		
 	}
 	
 	
