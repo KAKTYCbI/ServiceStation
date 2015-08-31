@@ -50,12 +50,12 @@ public class ReviewEntity {
 	
 	@Mapping("mechanic")
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn( name = "mechanic_mechanic_id", nullable = false)
+	@JoinColumn( name = "mechanic_mechanic_id", nullable = true)
     private MechanicEntity mechanic;
 	
 	@Mapping("sto")
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn( name = "sto_sto_id", nullable = false)
+	@JoinColumn( name = "sto_sto_id", nullable = true)
 	private StoEntity sto;
 	
 	public Long getReviewId() {

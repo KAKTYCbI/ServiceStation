@@ -24,9 +24,11 @@ import sjc.example.domain.service.UserService;
 import sjc.example.domain.model.Application;
 import sjc.example.domain.model.Client;
 import sjc.example.domain.model.Guest;
+import sjc.example.domain.model.Mechanic;
 import sjc.example.domain.model.Rent;
 import sjc.example.domain.model.Review;
 import sjc.example.domain.model.Status;
+import sjc.example.domain.model.Sto;
 import sjc.example.domain.model.UserPrincipal;
 
 @Controller
@@ -77,10 +79,12 @@ public class ClientController {
 	}
 	
 	@PreAuthorize("isFullyAuthenticated()") 
-	@RequestMapping(value = "/addreview", method = RequestMethod.GET)
-	public ModelAndView  addreview(HttpSession session, Authentication auth){
+	@RequestMapping(value = "/addreview/{id}", method = RequestMethod.GET)
+	public ModelAndView  addreview(@PathVariable Long id, HttpSession session, Authentication auth){
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
+		Application application = mechanicService.getApplicationById(id);
+		mav.addObject("application", application);
         mav.addObject("user", user);
         mav.addObject("review", new Review());
 		mav.setViewName("client.addreview");
@@ -88,12 +92,22 @@ public class ClientController {
 	};
 	
 	@PreAuthorize("isFullyAuthenticated()") 
-	@RequestMapping(value = { "/addreview" }, method = { RequestMethod.POST })
-	public String addreview(@ModelAttribute("review") Review review,  Model model, HttpSession session, Authentication auth) {
-        
+	@RequestMapping(value = { "/addreview/{id}" }, method = { RequestMethod.POST })
+	public String addreview( @PathVariable Long id, @ModelAttribute("review") Review review,  Model model, HttpSession session, Authentication auth) {
+        Application application = mechanicService.getApplicationById(id); 
         UserPrincipal user = userService.getUserByName(auth.getName());
-        System.out.println("test test test"+review.getWhom());
-        System.out.println("test test test"+review.getRating());
+        Client client =  application.getClient();
+        review.setClient(client);
+        review.setDate(new java.util.Date());
+        review.setVisible(true);
+        if (review.getWhom().equals("sto")){
+        	Sto sto = application.getSto();
+        	review.setSto(sto);
+        }else{
+        	Mechanic mechanic = application.getMechanic();
+        	review.setMechanic(mechanic);
+        }
+        clientService.addReview(review);
 	    return "redirect:/home";
 	}
 	

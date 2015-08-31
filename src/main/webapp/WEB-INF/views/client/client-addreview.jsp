@@ -11,9 +11,11 @@
 	<div class="review">
 		<div class="reviewtop"></div>
 		<div class="reviewcenter">
-			<form:form method="post" action="addreview" commandName="review">
+			<form:form method="post" action="../addreview/${application.id }" commandName="review">
 				<form:radiobutton path="whom" value="sto" /> STO
 	            <form:radiobutton path="whom" value="mechanic" /> Mechanic</br></br>
+	            <form:textarea path="text" /></br></br>
+	            
 	            <form:radiobutton path="rating" value="1" /> 1
 	            <form:radiobutton path="rating" value="2" /> 2
 	            <form:radiobutton path="rating" value="3" /> 3

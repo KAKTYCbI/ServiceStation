@@ -31,7 +31,7 @@
              Дата заявки:<fmt:formatDate value="${application.dateOrder }" pattern="dd-MM-yyyy" /></br>
              Дата выполнения:<fmt:formatDate value="${application.dateCompletion }" pattern="dd-MM-yyyy" /></br>
              Стоимость:${application.price }</br>
-             <a href="<c:url value="/client/addreview" />">Оставить отзыв</a>
+             <a href="<c:url value="/client/addreview/${application.id }" />">Оставить отзыв</a>
             </ul>
             </div>
           <div class = "reviewbottom"></div>

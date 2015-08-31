@@ -32,6 +32,8 @@ public class Review {
 
 	private String whom;
 	
+	private Long AppID;
+	
 	public Long getId() {
 		return id;
 	}
@@ -102,6 +104,14 @@ public class Review {
 
 	public void setWhom(String whom) {
 		this.whom = whom;
+	}
+
+	public Long getAppID() {
+		return AppID;
+	}
+
+	public void setAppID(Long appID) {
+		AppID = appID;
 	}
 	
 	
