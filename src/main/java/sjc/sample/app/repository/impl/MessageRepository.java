@@ -24,4 +24,13 @@ AbstractHibernateDao<MessageEntity, Long> implements MessageDao{
 		return (List<MessageEntity>) criteria.list();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<MessageEntity> findByClientToPage(ClientEntity client,
+			Integer first, Integer max) {
+		  Criteria criteria = getSession().createCriteria(MessageEntity.class).add(
+				Restrictions.eq("client", client)).addOrder(Order.desc("id")).setFirstResult(first).setMaxResults(max);
+		return (List<MessageEntity>) criteria.list();
+	}
+
 }

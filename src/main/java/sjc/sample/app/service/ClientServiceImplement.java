@@ -244,4 +244,15 @@ public class ClientServiceImplement implements ClientService{
 		return statusModel;
 	}
 
+	@Override
+	public List<Message> getMessageByClientToPage(Client client, Integer first,
+			Integer max) {
+		List<Message> message = new ArrayList<Message>();
+		List<MessageEntity> messageEntities = messageRepository.findByClientToPage((getMapper().map(client,ClientEntity.class)), first, max);
+		for(MessageEntity MessageEntity : messageEntities) {
+			message.add(getMapper().map(MessageEntity, Message.class));
+		}
+		return message;
+	}
+
 }

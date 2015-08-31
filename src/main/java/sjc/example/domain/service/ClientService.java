@@ -20,6 +20,7 @@ public interface ClientService {
  //метод возращает уведомления определеного клиента
  List<Message> getMessageByClient(Client client);
  
+ List<Message> getMessageByClientToPage(Client client, Integer first, Integer max);
  //метод дабавляет отзыв
  void addReview(Review review);
  

@@ -20,3 +20,23 @@
           </div>
   </c:forEach>
   </div>
+  <div class="panel-body">
+				<ul class="pagination">
+	
+					<c:if test="${page > 1 }">
+						<li><a href="?page=${page - 1}"><span>&laquo;</span></a></li>
+					</c:if>
+					<c:forEach begin="${startpage}" end="${endpage}" var="p">
+						<c:if test="${p == page }">
+							<li class="active"><a href="?page=${p}">${p}<span
+									class="sr-only">(current)</span></a></li>
+						</c:if>
+						<c:if test="${p != page }">
+							<li><span><a href="?page=${p}">${p}</a></span></li>
+						</c:if>
+					</c:forEach>
+					<c:if test="${(page + 1) <= endpage}">
+						<li><a href="?page=${page + 1}"><span>&raquo;</span></a></li>
+					</c:if>
+				</ul>
+			</div>

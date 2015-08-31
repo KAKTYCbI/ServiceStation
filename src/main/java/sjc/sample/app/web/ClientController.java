@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import net.sf.seaf.util.convert.simple.ConverterToInteger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import sjc.example.domain.service.ClientService;
@@ -25,6 +28,7 @@ import sjc.example.domain.model.Application;
 import sjc.example.domain.model.Client;
 import sjc.example.domain.model.Guest;
 import sjc.example.domain.model.Mechanic;
+import sjc.example.domain.model.Message;
 import sjc.example.domain.model.Rent;
 import sjc.example.domain.model.Review;
 import sjc.example.domain.model.Status;
@@ -144,13 +148,31 @@ public class ClientController {
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/messages", method = RequestMethod.GET)
-	public ModelAndView  getmessage(HttpSession session, Authentication auth){
+	public ModelAndView  getmessage(@RequestParam(value = "page", required = false) Integer page, HttpSession session, Authentication auth){
+		if(page==null) page = 1;
+		Integer pageSize = 3;
+		Integer startPage = page;
+		Integer endPage = page + 5;
+		
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
 		Client client = clientService.getCilentById(user.getUserId());
+		
+		List<Message> messages = clientService.getMessageByClient(client);
+		int size = messages.size();
+		Integer lastPage = (size+(pageSize-1)) / pageSize;
+		
+		if(endPage >= lastPage) endPage = lastPage;
+		if(endPage >= 5 && (endPage - startPage) < 5) startPage = endPage -5;
+		
+		mav.addObject("page", page);
+		mav.addObject("startpage", startPage);
+		mav.addObject("endpage", endPage);
         mav.addObject("user", user);
+        List<Message> messages1 = clientService.getMessageByClientToPage(client, (page-1)*pageSize,pageSize);
+		mav.addObject("message", messages1);
+		
 		mav.setViewName("client.messages");
-		mav.addObject("message", clientService.getMessageByClient(client));
 		return mav;
 	};
 	
