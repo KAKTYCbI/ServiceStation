@@ -41,7 +41,7 @@
           <form:label path = "dateOrder">Дата заявки:</form:label>
         </td>
         <td>
-          <fmt:formatDate value="${applicationdetails.dateOrder }" pattern="dd-MM-yyyy" />
+          <fmt:formatDate value="${applicationdetail.dateOrder }" pattern="dd-MM-yyyy" />
         </td>
       </tr>
       <tr>

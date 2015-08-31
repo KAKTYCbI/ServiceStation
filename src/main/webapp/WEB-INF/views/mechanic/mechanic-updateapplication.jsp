@@ -70,7 +70,7 @@
 		  </c:if>
 		  </c:forEach>
 		
-		 <form:option value="status" selected="selected">${application.status.status}</form:option>
+		 <option path="status" >${application.status.status}</option>
         </form:select>
         </td>
       </tr> 
