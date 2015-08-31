@@ -55,7 +55,7 @@
 		</bean>
 	</mvc:interceptors>
 
-	<!-- bean id="clientValidator" class="sjc.sample.app.repository.entity.validation.ClientValidator" /-->
+	<bean id="clientValidator" class="sjc.sample.app.repository.entity.validation.ClientValidator" />
 
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">

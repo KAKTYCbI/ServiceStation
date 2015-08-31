@@ -4,13 +4,18 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,16 +32,22 @@ import sjc.example.domain.model.UserRole;
 import sjc.example.domain.service.ClientService;
 import sjc.example.domain.service.DirectorService;
 import sjc.example.domain.service.UserService;
+import sjc.sample.app.repository.entity.validation.ClientValidator;
 
 @Controller
 @RequestMapping("")
 public class LoginController {
 
+	private static final Logger logger = LoggerFactory.getLogger(ClientController.class);
+	
 	@Autowired
 	private UserService userService;
 	
 	@Autowired
 	private ClientService clientService;
+	
+	@Autowired
+	private ClientValidator clientValidator;
 	
 	@Autowired
 	private DirectorService directorService;
@@ -61,14 +72,19 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = { "/registration" }, method = { RequestMethod.POST })
-	public String registration(@ModelAttribute("client") Client user,  Model model, HttpSession session) {
+	public String registration(@ModelAttribute("client") Client user,BindingResult bindingResult,  Model model, HttpSession session) {
 
-	    //userService.getUserByID(1l);
+		clientValidator.validate(user, bindingResult);
+	    if (bindingResult.hasErrors()){
+	    	logger.info("Returning registration.jsp page");
+	    	return "registration";
+	    }
 		UserPrincipal user2 = userService.getUserByName(user.getName());
         if (user2 == null){
         user.setRole(UserRole.CLIENT);	
 		clientService.saveClient(user);
         }
+        logger.info("Returning login.jsp page");
 	    return "login";
 	}
 

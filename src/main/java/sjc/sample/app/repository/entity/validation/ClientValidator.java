@@ -7,7 +7,7 @@ import org.springframework.validation.Validator;
 
 import sjc.sample.app.repository.entity.ClientEntity;
 
-@Component("clientValidator")
+
 public class ClientValidator implements Validator {
 	 
     @Override
@@ -18,10 +18,12 @@ public class ClientValidator implements Validator {
     @Override
     public void validate(Object obj, Errors errors) {
          
-    	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "clientName", "clientName.required");    	
-    	//ClientEntity client = (ClientEntity) obj;
+    	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "name.required", "name is required");    	
+    	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "email.required", "email is required");  
+    	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "contact", "contatc.required", "contatc is required");  
+    	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "password.required", "password is required");  
     	
-    	//... do validation
+
          
     }
 }
