@@ -22,6 +22,7 @@
 					<tr>
 						<td><form:label path="name">Имя:</form:label></td>
 						<td><form:input path="name" /></td>
+						
 					</tr>
 
 
@@ -33,7 +34,7 @@
 					<tr>
 						<td><form:label path="contact">контакт:</form:label></td>
 						<td><form:input path="contact" /></td>
-					</tr>
+						</tr>
 					<tr>
 						<td><form:label path="sto">СТО:</form:label></td>
 						<td><form:select  path="sto">
@@ -46,11 +47,13 @@
 					<tr>
 						<td><form:label path="salary">зарплата:</form:label></td>
 						<td><form:input path="salary" /></td>
+						
 					</tr>
 
 					<tr>
 						<td><form:label path="password">пароль:</form:label></td>
 						<td><form:input path="password" /></td>
+					S
 					</tr>
 
 

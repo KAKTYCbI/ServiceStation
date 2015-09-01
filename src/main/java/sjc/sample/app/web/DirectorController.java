@@ -5,19 +5,20 @@ import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -39,10 +40,37 @@ import sjc.example.domain.service.ClientService;
 import sjc.example.domain.service.DirectorService;
 import sjc.example.domain.service.MechanicService;
 import sjc.example.domain.service.UserService;
+import sjc.sample.app.repository.entity.validation.ApplicationDetailValidator;
+import sjc.sample.app.repository.entity.validation.DetailValidator;
+import sjc.sample.app.repository.entity.validation.MechanicValidator;
+import sjc.sample.app.repository.entity.validation.RentValidator;
+import sjc.sample.app.repository.entity.validation.ServiceValidator;
+import sjc.sample.app.repository.entity.validation.StoValidator;
+
+
 
 @Controller
 @RequestMapping("/director")
-public class DirectorConrtoller {
+public class DirectorController {
+	private static final Logger logger = LoggerFactory.getLogger(DirectorController.class);
+	@Autowired
+	private RentValidator rentValidator;
+	
+	@Autowired
+	private StoValidator stoValidator;
+	
+	@Autowired
+	private ApplicationDetailValidator applicationDetailValidator;
+
+	
+	@Autowired
+	private ServiceValidator serviceValidator;
+
+	@Autowired
+	private MechanicValidator mechanicValidator;
+	
+	@Autowired
+	private DetailValidator detailValidator;
 	
 	@Autowired
 	private DirectorService directorService;
@@ -230,7 +258,13 @@ public class DirectorConrtoller {
 	};
 	
 	@RequestMapping(value = { "/adddetail" }, method = { RequestMethod.POST })
-	public String adddetail(@ModelAttribute("service") Detail detail,  Model model, HttpSession session) {
+	public String adddetail(@ModelAttribute("service") Detail detail, BindingResult bindingResult,
+			Model model, HttpSession session) {
+		detailValidator.validate(detail, bindingResult);
+	    if (bindingResult.hasErrors()){
+	    	logger.info("Returning adddetail.jsp page");
+	    	return "director.adddetail";
+	    }
 
 	    directorService.addDetail(detail);
         
@@ -249,7 +283,14 @@ public class DirectorConrtoller {
 	};
 	
 	@RequestMapping(value = { "/addsto" }, method = { RequestMethod.POST })
-	public String addsto(@ModelAttribute("sto") Sto sto,  Model model, HttpSession session) {
+	public String addsto(@ModelAttribute("sto") Sto sto,BindingResult bindingResult, 
+			Model model, HttpSession session) {
+		stoValidator.validate(sto, bindingResult);
+		if (bindingResult.hasErrors()){
+	    	logger.info("Returning addsto.jsp page");
+	    	return "director.addsto";
+	    }
+		
         sto.setRating((float)0);
 	    directorService.addSto(sto);
 	    return "redirect:/home";
@@ -267,7 +308,14 @@ public class DirectorConrtoller {
 	};
 	
 	@RequestMapping(value = { "/updatesto/{id}" }, method = { RequestMethod.POST })
-	public String updatesto(@PathVariable Long id,@ModelAttribute("sto") Sto sto,  Model model, HttpSession session) {
+	public String updatesto(@PathVariable Long id,@ModelAttribute("sto") Sto sto,BindingResult bindingResult,
+			Model model, HttpSession session) {
+		rentValidator.validate(sto, bindingResult);
+		if (bindingResult.hasErrors()){
+	    	logger.info("Returning updatesto.jsp page");
+	    	return "director.updatesto";
+	    }
+		
         Sto sto1 = directorService.getStoById(id);
         sto1.setName(sto.getName());
         sto1.setPrice(sto.getPrice());
@@ -287,7 +335,14 @@ public class DirectorConrtoller {
 	};
 	
 	@RequestMapping(value = { "/addservice" }, method = { RequestMethod.POST })
-	public String addservice(@ModelAttribute("service") Service service,  Model model, HttpSession session) {
+	public String addservice(@ModelAttribute("service") Service service,BindingResult bindingResult, 
+			Model model, HttpSession session) {
+		serviceValidator.validate(service, bindingResult);
+	    if (bindingResult.hasErrors()){
+	    	logger.info("Returning addservice.jsp page");
+	    	return "director.addservice";
+	    }
+
 
 	    directorService.addService(service);
         
@@ -333,8 +388,14 @@ public class DirectorConrtoller {
 	}
 	
 	@RequestMapping(value = { "/addmechanic" }, method = { RequestMethod.POST })
-	public String addmechanic(@ModelAttribute("mechanic") Mechanic mechanic,  Model model, HttpSession session) {
+	public String addmechanic(@ModelAttribute("mechanic") Mechanic mechanic, BindingResult bindingResult,
+			Model model, HttpSession session) {
+		mechanicValidator.validate(mechanic, bindingResult);
+	    if (bindingResult.hasErrors()){
+	    	  	return "director.addmechanic";
+	    }
         
+		
 		System.out.println("test test test name mechanic  =  " + mechanic.getName());
 		System.out.println("test test test name sto  =  " + mechanic.getSto().getName());
 		mechanic.setLogin(mechanic.getName());
@@ -386,7 +447,13 @@ public class DirectorConrtoller {
 	};
 	
 	@RequestMapping(value = { "/updateapplicationdetail/{id}" }, method = { RequestMethod.POST })
-	public String updateapplicationdetail(@ModelAttribute("applicationdetails") ApplicationDetail applicationDetail,  Model model, HttpSession session) {
+	public String updateapplicationdetail(@ModelAttribute("applicationdetails") ApplicationDetail applicationDetail, BindingResult bindingResult,
+			Model model, HttpSession session) {
+		applicationDetailValidator.validate(applicationDetail, bindingResult);
+	    if (bindingResult.hasErrors()){
+	    	  	return "director.addservice";
+	    }
+		
         ApplicationDetail applicationDetail1= directorService.getApplicationDetailById(applicationDetail.getId());
         applicationDetail1.setStatus(applicationDetail.getStatus());
         applicationDetail1.setDateDelivery(applicationDetail.getDateDelivery());

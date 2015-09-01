@@ -23,6 +23,7 @@
         <td>
           <form:input path="name" />
         </td>
+        <td><form:errors path="name" cssClass="error" /></td>
       </tr>
       <tr>
         <td>
@@ -31,6 +32,7 @@
         <td>
           <form:input path="price"/>
         </td>
+        <td><form:errors path="price" cssClass="error" /></td>
       </tr>
       
       <tr>

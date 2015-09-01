@@ -18,17 +18,20 @@
 					<tr>
 						<td><form:label path="name">Имя:</form:label></td>
 						<td><form:input path="name" /></td>
+						<td><form:errors path="name" cssClass="error"/></td>
 					</tr>
 
 
 					<tr>
 						<td><form:label path="email">email:</form:label></td>
 						<td><form:input path="email" /></td>
+						<td><form:errors path="email" cssClass="error"/></td>
 					</tr>
 
 					<tr>
 						<td><form:label path="contact">контакт:</form:label></td>
 						<td><form:input path="contact" /></td>
+						<td><form:errors path="contact" cssClass="error"/></td>
 					</tr>
 					<tr>
 						<td><form:label path="sto">СТО:</form:label></td>
@@ -42,11 +45,13 @@
 					<tr>
 						<td><form:label path="salary">зарплата:</form:label></td>
 						<td><form:input path="salary" /></td>
+						<td><form:errors path="salary" cssClass="error"/></td>
 					</tr>
 
 					<tr>
 						<td><form:label path="password">пароль:</form:label></td>
 						<td><form:input path="password" /></td>
+						<td><form:errors path="password" cssClass="error"/></td>
 					</tr>
 
 

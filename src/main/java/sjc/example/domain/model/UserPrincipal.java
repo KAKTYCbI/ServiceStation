@@ -19,7 +19,7 @@ public class UserPrincipal {
 	private String login;
     
 	
-	@Size(min=8, max=32)
+	@Size(min=3, max=32)
 	private String password;
 	
 	@NotEmpty @Email
