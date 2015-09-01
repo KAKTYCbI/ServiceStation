@@ -2,6 +2,8 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/home.css"/>" />
 
@@ -14,7 +16,10 @@
           
             <div class = "reviewcenter">
             <div class="rating">
-                 <ul>${mechanic.rating }</ul>
+                 <ul>
+                 <fmt:formatNumber value=" ${mechanic.rating }" maxFractionDigits="2"/>
+                 
+                 </ul>
                </div>
             <ul>Имя: ${mechanic.name }&nbsp;&nbsp;
             СТО:${mechanic.sto.name }&nbsp;&nbsp;

@@ -17,6 +17,7 @@ public interface ClientService {
  //c возмощностью обнавления заявки(выбора СТО)
  void addOrUpdateApplication(Application application);
 
+
  //метод возращает уведомления определеного клиента
  List<Message> getMessageByClient(Client client);
  

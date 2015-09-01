@@ -27,6 +27,7 @@ import sjc.example.domain.model.Mechanic;
 import sjc.example.domain.model.Message;
 import sjc.example.domain.model.Review;
 import sjc.example.domain.model.Sto;
+import sjc.example.domain.service.DirectorService;
 import sjc.example.domain.service.MechanicService;
 
 @Service()
@@ -47,6 +48,9 @@ public class MechanicServiceImplement implements MechanicService{
 	
 	@Autowired
 	private ModelClassMap modelClassMap;
+	
+	@Autowired
+	private DirectorService directorService;
 	
 	private Mapper getMapper() {
 		return DozerBeanMapperSingletonWrapper.getInstance();
@@ -152,5 +156,8 @@ public class MechanicServiceImplement implements MechanicService{
 		// TODO Auto-generated method stub
 		return reviewRepository.getSizeReviewBySto((getMapper().map(sto,StoEntity.class)));
 	}
+
+	
+	
 
 }

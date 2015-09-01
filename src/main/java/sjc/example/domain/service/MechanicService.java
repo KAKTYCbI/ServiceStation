@@ -10,6 +10,7 @@ import sjc.example.domain.model.Sto;
 
 public interface MechanicService {
 
+	 
 	 // метод возвращает список заявок заданного механика
 	 List<Application> getCurrentApplication(Mechanic mechanic, Integer first, Integer max);
 	 

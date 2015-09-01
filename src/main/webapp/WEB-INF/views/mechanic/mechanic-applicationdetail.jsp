@@ -14,7 +14,7 @@
          <div class = "reviewtop"></div>
             <div class = "reviewcenter">
             <ul>Название детали: ${applicationdetail.name }</br>
-             Дата поступления детали: ${applicationdetail.dateDelivery}</br>
+             Дата поступления детали: <fmt:formatDate value="${applicationdetail.dateDelivery }" pattern="dd-MM-yyyy" /></br>
              Статус:${applicationdetail.status.status }</br>
              
             </ul>

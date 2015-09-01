@@ -113,7 +113,6 @@ public class ClientController {
         	review.setMechanic(mechanic);
         }
         clientService.addReview(review);
-        
         if (review.getWhom().equals("mechanic"))
         {
 		
@@ -148,6 +147,7 @@ public class ClientController {
 			directorService.addSto(sto);
 		}
         
+        
 	    return "redirect:/home";
 	}
 	
@@ -178,8 +178,8 @@ public class ClientController {
         mav.addObject("user", user);
         List<Message> messages1 = clientService.getMessageByClientToPage(client, (page-1)*pageSize,pageSize);
 		mav.addObject("message", messages1);
-		
 		mav.setViewName("client.messages");
+		
 		return mav;
 	};
 	
