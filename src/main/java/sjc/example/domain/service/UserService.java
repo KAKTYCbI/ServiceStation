@@ -20,7 +20,9 @@ public interface UserService {
 	 List<UserPrincipal> getUsers();
 	 
 	 // метод возвращает список всех отзывов
-     List<Review> getReview();
+     List<Review> getReview(Integer first, Integer max);
+     
+     Number getSizeAllReview();
 		 
 	 // сохранение введенной информации об аккаунте от клиента
 	 void saveUser(UserPrincipal user);

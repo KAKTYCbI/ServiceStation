@@ -1,6 +1,9 @@
 package sjc.sample.app.repository.impl;
 
+import java.util.List;
+
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -27,6 +30,26 @@ AbstractHibernateDao<StoEntity, Long> implements StoDao{
 		Criteria cr = getSession().createCriteria(StoEntity.class,
 				"users").add(Restrictions.eq("stoId", id));
 		return (StoEntity) cr.uniqueResult();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<StoEntity> getAllStoToPage(Integer first, Integer max) {
+		Criteria criteria = getSession().createCriteria(StoEntity.class).setFirstResult(first).setMaxResults(max);
+		return (List<StoEntity>) criteria.list();
+	}
+
+	@Override
+	public Number getSizeAllSto() {
+		Criteria criteria = getSession().createCriteria(StoEntity.class).setProjection(Projections.rowCount());
+		return (Number) criteria.uniqueResult();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<StoEntity> getAllSto() {
+		Criteria criteria = getSession().createCriteria(StoEntity.class);
+		return (List<StoEntity>) criteria.list();
 	}
 
 

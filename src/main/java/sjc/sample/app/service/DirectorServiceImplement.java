@@ -20,6 +20,7 @@ import sjc.sample.app.repository.dao.StatusDao;
 import sjc.sample.app.repository.dao.StoDao;
 import sjc.sample.app.repository.entity.ApplicationDetailEntity;
 import sjc.sample.app.repository.entity.ApplicationEntity;
+import sjc.sample.app.repository.entity.ClientEntity;
 import sjc.sample.app.repository.entity.DetailEntity;
 import sjc.sample.app.repository.entity.MechanicEntity;
 import sjc.sample.app.repository.entity.RentEntity;
@@ -79,10 +80,11 @@ public class DirectorServiceImplement implements DirectorService{
 	private Mapper getMapper() {
 		return DozerBeanMapperSingletonWrapper.getInstance();
 	}
+	
 	@Override
-	public List<Application> getApplication() {
+	public List<Application> getApplication(Integer first, Integer max) {
 		List<Application> application = new ArrayList<Application>();
-		List<ApplicationEntity> ApplicationEntities = applicationRepository.findAll();
+		List<ApplicationEntity> ApplicationEntities = applicationRepository.getAllApplication(first, max);
 		for(ApplicationEntity ApplicationEntity : ApplicationEntities) {
 			application.add(getMapper().map(ApplicationEntity, Application.class));
 		}
@@ -90,9 +92,9 @@ public class DirectorServiceImplement implements DirectorService{
 	}
 
 	@Override
-	public List<ApplicationDetail> getApplicationDetail() {
+	public List<ApplicationDetail> getApplicationDetail(Integer first,Integer max) {
 		List<ApplicationDetail> applicationDetail = new ArrayList<ApplicationDetail>();
-		List<ApplicationDetailEntity> applicationDetailEntities = applicationDetailRepository.getAllApplicationDetail();
+		List<ApplicationDetailEntity> applicationDetailEntities = applicationDetailRepository.getAllApplicationDetailToPage(first, max);
 		for(ApplicationDetailEntity ApplicationDetailEntity : applicationDetailEntities) {
 			applicationDetail.add(getMapper().map(ApplicationDetailEntity, ApplicationDetail.class));
 		}
@@ -100,9 +102,9 @@ public class DirectorServiceImplement implements DirectorService{
 	}
 
 	@Override
-	public List<Mechanic> getMechanics() {
+	public List<Mechanic> getMechanicsToPage(Integer first,Integer max) {
 		List<Mechanic> mechanic = new ArrayList<Mechanic>();
-		List<MechanicEntity> mechanicEntities = mechanicRepository.findAll();
+		List<MechanicEntity> mechanicEntities = mechanicRepository.getAllMechanicToPage(first, max);
 		for(MechanicEntity MechanicEntity : mechanicEntities) {
 			mechanic.add(getMapper().map(MechanicEntity, Mechanic.class));
 		}
@@ -110,9 +112,9 @@ public class DirectorServiceImplement implements DirectorService{
 	}
 
 	@Override
-	public List<Mechanic> getMechanicsOnSto(Sto sto) {
+	public List<Mechanic> getMechanicsOnSto(Sto sto, Integer first, Integer max) {
 		List<Mechanic> mechanic = new ArrayList<Mechanic>();
-		List<MechanicEntity> mechanicEntities = mechanicRepository.findBySto((getMapper().map(sto,StoEntity.class)));
+		List<MechanicEntity> mechanicEntities = mechanicRepository.findByStoToPage(((getMapper().map(sto,StoEntity.class))), first, max);
 		for(MechanicEntity MechanicEntity : mechanicEntities) {
 			mechanic.add(getMapper().map(MechanicEntity, Mechanic.class));
 		}
@@ -120,9 +122,9 @@ public class DirectorServiceImplement implements DirectorService{
 	}
 
 	@Override
-	public List<Sto> getSto() {
+	public List<Sto> getStoToPage(Integer first, Integer max) {
 		List<Sto> sto = new ArrayList<Sto>();
-		List<StoEntity> stoEntities = stoRepository.findAll();
+		List<StoEntity> stoEntities = stoRepository.getAllStoToPage(first, max);
 		for(StoEntity StoEntity : stoEntities) {
 			sto.add(getMapper().map(StoEntity, Sto.class));
 		}
@@ -205,9 +207,9 @@ public class DirectorServiceImplement implements DirectorService{
 		return stoModel;
 	}
 	@Override
-	public List<Application> getApplicationByStatus(Status status) {
+	public List<Application> getApplicationByStatus(Status status, Integer first, Integer max) {
 		List<Application> application = new ArrayList<Application>();
-		List<ApplicationEntity> applicationEntities = applicationRepository.getApplicationByStatus((getMapper().map(status,StatusEntity.class)));
+		List<ApplicationEntity> applicationEntities = applicationRepository.getApplicationByStatus(((getMapper().map(status,StatusEntity.class))), first, max);
 		for(ApplicationEntity ApplicationEntity : applicationEntities) {
 			application.add(getMapper().map(ApplicationEntity, Application.class));
 		}
@@ -253,6 +255,63 @@ public class DirectorServiceImplement implements DirectorService{
 	public void addSalary(Salary salary) {
 		salaryRepository.save((getMapper().map(salary, SalaryEntity.class)));
 		
+	}
+
+	@Override
+	public Number getSizeAllApplication() {
+		return applicationRepository.getAllSizeApplication();
+	}
+
+	@Override
+	public Number getSizeAllApplicationDetail() {
+		
+		return applicationDetailRepository.getSizeApplicationDetail();
+	}
+
+	@Override
+	public Number getSizeAllMechanic() {
+		
+		return mechanicRepository.getSizeAllMechanic();
+	}
+
+	@Override
+	public Number getSizeMechanicOnSto(Sto sto) {
+	
+		
+		return mechanicRepository.getSizeMechanicBySto((getMapper().map( sto ,StoEntity.class)));
+	}
+
+	@Override
+	public Number getSizeAllSto() {
+		
+		return stoRepository.getSizeAllSto();
+	}
+
+	@Override
+	public Number getSizeApplicationByStatus(Status status) {
+		
+		return applicationRepository.getSizeApplicationByStatus((getMapper().map(status,StatusEntity.class)));
+	}
+
+	@Override
+	public List<Mechanic> getMechanics() {
+		
+		List<Mechanic> mechanic = new ArrayList<Mechanic>();
+		List<MechanicEntity> mechanicEntities = mechanicRepository.getAllMechanic();
+		for(MechanicEntity MechanicEntity : mechanicEntities) {
+			mechanic.add(getMapper().map(MechanicEntity, Mechanic.class));
+		}
+		return mechanic;
+	}
+
+	@Override
+	public List<Sto> getSto() {
+		List<Sto> sto = new ArrayList<Sto>();
+		List<StoEntity> stoEntities = stoRepository.getAllSto();
+		for(StoEntity StoEntity : stoEntities) {
+			sto.add(getMapper().map(StoEntity, Sto.class));
+		}
+		return sto;
 	}
 		
 	

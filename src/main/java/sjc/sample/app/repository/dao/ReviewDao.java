@@ -11,8 +11,16 @@ import sjc.sample.app.repository.entity.StoEntity;
 
 public interface ReviewDao extends GenericDao<ReviewEntity, Long>{
 	
-	List<ReviewEntity> getReviewByMechanic(MechanicEntity mechanic);
+	List<ReviewEntity> getReviewToPage(Integer first, Integer mac);
 	
-	List<ReviewEntity> getReviewBySto(StoEntity sto);
+	Number getSizeRiview();
+	
+	List<ReviewEntity> getReviewByMechanicToPage(MechanicEntity mechanic,Integer first,Integer max);
+	
+	Number getSizeReviewByMechanic(MechanicEntity mechanic);
+	
+	List<ReviewEntity> getReviewByStoToPage(StoEntity sto, Integer first,Integer max);
+	
+	Number getSizeReviewBySto(StoEntity sto);
 
 }

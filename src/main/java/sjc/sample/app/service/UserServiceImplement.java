@@ -95,13 +95,19 @@ public class UserServiceImplement implements UserService {
 	}
 
 	@Override
-	public List<Review> getReview() {
+	public List<Review> getReview(Integer first, Integer max) {
 		List<Review> reviews = new ArrayList<Review>();
-		List<ReviewEntity> ReviewEntities = reviewRepository.findAll();
+		List<ReviewEntity> ReviewEntities = reviewRepository.getReviewToPage(first, max);
 		for(ReviewEntity ReviewEntity : ReviewEntities) {
 			reviews.add(getMapper().map(ReviewEntity, Review.class));
 		}
 		return reviews;
+	}
+
+	@Override
+	public Number getSizeAllReview() {
+		
+		return reviewRepository.getSizeRiview();
 	}
 
 	

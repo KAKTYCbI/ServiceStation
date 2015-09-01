@@ -130,13 +130,29 @@ public class LoginController {
 
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public ModelAndView  getHome(HttpSession session, Authentication auth){
+	public ModelAndView  getHome(@RequestParam(value = "page", required = false) Integer page,HttpSession session, Authentication auth){
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
-		List<Review> reviews = userService.getReview();
+		if(page==null) page = 1;
+		Integer pageSize = 3;
+		Integer startPage = page;
+		Integer endPage = page + 5;
+
+		Number size1 = userService.getSizeAllReview();
+		int size = Integer.parseInt(size1.toString());
+		
+		Integer lastPage = (size+(pageSize-1)) / pageSize;
+		
+		if(endPage >= lastPage) endPage = lastPage;
+		if(endPage >= 5 && (endPage - startPage) < 5) startPage = endPage -5;
+		
+		mav.addObject("page", page);
+		mav.addObject("startpage", startPage);
+		mav.addObject("endpage", endPage);
+
 		//Review review = reviews.get(0);
 		//System.out.println("Review review sto name  =  "+review.getSto().getName()); 
-		mav.addObject("reviews", reviews);
+		mav.addObject("reviews", userService.getReview((page-1)*pageSize,pageSize));
 		mav.addObject("user",user);
 		mav.setViewName("home");
 		return mav;

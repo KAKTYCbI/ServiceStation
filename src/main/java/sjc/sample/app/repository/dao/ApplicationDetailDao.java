@@ -9,9 +9,13 @@ import sjc.sample.app.repository.entity.MechanicEntity;
 
 public interface ApplicationDetailDao extends GenericDao<ApplicationDetailEntity, Long>{
 	
-	List<ApplicationDetailEntity> findByMechanic(MechanicEntity mechanic);
+	List<ApplicationDetailEntity> findByMechanicToPage(MechanicEntity mechanic, Integer first, Integer max);
 	
-	List<ApplicationDetailEntity> getAllApplicationDetail();
+	Number getSizeApplicationDetailByMechanic(MechanicEntity mechanic);
+	
+	List<ApplicationDetailEntity> getAllApplicationDetailToPage(Integer first, Integer max);
+	
+	Number getSizeApplicationDetail();
 	
 	ApplicationDetailEntity getApplicationDetailById(Long Id);
 }

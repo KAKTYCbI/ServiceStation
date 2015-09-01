@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import sjc.example.domain.model.Application;
@@ -55,7 +56,7 @@ public class MechanicController {
                 dateFormat, true));
     }
 	
-	@PreAuthorize("isFullyAuthenticated()") 
+	/*@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView mechanicHome(HttpSession session, Model model) {
 
@@ -64,28 +65,62 @@ public class MechanicController {
 		mav.setViewName("review.list");
 		return mav;
 		
-	}
+	}*/
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/getapplication", method = RequestMethod.GET)
-	public ModelAndView  getapplicationlist(HttpSession session, Authentication auth){
+	public ModelAndView  getapplicationlist(@RequestParam(value = "page", required = false) Integer page,HttpSession session, Authentication auth){
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
 		Mechanic mechanic = directorService.getMechanicByName(auth.getName());
+		if(page==null) page = 1;
+		Integer pageSize = 3;
+		Integer startPage = page;
+		Integer endPage = page + 5;
+
+		Number size1 = mechanicService.getSizeApplicationByMechanic(mechanic);
+		int size = Integer.parseInt(size1.toString());
+		
+		Integer lastPage = (size+(pageSize-1)) / pageSize;
+		
+		if(endPage >= lastPage) endPage = lastPage;
+		if(endPage >= 5 && (endPage - startPage) < 5) startPage = endPage -5;
+		
+		mav.addObject("page", page);
+		mav.addObject("startpage", startPage);
+		mav.addObject("endpage", endPage);
+
         mav.addObject("user", user);
-        mav.addObject("application", mechanicService.getCurrentApplication(mechanic));
+        mav.addObject("application", mechanicService.getCurrentApplication(mechanic, (page-1)*pageSize,pageSize));
 		mav.setViewName("mechanic.applicationlist");
 		return mav;
 	};
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/getapplicationdetail", method = RequestMethod.GET)
-	public ModelAndView  getapplicationdetail(HttpSession session, Authentication auth){
+	public ModelAndView  getapplicationdetail(@RequestParam(value = "page", required = false) Integer page,HttpSession session, Authentication auth){
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
 		//Mechanic mechanic = directorService.getMechanicByName(auth.getName());
+		if(page==null) page = 1;
+		Integer pageSize = 4;
+		Integer startPage = page;
+		Integer endPage = page + 5;
+
+		Number size1 = directorService.getSizeAllApplicationDetail();
+		int size = Integer.parseInt(size1.toString());
+		
+		Integer lastPage = (size+(pageSize-1)) / pageSize;
+		
+		if(endPage >= lastPage) endPage = lastPage;
+		if(endPage >= 5 && (endPage - startPage) < 5) startPage = endPage -5;
+		
+		mav.addObject("page", page);
+		mav.addObject("startpage", startPage);
+		mav.addObject("endpage", endPage);
+
         mav.addObject("user", user);  
-        mav.addObject("applicationdetail", directorService.getApplicationDetail());
+        mav.addObject("applicationdetail", directorService.getApplicationDetail((page-1)*pageSize,pageSize));
        
 		mav.setViewName("mechanic.applicationdetail");
 		return mav;
@@ -97,7 +132,9 @@ public class MechanicController {
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
 		Status status =clientService.getStatusByName("net nuznych detaley");
-		mav.addObject("applications", directorService.getApplicationByStatus(status));
+		Number size1 = directorService.getSizeApplicationByStatus(status);
+		int size = Integer.parseInt(size1.toString());
+		mav.addObject("applications", directorService.getApplicationByStatus(status, 0, size));
 		mav.addObject("applicationdetail", new ApplicationDetail());
         mav.addObject("user", user);
 		mav.setViewName("mechanic.addapplicationdetail");
@@ -143,13 +180,30 @@ public class MechanicController {
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/getreviewbymechanic", method = RequestMethod.GET)
-	public ModelAndView  getreviewbymechanic(HttpSession session, Authentication auth){
+	public ModelAndView  getreviewbymechanic(@RequestParam(value = "page", required = false) Integer page,HttpSession session, Authentication auth){
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
 		Mechanic mechanic = directorService.getMechanicById(user.getUserId());
         System.out.println("test test test"+ mechanic.getName());
+        if(page==null) page = 1;
+		Integer pageSize = 4;
+		Integer startPage = page;
+		Integer endPage = page + 5;
+
+		Number size1 = mechanicService.getSizeReviewByMechanic(mechanic);
+		int size = Integer.parseInt(size1.toString());
+		
+		Integer lastPage = (size+(pageSize-1)) / pageSize;
+		
+		if(endPage >= lastPage) endPage = lastPage;
+		if(endPage >= 5 && (endPage - startPage) < 5) startPage = endPage -5;
+		
+		mav.addObject("page", page);
+		mav.addObject("startpage", startPage);
+		mav.addObject("endpage", endPage);
+
 		mav.addObject("user", user);
-        mav.addObject("reviews", mechanicService.getReviewByMechanic(mechanic));
+        mav.addObject("reviews", mechanicService.getReviewByMechanic(mechanic, (page-1)*pageSize,pageSize));
 		mav.setViewName("mechanic.reviewbymechanic");
 		return mav;
 	};

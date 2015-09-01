@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import sjc.example.domain.model.Application;
@@ -67,48 +68,113 @@ public class DirectorConrtoller {
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/getapplication", method = RequestMethod.GET)
-	public ModelAndView  getapplicationlist(HttpSession session, Authentication auth){
+	public ModelAndView  getapplicationlist(@RequestParam(value = "page", required = false) Integer page,HttpSession session, Authentication auth){
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
 		Status status = clientService.getStatusByName("zajavka ozhidaet obrabotku");
+		if(page==null) page = 1;
+		Integer pageSize = 3;
+		Integer startPage = page;
+		Integer endPage = page + 5;
+
+		Number size1 = directorService.getSizeApplicationByStatus(status);
+		int size = Integer.parseInt(size1.toString());
+		
+		Integer lastPage = (size+(pageSize-1)) / pageSize;
+		
+		if(endPage >= lastPage) endPage = lastPage;
+		if(endPage >= 5 && (endPage - startPage) < 5) startPage = endPage -5;
+		
+		mav.addObject("page", page);
+		mav.addObject("startpage", startPage);
+		mav.addObject("endpage", endPage);
+
         mav.addObject("user", user);
-        mav.addObject("application", directorService.getApplicationByStatus(status));
+        mav.addObject("application", directorService.getApplicationByStatus(status, (page-1)*pageSize,pageSize));
 		mav.setViewName("director.applicationlist");
 		return mav;
 	};
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/getmechanics", method = RequestMethod.GET)
-	public ModelAndView  getmechaniclist(HttpSession session, Authentication auth){
+	public ModelAndView  getmechaniclist(@RequestParam(value = "page", required = false) Integer page,HttpSession session, Authentication auth){
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
+		if(page==null) page = 1;
+		Integer pageSize = 4;
+		Integer startPage = page;
+		Integer endPage = page + 5;
+
+		Number size1 = directorService.getSizeAllMechanic();
+		int size = Integer.parseInt(size1.toString());
+		
+		Integer lastPage = (size+(pageSize-1)) / pageSize;
+		
+		if(endPage >= lastPage) endPage = lastPage;
+		if(endPage >= 5 && (endPage - startPage) < 5) startPage = endPage -5;
+		
+		mav.addObject("page", page);
+		mav.addObject("startpage", startPage);
+		mav.addObject("endpage", endPage);
+
         mav.addObject("user", user);
-        mav.addObject("mechanic", directorService.getMechanics());
+        mav.addObject("mechanic", directorService.getMechanicsToPage((page-1)*pageSize,pageSize));
 		mav.setViewName("director.mechanicslist");
 		return mav;
 	};
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/getsto", method = RequestMethod.GET)
-	public ModelAndView  getstolist(HttpSession session, Authentication auth){
+	public ModelAndView  getstolist(@RequestParam(value = "page", required = false) Integer page,HttpSession session, Authentication auth){
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
+		if(page==null) page = 1;
+		Integer pageSize = 3;
+		Integer startPage = page;
+		Integer endPage = page + 5;
+
+		Number size1 = directorService.getSizeAllSto();
+		int size = Integer.parseInt(size1.toString());
+		
+		Integer lastPage = (size+(pageSize-1)) / pageSize;
+		
+		if(endPage >= lastPage) endPage = lastPage;
+		if(endPage >= 5 && (endPage - startPage) < 5) startPage = endPage -5;
+		
+		mav.addObject("page", page);
+		mav.addObject("startpage", startPage);
+		mav.addObject("endpage", endPage);
+
         mav.addObject("user", user);
-        mav.addObject("sto", directorService.getSto());
+        mav.addObject("sto", directorService.getStoToPage((page-1)*pageSize,pageSize));
 		mav.setViewName("director.stolist");
 		return mav;
 	};
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/mechaniclistbysto/{id}", method = RequestMethod.GET)
-	public ModelAndView  getmechaniclistbysto(@PathVariable Long id,  HttpSession session, Authentication auth){
+	public ModelAndView  getmechaniclistbysto(@RequestParam(value = "page", required = false) Integer page,@PathVariable Long id,  HttpSession session, Authentication auth){
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
 		Sto sto = directorService.getStoById(id);
-		
+		Number size1 = directorService.getSizeMechanicOnSto(sto);
+		int size = Integer.parseInt(size1.toString());
 		System.out.println("Test test test"+sto.getName());
+		if(page==null) page = 1;
+		Integer pageSize = 3;
+		Integer startPage = page;
+		Integer endPage = page + 5;
+		Integer lastPage = (size+(pageSize-1)) / pageSize;
+		
+		if(endPage >= lastPage) endPage = lastPage;
+		if(endPage >= 5 && (endPage - startPage) < 5) startPage = endPage -5;
+		
+		mav.addObject("page", page);
+		mav.addObject("startpage", startPage);
+		mav.addObject("endpage", endPage);
+
         mav.addObject("user", user);
-        mav.addObject("mechanic", directorService.getMechanicsOnSto(sto));
+        mav.addObject("mechanic", directorService.getMechanicsOnSto(sto, (page-1)*pageSize,pageSize));
 		mav.setViewName("director.mechaniclistbysto");
 		return mav;
 	};
@@ -281,11 +347,28 @@ public class DirectorConrtoller {
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/getapplicationdetail", method = RequestMethod.GET)
-	public ModelAndView  getapplicationdetail(HttpSession session, Authentication auth, Model model){
+	public ModelAndView  getapplicationdetail(@RequestParam(value = "page", required = false) Integer page,HttpSession session, Authentication auth, Model model){
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
         mav.addObject("user", user);
-        mav.addObject("applicationdetail", directorService.getApplicationDetail());
+        if(page==null) page = 1;
+		Integer pageSize = 3;
+		Integer startPage = page;
+		Integer endPage = page + 5;
+
+		Number size1 = directorService.getSizeAllApplicationDetail();
+		int size = Integer.parseInt(size1.toString());
+		
+		Integer lastPage = (size+(pageSize-1)) / pageSize;
+		
+		if(endPage >= lastPage) endPage = lastPage;
+		if(endPage >= 5 && (endPage - startPage) < 5) startPage = endPage -5;
+		
+		mav.addObject("page", page);
+		mav.addObject("startpage", startPage);
+		mav.addObject("endpage", endPage);
+
+        mav.addObject("applicationdetail", directorService.getApplicationDetail((page-1)*pageSize,pageSize));
 		mav.setViewName("director.applicationdetail");
 		return mav;
 	};
@@ -319,9 +402,11 @@ public class DirectorConrtoller {
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
 		Application application = mechanicService.getApplicationById(id);
+		Number size1 = directorService.getSizeMechanicOnSto(application.getSto());
+		int size = Integer.parseInt(size1.toString());
 		mav.addObject("application", application);
 		mav.addObject("statuss", directorService.getStatus());
-		mav.addObject("mechanics", directorService.getMechanicsOnSto(application.getSto()));
+		mav.addObject("mechanics", directorService.getMechanicsOnSto(application.getSto(), 0, size));
         mav.addObject("user", user);
 		mav.setViewName("director.updateapplication");
 		return mav;

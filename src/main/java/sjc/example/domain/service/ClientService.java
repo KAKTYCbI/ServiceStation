@@ -21,19 +21,25 @@ public interface ClientService {
  List<Message> getMessageByClient(Client client);
  
  List<Message> getMessageByClientToPage(Client client, Integer first, Integer max);
+ 
+ Number getSizeMessageBYClient(Client client);
  //метод дабавляет отзыв
  void addReview(Review review);
  
  // возвращает список заказов вмести со статусами определенного
  // авторизованного клиента
- List<Application> getApplication(Client client);
+ List<Application> getApplication(Client client, Integer first, Integer max);
+ 
+ Number getSizeApplicationByClient(Client client);
  
  List<Service> getService();
  
  List<Detail> getDetail();
  
  //метод возращает список СТО
- List<Sto> getAllSto();
+ List<Sto> getAllSto(Integer first, Integer max);
+ 
+ Number getSizeAllSto();
  
  Client getCilentById(Long id);
  

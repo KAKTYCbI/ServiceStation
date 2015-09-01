@@ -11,10 +11,14 @@ import sjc.example.domain.model.Sto;
 public interface MechanicService {
 
 	 // метод возвращает список заявок заданного механика
-	 List<Application> getCurrentApplication(Mechanic mechanic);
+	 List<Application> getCurrentApplication(Mechanic mechanic, Integer first, Integer max);
+	 
+	 Number getSizeApplicationByMechanic(Mechanic mechanic);
 	 
 	 //метод возращает список заявок на детали у определенного механика
-	 List<ApplicationDetail> getAllApplicationDetail(Mechanic mechanic);
+	 List<ApplicationDetail> getApplicationDetailByMechanic(Mechanic mechanic, Integer first, Integer max);
+	 
+	 Number getSizeApplicationDeatilByMechanic(Mechanic mechanic);
 	 
 	 //метод обнавляет заявку
 	 void updateApplication(Application application);
@@ -28,7 +32,11 @@ public interface MechanicService {
 	 //метод создает сообщение
 	 void notification(Message message);
      
-	 List<Review> getReviewByMechanic(Mechanic mechanic);
+	 List<Review> getReviewByMechanic(Mechanic mechanic, Integer first, Integer max);
+	 
+	 Number getSizeReviewByMechanic(Mechanic mechanic);
 	
-     List<Review> getReviewBySto(Sto sto);
+     List<Review> getReviewBySto(Sto sto, Integer first, Integer max);
+     
+     Number getSizeReviewBySto(Sto sto);
 }

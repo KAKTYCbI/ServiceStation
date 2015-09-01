@@ -51,7 +51,13 @@
 	</security:authorize>
 	</div>
 	</div>
+	
 	</div>
+    <security:authorize access="isAuthenticated()">
+	
+	 <tiles:insertAttribute name="paginator" />
+	
+	</security:authorize>	
 <tiles:insertAttribute name="footer" />	
 </body>
 </html>

@@ -75,7 +75,7 @@ public class ClientController {
         application.setDateOrder(new java.util.Date());
         UserPrincipal user = userService.getUserByName(auth.getName());
         Client client = clientService.getCilentById(user.getUserId());
-        application.setClient(client);
+         application.setClient(client);
         Status status = clientService.getStatusByName("zajavka ozhidaet obrabotku");
         System.out.println("тест тест тест " + status.getStatus());
         application.setStatus(status);
@@ -118,7 +118,10 @@ public class ClientController {
         {
 		
         	Mechanic mechanic = review.getMechanic();
-        	List<Review> reviews = mechanicService.getReviewByMechanic(mechanic);
+        	Number size1 = mechanicService.getSizeReviewByMechanic(mechanic);
+        	int size = Integer.parseInt(size1.toString());
+        	List<Review> reviews = mechanicService.getReviewByMechanic(mechanic, 0, size);
+        	
         	Float sum = (float)0;
         	
         	for(Review review1:reviews)
@@ -131,7 +134,9 @@ public class ClientController {
 		}else
 		{
 			Sto sto = review.getSto();
-			List<Review> reviews=mechanicService.getReviewBySto(sto);
+			Number size1 = mechanicService.getSizeReviewBySto(sto);
+			int size = Integer.parseInt(size1.toString());
+			List<Review> reviews=mechanicService.getReviewBySto(sto, 0, size);
             Float sum = (float)0;
         	
         	for(Review review1:reviews)
@@ -149,17 +154,19 @@ public class ClientController {
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/messages", method = RequestMethod.GET)
 	public ModelAndView  getmessage(@RequestParam(value = "page", required = false) Integer page, HttpSession session, Authentication auth){
-		if(page==null) page = 1;
-		Integer pageSize = 3;
-		Integer startPage = page;
-		Integer endPage = page + 5;
-		
+				
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
 		Client client = clientService.getCilentById(user.getUserId());
 		
-		List<Message> messages = clientService.getMessageByClient(client);
-		int size = messages.size();
+		if(page==null) page = 1;
+		Integer pageSize = 4;
+		Integer startPage = page;
+		Integer endPage = page + 5;
+
+		Number size1 = clientService.getSizeMessageBYClient(client);
+		int size = Integer.parseInt(size1.toString());
+		
 		Integer lastPage = (size+(pageSize-1)) / pageSize;
 		
 		if(endPage >= lastPage) endPage = lastPage;
@@ -180,11 +187,29 @@ public class ClientController {
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/getsto", method = RequestMethod.GET)
-	public ModelAndView  getsto(HttpSession session, Authentication auth){
+	public ModelAndView  getsto(@RequestParam(value = "page", required = false) Integer page,HttpSession session, Authentication auth){
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
-        mav.addObject("user", user);
-        mav.addObject("sto", clientService.getAllSto());
+		if(page==null) page = 1;
+		Integer pageSize = 5;
+		Integer startPage = page;
+		Integer endPage = page + 5;
+
+		Number size1 = directorService.getSizeAllSto();
+		int size = Integer.parseInt(size1.toString());
+		
+		Integer lastPage = (size+(pageSize-1)) / pageSize;
+		
+		if(endPage >= lastPage) endPage = lastPage;
+		if(endPage >= 5 && (endPage - startPage) < 5) startPage = endPage -5;
+		
+		mav.addObject("page", page);
+		mav.addObject("startpage", startPage);
+		mav.addObject("endpage", endPage);
+
+		
+		mav.addObject("user", user);
+        mav.addObject("sto", clientService.getAllSto((page-1)*pageSize,pageSize));
 		mav.setViewName("client.stolist");
 		//Client client = clientService.getCilentById(3l);
 		//System.out.println("client client client: " + client.getLogin());
@@ -193,17 +218,35 @@ public class ClientController {
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/getapplication", method = RequestMethod.GET)
-	public ModelAndView  getapplicationlist(HttpSession session, Authentication auth, Model model){
+	public ModelAndView  getapplicationlist(@RequestParam(value = "page", required = false) Integer page,HttpSession session, Authentication auth, Model model){
 		ModelAndView mav = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
-        mav.addObject("user", user);
+
         Client client = clientService.getCilentById(user.getUserId());
-        List<Application> application = clientService.getApplication(client);
+		if(page==null) page = 1;
+		Integer pageSize = 3;
+		Integer startPage = page;
+		Integer endPage = page + 5;
+
+		Number size1 = clientService.getSizeApplicationByClient(client);
+		int size = Integer.parseInt(size1.toString());
+		
+		Integer lastPage = (size+(pageSize-1)) / pageSize;
+		
+		if(endPage >= lastPage) endPage = lastPage;
+		if(endPage >= 5 && (endPage - startPage) < 5) startPage = endPage -5;
+		
+		mav.addObject("page", page);
+		mav.addObject("startpage", startPage);
+		mav.addObject("endpage", endPage);
+		
+        mav.addObject("user", user);;
+       
         
-        System.out.println("client client client: " + application.get(0).getId());
-        mav.addObject("application", application);
+        mav.addObject("application", clientService.getApplication(client, (page-1)*pageSize,pageSize));
 		mav.setViewName("client.applicationlist");
 		return mav;
+		
 	};
 	
 	@PreAuthorize("isFullyAuthenticated()") 

@@ -8,6 +8,7 @@
 		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
 		<put-attribute name="menu" value="" />
 		<put-attribute name="body" value="" />
+		<put-attribute name="paginator" value="" />
 		<put-attribute name="footer" value="/WEB-INF/tiles-base/footer.jsp" />
 	</definition>
 
@@ -46,6 +47,7 @@
 		<put-attribute name="title" expression="TEST: ${user.name}" />
 		<put-attribute name="body" value="/WEB-INF/views/user/home.jsp" />
 	    <put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+	    <put-attribute name="paginator" value="/WEB-INF/tiles-base/paginator.jsp" />
 	</definition>
 	
 	<definition name="client.addapplication" extends="base.definition">
@@ -63,6 +65,7 @@
 	<definition name="client.messages" extends="base.definition">
 		<put-attribute name="title" expression="TEST: ${user.name}" />
 		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="paginator" value="/WEB-INF/tiles-base/paginator.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/client/client-messages.jsp" />
 	</definition>
 	
@@ -70,12 +73,14 @@
 		<put-attribute name="title" expression="TEST: ${user.name}" />
 		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/client/client-stolist.jsp" />
+		<put-attribute name="paginator" value="/WEB-INF/tiles-base/paginator.jsp" />
 	</definition>
 	
 	<definition name="client.applicationlist" extends="base.definition">
 		<put-attribute name="title" expression="TEST: ${user.name}" />
 		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/client/client-applicationlist.jsp" />
+		<put-attribute name="paginator" value="/WEB-INF/tiles-base/paginator.jsp" />
 	</definition>
 	
 	<definition name="client.applicationinfo" extends="base.definition">
@@ -87,6 +92,7 @@
      <definition name="mechanic.applicationlist" extends="base.definition">
 		<put-attribute name="title" expression="TEST: ${user.name}" />
 		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="paginator" value="/WEB-INF/tiles-base/paginator.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/mechanic/mechanic-applicationlist.jsp" />
 	</definition>
 	
@@ -94,6 +100,7 @@
 		<put-attribute name="title" expression="TEST: ${user.name}" />
 		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/mechanic/mechanic-applicationdetail.jsp" />
+		<put-attribute name="paginator" value="/WEB-INF/tiles-base/paginator.jsp" />
 	</definition>
 	
 	<definition name="mechanic.addapplicationdetail" extends="base.definition">
@@ -112,23 +119,27 @@
 		<put-attribute name="title" expression="TEST: ${user.name}" />
 		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/mechanic/mechanic-reviewbymechanic.jsp" />
+		<put-attribute name="paginator" value="/WEB-INF/tiles-base/paginator.jsp" />
 	</definition>
 	
 	<definition name="director.applicationlist" extends="base.definition">
 		<put-attribute name="title" expression="TEST: ${user.name}" />
 		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/director/director-applicationlist.jsp" />
+		<put-attribute name="paginator" value="/WEB-INF/tiles-base/paginator.jsp" />
 	</definition>
 	
 	<definition name="director.mechanicslist" extends="base.definition">
 		<put-attribute name="title" expression="TEST: ${user.name}" />
 		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/director/director-mechaniclist.jsp" />
+		<put-attribute name="paginator" value="/WEB-INF/tiles-base/paginator.jsp" />
 	</definition>
 	
 	<definition name="director.stolist" extends="base.definition">
 		<put-attribute name="title" expression="TEST: ${user.name}" />
 		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="paginator" value="/WEB-INF/tiles-base/paginator.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/director/director-stolist.jsp" />
 	</definition>
 	
@@ -166,6 +177,7 @@
 		<put-attribute name="title" expression="TEST: ${user.name}" />
 		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/director/director-applicationdetail.jsp" />
+		<put-attribute name="paginator" value="/WEB-INF/tiles-base/paginator.jsp" />
 	</definition>
 	
 	<definition name="director.updateapplicationdetail" extends="base.definition">
@@ -184,6 +196,7 @@
 		<put-attribute name="title" expression="TEST: ${user.name}" />
 		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/director/director-mechaniclistbysto.jsp" />
+		<put-attribute name="paginator" value="/WEB-INF/tiles-base/paginator.jsp" />
 	</definition>
 	
 	<definition name="director.updatemechanic" extends="base.definition">

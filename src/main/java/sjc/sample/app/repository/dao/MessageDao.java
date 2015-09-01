@@ -11,4 +11,6 @@ public interface MessageDao extends GenericDao<MessageEntity, Long>{
 	List<MessageEntity> findByClient(ClientEntity client);
 	
 	List<MessageEntity> findByClientToPage(ClientEntity client, Integer first, Integer max);
+	
+	Number sizeMessagesbyClient(ClientEntity client);
 }

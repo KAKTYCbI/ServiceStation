@@ -42,3 +42,23 @@ background-image:url(../img/reviewbottom.png);
 height:14px;
 background-repeat:no-repeat;
 }
+
+.paginator {
+	
+    margin: -54px auto 0;
+    background-color: white;
+    width: 913px;
+}
+.paginator ul{
+	margin-left:300px;
+	padding-bottom: 75px;
+	font-size:medium;
+    
+}
+.paginator a{
+	text-decoration: none;
+}
+.paginator li{
+	list-style:none;
+	display:inline
+}

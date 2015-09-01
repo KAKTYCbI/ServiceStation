@@ -155,9 +155,9 @@ public class ClientServiceImplement implements ClientService{
 
 
 	@Override
-	public List<Sto> getAllSto() {
+	public List<Sto> getAllSto(Integer first, Integer max) {
 		List<Sto> sto = new ArrayList<Sto>();
-		List<StoEntity> stoEntities = stoRepository.findAll();
+		List<StoEntity> stoEntities = stoRepository.getAllStoToPage(first, max);
 		for(StoEntity StoEntity : stoEntities) {
 			sto.add(getMapper().map(StoEntity, Sto.class));
 		}
@@ -165,9 +165,9 @@ public class ClientServiceImplement implements ClientService{
 	}
 
 	@Override
-	public List<Application> getApplication(Client client) {
+	public List<Application> getApplication(Client client, Integer first, Integer max) {
 		List<Application> application = new ArrayList<Application>();
-		List<ApplicationEntity> applicationEntities = applicationRepository.findByClient((getMapper().map(client,ClientEntity.class)));
+		List<ApplicationEntity> applicationEntities = applicationRepository.findByClientToPage(((getMapper().map(client,ClientEntity.class))), first, max);
 		for(ApplicationEntity ApplicationEntity : applicationEntities) {
 			application.add(getMapper().map(ApplicationEntity, Application.class));
 		}
@@ -253,6 +253,24 @@ public class ClientServiceImplement implements ClientService{
 			message.add(getMapper().map(MessageEntity, Message.class));
 		}
 		return message;
+	}
+
+	@Override
+	public Number getSizeMessageBYClient(Client client) {
+		
+		return messageRepository.sizeMessagesbyClient((getMapper().map(client,ClientEntity.class)));
+	}
+
+	@Override
+	public Number getSizeApplicationByClient(Client client) {
+		
+		return applicationRepository.getSizeApplicationByClient((getMapper().map(client,ClientEntity.class)));
+	}
+
+	@Override
+	public Number getSizeAllSto() {
+		
+		return stoRepository.getSizeAllSto();
 	}
 
 }

@@ -17,19 +17,32 @@ import sjc.example.domain.model.Sto;
 public interface DirectorService {
 	
 	//метод возращает список  всех за€вок
-	List<Application> getApplication();
+	List<Application> getApplication(Integer first, Integer max);
+	
+	Number getSizeAllApplication();
 	
 	//метод возращает список  всех за€вок на детали
-	List<ApplicationDetail> getApplicationDetail();
+	List<ApplicationDetail> getApplicationDetail(Integer first, Integer max);
+	
+	Number getSizeAllApplicationDetail();
 	
 	//метод возращает список  всех ћехаников
+	List<Mechanic> getMechanicsToPage(Integer first, Integer max);
+	
 	List<Mechanic> getMechanics();
 	
-	//метод возращает список  всех ћехаников на конкретном сто
-	List<Mechanic> getMechanicsOnSto(Sto sto);
+    Number getSizeAllMechanic();
 	
+	//метод возращает список  всех ћехаников на конкретном сто
+	List<Mechanic> getMechanicsOnSto(Sto sto, Integer first, Integer max);
+	
+	Number getSizeMechanicOnSto(Sto sto);
 	//метод возращает список  всех —“ќ
+    List<Sto> getStoToPage(Integer first, Integer max);
+    
     List<Sto> getSto();
+    
+    Number getSizeAllSto();
     
     List<Status> getStatus();
     //метод дабавл€ет делать
@@ -65,7 +78,9 @@ public interface DirectorService {
     
     Mechanic getMechanicById(Long id);
     
-    List<Application> getApplicationByStatus(Status status);
+    List<Application> getApplicationByStatus(Status status, Integer first, Integer max);
+    
+    Number getSizeApplicationByStatus(Status status);
     
     Mechanic getMechanicByName(String name);
 }

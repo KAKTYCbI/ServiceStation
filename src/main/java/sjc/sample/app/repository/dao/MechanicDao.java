@@ -8,7 +8,15 @@ import sjc.sample.app.repository.entity.StoEntity;
 
 public interface MechanicDao extends GenericDao<MechanicEntity, Long> {
 	
-	List<MechanicEntity> findBySto(StoEntity sto);
+	List<MechanicEntity> getAllMechanicToPage(Integer first, Integer max);
+	
+	List<MechanicEntity> getAllMechanic();
+	
+	Number getSizeAllMechanic();
+	
+	List<MechanicEntity> findByStoToPage(StoEntity sto, Integer first, Integer max);
+	
+	Number getSizeMechanicBySto(StoEntity sto);
 	
 	MechanicEntity getMechanicById(Long id);
 	

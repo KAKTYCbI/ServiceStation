@@ -12,9 +12,17 @@ import sjc.sample.app.repository.entity.StoEntity;
 
 public interface ApplicationDao extends GenericDao<ApplicationEntity, Long> {
 	
-	List<ApplicationEntity> findByClient(ClientEntity client);
+	List<ApplicationEntity> findByClientToPage(ClientEntity client, Integer first, Integer max);
 	
-	List<ApplicationEntity> findByMechanic(MechanicEntity mechanic);
+	Number getSizeApplicationByClient(ClientEntity client);
+	
+	List<ApplicationEntity> getAllApplication( Integer first, Integer max);
+	
+	Number getAllSizeApplication();
+	
+	List<ApplicationEntity> findByMechanic(MechanicEntity mechanic,Integer first, Integer max);
+	
+	Number getSizeApplicationByMechanic(MechanicEntity client);
 	
 	List<ApplicationEntity> findByStoToDate(StoEntity sto,Date dateStart, Date dateFinish);
 	
@@ -22,7 +30,9 @@ public interface ApplicationDao extends GenericDao<ApplicationEntity, Long> {
 	
 	ApplicationEntity getApplicationByID(Long applicationId);
 	
-	List<ApplicationEntity> getApplicationByStatus(StatusEntity status);
+	List<ApplicationEntity> getApplicationByStatus(StatusEntity status, Integer first, Integer max);
+	
+	Number getSizeApplicationByStatus(StatusEntity client);
 	
 
 }

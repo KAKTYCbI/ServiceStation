@@ -18,6 +18,7 @@ import sjc.sample.app.repository.entity.ApplicationEntity;
 import sjc.sample.app.repository.entity.MechanicEntity;
 import sjc.sample.app.repository.entity.MessageEntity;
 import sjc.sample.app.repository.entity.ReviewEntity;
+import sjc.sample.app.repository.entity.StatusEntity;
 import sjc.sample.app.repository.entity.StoEntity;
 import sjc.sample.app.repository.entity.map.ModelClassMap;
 import sjc.example.domain.model.Application;
@@ -52,10 +53,10 @@ public class MechanicServiceImplement implements MechanicService{
 	}
 	
 	@Override
-	public List<Application> getCurrentApplication(Mechanic mechanic) {
+	public List<Application> getCurrentApplication(Mechanic mechanic, Integer first, Integer max) {
 	 
 		List<Application> application = new ArrayList<Application>();
-		List<ApplicationEntity> applicationEntities = applicationRepository.findByMechanic((getMapper().map(mechanic,MechanicEntity.class)));
+		List<ApplicationEntity> applicationEntities = applicationRepository.findByMechanic(((getMapper().map(mechanic,MechanicEntity.class))), first, max);
 		for(ApplicationEntity ApplicationEntity : applicationEntities) {
 			application.add(getMapper().map(ApplicationEntity, Application.class));
 		}
@@ -63,9 +64,9 @@ public class MechanicServiceImplement implements MechanicService{
 	}
 
 	@Override
-	public List<ApplicationDetail> getAllApplicationDetail(Mechanic mechanic) {
+	public List<ApplicationDetail> getApplicationDetailByMechanic(Mechanic mechanic, Integer first, Integer max) {
 		List<ApplicationDetail> applicationDetail = new ArrayList<ApplicationDetail>();
-		List<ApplicationDetailEntity> applicationDetailEntities = applicationDetailRepository.findByMechanic((getMapper().map(mechanic,MechanicEntity.class)));
+		List<ApplicationDetailEntity> applicationDetailEntities = applicationDetailRepository.findByMechanicToPage(((getMapper().map(mechanic,MechanicEntity.class))), first, max);
 		for(ApplicationDetailEntity ApplicationDetailEntity : applicationDetailEntities) {
 			applicationDetail.add(getMapper().map(ApplicationDetailEntity, ApplicationDetail.class));
 		}
@@ -104,10 +105,10 @@ public class MechanicServiceImplement implements MechanicService{
 	}
 
 	@Override
-	public List<Review> getReviewByMechanic(Mechanic mechanic) {
+	public List<Review> getReviewByMechanic(Mechanic mechanic, Integer first, Integer max) {
 		
 		List<Review> review = new ArrayList<Review>();
-		List<ReviewEntity> reviewEntities = reviewRepository.getReviewByMechanic((getMapper().map(mechanic,MechanicEntity.class)));
+		List<ReviewEntity> reviewEntities = reviewRepository.getReviewByMechanicToPage(((getMapper().map(mechanic,MechanicEntity.class))), first, max);
 		for(ReviewEntity ReviewEntity : reviewEntities) {
 			review.add(getMapper().map(ReviewEntity, Review.class));
 		}
@@ -115,14 +116,41 @@ public class MechanicServiceImplement implements MechanicService{
 	}
 
 	@Override
-	public List<Review> getReviewBySto(Sto sto) {
+	public List<Review> getReviewBySto(Sto sto, Integer first, Integer max) {
 		List<Review> review = new ArrayList<Review>();
-		List<ReviewEntity> reviewEntities = reviewRepository.getReviewBySto(getMapper().map(sto,StoEntity.class));
+		List<ReviewEntity> reviewEntities = reviewRepository.getReviewByStoToPage((getMapper().map(sto,StoEntity.class)), first, max);
 		for(ReviewEntity ReviewEntity : reviewEntities) {
 			review.add(getMapper().map(ReviewEntity, Review.class));
 		}
 		return review;
 
+	}
+
+	@Override
+	public Number getSizeApplicationByMechanic(Mechanic mechanic) {
+		// TODO Auto-generated method stub
+		return applicationRepository.getSizeApplicationByMechanic((getMapper().map(mechanic,MechanicEntity.class)));
+
+	}
+
+	@Override
+	public Number getSizeApplicationDeatilByMechanic(Mechanic mechanic) {
+		// TODO Auto-generated method stub
+		return applicationDetailRepository.getSizeApplicationDetailByMechanic((getMapper().map(mechanic,MechanicEntity.class)));
+
+	}
+
+	@Override
+	public Number getSizeReviewByMechanic(Mechanic mechanic) {
+		// TODO Auto-generated method stub
+		return reviewRepository.getSizeReviewByMechanic((getMapper().map(mechanic,MechanicEntity.class)));
+
+	}
+
+	@Override
+	public Number getSizeReviewBySto(Sto sto) {
+		// TODO Auto-generated method stub
+		return reviewRepository.getSizeReviewBySto((getMapper().map(sto,StoEntity.class)));
 	}
 
 }
