@@ -5,12 +5,15 @@ import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,10 +33,18 @@ import sjc.example.domain.service.ClientService;
 import sjc.example.domain.service.DirectorService;
 import sjc.example.domain.service.MechanicService;
 import sjc.example.domain.service.UserService;
+import sjc.sample.app.repository.entity.validation.ApplicationDetailValidator;
+import sjc.sample.app.repository.entity.validation.ApplicationValidator;
 
 @Controller
 @RequestMapping("/mechanic")
 public class MechanicController {
+	private static final Logger logger = LoggerFactory.getLogger(MechanicController.class);
+	@Autowired
+	private ApplicationValidator applicationValidator;
+	
+	@Autowired
+	private ApplicationDetailValidator applicationDetailValidator;
 	
 	@Autowired
 	private MechanicService mechanicService;
@@ -142,15 +153,30 @@ public class MechanicController {
 	};
 	
 	@RequestMapping(value = { "/addapplicationdetail" }, method = { RequestMethod.POST })
-	public String addapplicationdetail(@ModelAttribute("applicationdetails") ApplicationDetail applicationDetail,  Model model, HttpSession session) {
+	public ModelAndView addapplicationdetail(@ModelAttribute("applicationdetails") ApplicationDetail applicationDetail,Authentication auth,
+			BindingResult bindingResult, Model model, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		applicationDetailValidator.validate(applicationDetail,bindingResult);
+		if (bindingResult.hasErrors()){
+	    	logger.info("Returning addapplicationdetail.jsp page");
+	    	UserPrincipal user = userService.getUserByName(auth.getName());
+	    	Status status =clientService.getStatusByName("net nuznych detaley");
+	    	Number size1 = directorService.getSizeApplicationByStatus(status);
+			int size = Integer.parseInt(size1.toString());
+			mav.addObject("applications", directorService.getApplicationByStatus(status, 0, size));
+		    mav.addObject("user", user);
+			mav.setViewName("mechanic.addapplicationdetail");
+			return mav;
+		};
         
         applicationDetail.setDateOrder(new Date());
         Status status = clientService.getStatusByName("ozhidaetsia obrobotki directora");
         applicationDetail.setStatus(status);
        // applicationDetail.setId(1l);
 	    directorService.saveApplicationDetail(applicationDetail);
+	    mav.setViewName("home");
         
-	    return "redirect:/home";
+	    return mav;
 	}
 	
 	@PreAuthorize("isFullyAuthenticated()") 
@@ -167,15 +193,31 @@ public class MechanicController {
 	};
 	
 	@RequestMapping(value = { "/updateapplication/{id}" }, method = { RequestMethod.POST })
-	public String updateapplication(@ModelAttribute("application") Application application,  Model model, HttpSession session) {
+	public ModelAndView updateapplication(@PathVariable Long id,@ModelAttribute("application") Application application,  Model model, HttpSession session,
+			Authentication auth,BindingResult bindingResult) {
+		ModelAndView mav = new ModelAndView();
+		UserPrincipal user = userService.getUserByName(auth.getName());
+		applicationValidator.validate(application,bindingResult);
+		if (bindingResult.hasErrors()){
+	    	logger.info("Returning addapplication.jsp page");
+	    	mav.addObject("application", mechanicService.getApplicationById(id));
+			mav.addObject("statuss", directorService.getStatus());
+			mav.addObject("detail", clientService.getDetail());
+	        mav.addObject("user", user);
+			mav.setViewName("mechanic.updateapplication");
+			return mav;
+		};
+	    
+		
+		
         Application application1 = mechanicService.getApplicationById(application.getId());
        // System.out.println("test test tes"+application.getId());
         application1.setDateCompletion(application.getDateCompletion());
         application1.setDetails(application.getDetails());
         application1.setStatus(application.getStatus());
 	    clientService.addOrUpdateApplication(application1);
-        
-	    return "redirect:/home";
+	    mav.setViewName("mechanic.updateapplication");
+	    return mav;
 	}
 	
 	@PreAuthorize("isFullyAuthenticated()") 

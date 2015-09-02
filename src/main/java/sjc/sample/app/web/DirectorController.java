@@ -46,6 +46,7 @@ import sjc.sample.app.repository.entity.validation.ApplicationValidator;
 import sjc.sample.app.repository.entity.validation.DetailValidator;
 import sjc.sample.app.repository.entity.validation.MechanicValidator;
 import sjc.sample.app.repository.entity.validation.RentValidator;
+import sjc.sample.app.repository.entity.validation.ReportValidator;
 import sjc.sample.app.repository.entity.validation.ServiceValidator;
 import sjc.sample.app.repository.entity.validation.StoValidator;
 
@@ -55,6 +56,9 @@ import sjc.sample.app.repository.entity.validation.StoValidator;
 @RequestMapping("/director")
 public class DirectorController {
 	private static final Logger logger = LoggerFactory.getLogger(DirectorController.class);
+	@Autowired
+	private ReportValidator reportValidator;
+	
 	@Autowired
 	private RentValidator rentValidator;
 	
@@ -224,23 +228,37 @@ public class DirectorController {
 	};
 	
 	@RequestMapping(value = { "/getreport" }, method = { RequestMethod.POST })
-	public ModelAndView getreport(@ModelAttribute("reportinfo") ReportInfo reportinfo,  Model model, HttpSession session, Authentication auth) {
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView getreport(@ModelAttribute("reportinfo") ReportInfo reportinfo, BindingResult bindingResult,
+			Model model, HttpSession session, Authentication auth) {
+		    ModelAndView mav = new ModelAndView();
+			reportValidator.validate(reportinfo, bindingResult);
+		    if (bindingResult.hasErrors()){
+		    	logger.info("Returning getreport.jsp page");
+		    	UserPrincipal user = userService.getUserByName(auth.getName());
+		    	mav.addObject("user", user);
+		    	mav.addObject("reportinfo", new ReportInfo());
+		        mav.addObject("stos", directorService.getSto());
+		        mav.setViewName("director.addreport");
+		    	return mav;
+		    } else{
+		
+		
+		ModelAndView mave = new ModelAndView();
 		UserPrincipal user = userService.getUserByName(auth.getName());
-        mav.addObject("user", user);
+        mave.addObject("user", user);
 		if (reportinfo.getWhom().equals("sto"))
 		{
-			mav.addObject("report", directorService.getreportSto(reportinfo.getSto(), reportinfo.getDateStart(), reportinfo.getDateFinish()));
-			mav.addObject("reportinfo", reportinfo);
-			mav.setViewName("director.reportsto");
+			mave.addObject("report", directorService.getreportSto(reportinfo.getSto(), reportinfo.getDateStart(), reportinfo.getDateFinish()));
+			mave.addObject("reportinfo", reportinfo);
+			mave.setViewName("director.reportsto");
 		}else
 		{
-			mav.addObject("report", directorService.getreportAll(reportinfo.getDateStart(), reportinfo.getDateFinish()));
-			mav.addObject("reportinfo", reportinfo);
-			mav.setViewName("director.reportall");
+			mave.addObject("report", directorService.getreportAll(reportinfo.getDateStart(), reportinfo.getDateFinish()));
+			mave.addObject("reportinfo", reportinfo);
+			mave.setViewName("director.reportall");
 		}
         
-	    return mav;
+	    return mave;}
 	}
 	
 	@PreAuthorize("isFullyAuthenticated()") 

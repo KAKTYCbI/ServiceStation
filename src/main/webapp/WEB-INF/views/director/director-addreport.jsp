@@ -33,8 +33,8 @@
         </td>
         <td>
         <form:input type="date" path="dateStart" />
-         
         </td>
+         <td><form:errors path="dateStart" cssClass="error"/></td>
       </tr>
       <tr>
         <td>
@@ -43,6 +43,7 @@
         <td>
           <form:input type="date" path="dateFinish" />
         </td>
+         <td><form:errors path="dateFinish" cssClass="error"/></td>
       </tr>
       
       <tr>

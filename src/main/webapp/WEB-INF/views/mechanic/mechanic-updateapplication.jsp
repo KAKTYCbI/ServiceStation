@@ -121,8 +121,8 @@
         </td>
         <td>
         <form:input type="date" path="dateCompletion" />
-         
         </td>
+        <td><form:errors path="dateCompletion" cssClass="error"/></td>
       </tr>
       <tr>
         <td>
