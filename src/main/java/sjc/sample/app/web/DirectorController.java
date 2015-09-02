@@ -42,6 +42,7 @@ import sjc.example.domain.service.DirectorService;
 import sjc.example.domain.service.MechanicService;
 import sjc.example.domain.service.UserService;
 import sjc.sample.app.repository.entity.validation.ApplicationDetailValidator;
+import sjc.sample.app.repository.entity.validation.ApplicationValidator;
 import sjc.sample.app.repository.entity.validation.DetailValidator;
 import sjc.sample.app.repository.entity.validation.MechanicValidator;
 import sjc.sample.app.repository.entity.validation.RentValidator;
@@ -63,6 +64,8 @@ public class DirectorController {
 	@Autowired
 	private ApplicationDetailValidator applicationDetailValidator;
 
+	@Autowired
+	private ApplicationValidator applicationValidator;
 	
 	@Autowired
 	private ServiceValidator serviceValidator;
@@ -427,8 +430,18 @@ public class DirectorController {
 	};
 	
 	@RequestMapping(value = { "/updatemechanic/{id}" }, method = { RequestMethod.POST })
-	public ModelAndView updatemechanic(@ModelAttribute("mechanic") Mechanic mechanic,  Model model, HttpSession session, Authentication auth) {
+	public ModelAndView updatemechanic(@PathVariable Long id, @ModelAttribute("mechanic") Mechanic mechanic,  Model model, 
+			HttpSession session, BindingResult bindingResult,Authentication auth) {
 		ModelAndView mav = new ModelAndView();
+		mechanicValidator.validate(mechanic, bindingResult);
+	    if (bindingResult.hasErrors()){
+	    	UserPrincipal user = userService.getUserByName(auth.getName());
+	        mav.addObject("user", user);
+	        mav.addObject("mechanic", directorService.getMechanicById(id));
+	    	mav.addObject("stos", directorService.getSto());
+			mav.setViewName("director.addmechanic");
+	    	  	return mav;
+	    }
 		Mechanic mechanic1 = directorService.getMechanicById(mechanic.getUserId());
 		mechanic.setLogin(mechanic.getName());
 		mechanic.setRating(mechanic1.getRating());
@@ -538,14 +551,29 @@ public class DirectorController {
 	};
 	
 	@RequestMapping(value = { "/updateapplication/{id}" }, method = { RequestMethod.POST })
-	public String updateapplication(@ModelAttribute("application") Application application,  Model model, HttpSession session) {
-        Application application1 = mechanicService.getApplicationById(application.getId());
-       // System.out.println("test test tes"+application.getId());
+	public ModelAndView updateapplication(@PathVariable Long id,@ModelAttribute("application") Application application,  Model model,BindingResult bindingResult,
+			HttpSession session,  Authentication auth) {
+		ModelAndView mav = new ModelAndView();
+		applicationValidator.validate(application, bindingResult);
+		if (bindingResult.hasErrors()){
+			Application application1 = mechanicService.getApplicationById(id);
+			UserPrincipal user = userService.getUserByName(auth.getName());
+			Number size1 = directorService.getSizeMechanicOnSto(application1.getSto());
+			int size = Integer.parseInt(size1.toString());
+			mav.addObject("application", application1);
+			mav.addObject("statuss", directorService.getStatus());
+			mav.addObject("mechanics", directorService.getMechanicsOnSto(application1.getSto(), 0, size));
+	        mav.addObject("user", user);
+			mav.setViewName("director.updateapplication");
+	    	  	return mav;
+	    }
+
+		Application application1 = mechanicService.getApplicationById(application.getId());
         application1.setMechanic(application.getMechanic());
         application1.setStatus(application.getStatus());
 	    clientService.addOrUpdateApplication(application1);
-        
-	    return "redirect:/home";
+        mav.setViewName("redirect:/home");
+	    return mav;
 	}
 	
 	}

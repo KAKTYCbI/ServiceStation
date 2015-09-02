@@ -62,7 +62,7 @@
     <bean id="stoValidator" class="sjc.sample.app.repository.entity.validation.StoValidator" />
     <bean id="applicationDetailValidator" class="sjc.sample.app.repository.entity.validation.ApplicationDetailValidator" />
     <bean id="RentValidator" class="sjc.sample.app.repository.entity.validation.RentValidator" />
-    
+     <bean id="applicationValidator" class="sjc.sample.app.repository.entity.validation.ApplicationValidator" />
     
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">

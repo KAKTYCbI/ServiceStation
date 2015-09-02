@@ -12,7 +12,7 @@
       <div class = "review">
          <div class = "reviewtop"></div>
             <div class = "reviewcenter">
-     <form:form method = "post" action = "updateapplication" commandName = "application">
+     <form:form method = "post" action = "../updateapplication/${application.id }" commandName = "application">
    
      <ul>
       <table>
@@ -59,6 +59,7 @@
 		  </c:forEach>
           </form:select>
         </td>
+        <td><form:errors path="mechanic" cssClass="error" /></td>
       </tr>   
       <tr>
         <td>
@@ -74,6 +75,7 @@
 		 </c:forEach>
         </form:select>
         </td>
+        <td><form:errors path="status" cssClass="error" /></td>
       </tr> 
       <tr>
         <td>

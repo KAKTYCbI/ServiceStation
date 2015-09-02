@@ -5,8 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/css/home.css"/>" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/home.css"/>" />
 
 <h1>Заявки на детали</h1>
 </br>
@@ -51,6 +50,7 @@
 										</c:if>
 									</c:forEach>
 								</form:select></td>
+								<td><form:errors path="status" cssClass="error" /></td>
 						</tr>
 
 						<tr>
