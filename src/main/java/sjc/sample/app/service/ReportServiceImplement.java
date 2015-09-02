@@ -112,4 +112,36 @@ public class ReportServiceImplement implements ReportService{
 		return application;
 	}
 
+	@Override
+	public List<Salary> getListStoSalary(Sto sto, Date dateStart,
+			Date dateFinish) {
+		List<Salary> salary = new ArrayList<Salary>();
+		List<SalaryEntity> salaryEntities = salaryRepository.findBySalaryToDate((getMapper().map(sto,StoEntity.class)), dateStart, dateFinish);
+		for(SalaryEntity SalaryEntity : salaryEntities) {
+			salary.add(getMapper().map(SalaryEntity, Salary.class));
+		}
+		return salary;
+	}
+
+	@Override
+	public List<Rent> getlostRent(Date dateStart, Date dateFinish) {
+		List<Rent> rent = new ArrayList<Rent>();
+		List<RentEntity> rentEntities = rentRepository.findByRentToDateAll( dateStart, dateFinish);
+		for(RentEntity RentEntity : rentEntities) {
+			rent.add(getMapper().map(RentEntity, Rent.class));
+		}
+		return rent;
+	}
+
+	@Override
+	public List<Application> getListApplicationToDate(Date dateStart,
+			Date dateFinish) {
+		List<Application> application = new ArrayList<Application>();
+		List<ApplicationEntity> applicationEntities = applicationRepository.findToDate(dateStart, dateFinish);
+		for(ApplicationEntity ApplicationEntity : applicationEntities) {
+			application.add(getMapper().map(ApplicationEntity, Application.class));
+		}
+		return application;
+	}
+
 }

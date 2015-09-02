@@ -13,6 +13,7 @@
          <div class = "reviewtop"></div>
             <div class = "reviewcenter">
             <ul>
+            
 <form:form method = "post" action = "addrent" commandName = "rent">
     <table>
       <tr>

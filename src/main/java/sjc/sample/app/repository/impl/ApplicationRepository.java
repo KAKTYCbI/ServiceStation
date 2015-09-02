@@ -109,6 +109,14 @@ AbstractHibernateDao<ApplicationEntity, Long> implements ApplicationDao{
 		Criteria criteria = getSession().createCriteria(ApplicationEntity.class).setProjection(Projections.rowCount());
 		return (Number) criteria.uniqueResult();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ApplicationEntity> findToDate(Date dateStart, Date dateFinish) {
+		Criteria criteria = getSession().createCriteria(ApplicationEntity.class).add(
+						Restrictions.between("dateCompletion", dateStart, dateFinish));
+		return (List<ApplicationEntity>) criteria.list();
+	}
 
 
 }

@@ -1,7 +1,11 @@
 package sjc.sample.app.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.dozer.DozerBeanMapperSingletonWrapper;
 import org.dozer.Mapper;
@@ -35,11 +39,13 @@ import sjc.example.domain.model.ApplicationDetail;
 import sjc.example.domain.model.Detail;
 import sjc.example.domain.model.Mechanic;
 import sjc.example.domain.model.Rent;
+import sjc.example.domain.model.Report;
 import sjc.example.domain.model.Salary;
 import sjc.example.domain.model.Status;
 import sjc.example.domain.model.Sto;
 import sjc.example.domain.model.UserPrincipal;
 import sjc.example.domain.service.DirectorService;
+import sjc.example.domain.service.ReportService;
 
 
 @Service()
@@ -73,6 +79,8 @@ public class DirectorServiceImplement implements DirectorService{
 	@Autowired
 	private DetailDao detailRepository;
 	
+	@Autowired
+	private ReportService reportService;
 	
 	@Autowired
 	private ModelClassMap modelClassMap;
@@ -312,6 +320,128 @@ public class DirectorServiceImplement implements DirectorService{
 			sto.add(getMapper().map(StoEntity, Sto.class));
 		}
 		return sto;
+	}
+
+	@Override
+	public Report getreportSto(Sto sto, Date dateStart, Date dateFinish) {
+		Report report = new Report();
+		List<Application> applications = reportService.getListStoApplicationToDate(sto, dateStart, dateFinish);
+		
+		List<Mechanic> mechanics = sto.getMechanics();
+		List<Rent> rents = reportService.getListSTORent(sto, dateStart, dateFinish);
+		Long applicationPrice = 0l;
+		Float salaryPrice = (float)0;
+		Long rentPrice = 0l;
+		Long detailPrice = 0l;
+		if (applications != null)
+		{
+		for(Application application:applications)
+		{
+			if (application.getPrice()!=null){
+			applicationPrice+=application.getPrice();
+			}
+			List<Detail> details = application.getDetails();
+			if (application.getDetails()!=null)
+			{
+			for(Detail detail:details)
+			{
+				detailPrice +=detail.getPrice();
+			}
+		    }
+		}
+		}
+		List<Salary> salarys1 = new ArrayList<Salary>(); 
+		if (mechanics!=null)
+		{
+		for(Mechanic mechanic:mechanics)
+		{
+			List<Salary> salarys = reportService.getListMechanicSalary(mechanic, dateStart, dateFinish);
+            salarys1.addAll(salarys); 
+		}
+		}
+		if (salarys1 != null)
+		{
+		for(Salary salary: salarys1)
+		{
+			salaryPrice +=salary.getSumma();
+		}
+		}
+		if(rents != null)
+		{
+		for(Rent rent:rents)
+		{
+			rentPrice+=rent.getPrice();
+		}
+		
+		}
+		Long expenses = salaryPrice.longValue()+rentPrice+detailPrice;
+		
+		Long profit = applicationPrice - expenses;
+		
+		report.setApplicationPrice(applicationPrice);
+		report.setDetailPrice(detailPrice);
+		report.setExpenses(expenses);
+		report.setProfit(profit);
+		report.setRentPrice(rentPrice);
+		report.setSalaryPrice(salaryPrice);
+		
+		return report;
+	}
+
+	@Override
+	public Report getreportAll(Date dateStart, Date dateFinish) {
+		List<Application> applications = reportService.getListApplicationToDate(dateStart, dateFinish);
+		List<Salary> salarys = reportService.getListSalary(dateStart, dateFinish);
+		List<Rent> rents = reportService.getlostRent(dateStart, dateFinish);
+		Report report = new Report();
+		Long applicationPrice = 0l;
+		Float salaryPrice = (float)0;
+		Long rentPrice = 0l;
+		Long detailPrice = 0l;
+		if (applications != null)
+		{
+		for(Application application:applications)
+		{
+			if (application.getPrice()!=null){
+			applicationPrice+=application.getPrice();
+			}
+			List<Detail> details = application.getDetails();
+			if (application.getDetails()!=null)
+			{
+			for(Detail detail:details)
+			{
+				detailPrice +=detail.getPrice();
+			}
+		    }
+		}
+		}
+		if (salarys != null)
+		{
+		for(Salary salary: salarys)
+		{
+			salaryPrice +=salary.getSumma();
+		}
+		}
+		if(rents != null)
+		{
+		for(Rent rent:rents)
+		{
+			rentPrice+=rent.getPrice();
+		}
+		
+		}
+		Long expenses = salaryPrice.longValue()+rentPrice+detailPrice;
+		
+		Long profit = applicationPrice - expenses;
+		
+		report.setApplicationPrice(applicationPrice);
+		report.setDetailPrice(detailPrice);
+		report.setExpenses(expenses);
+		report.setProfit(profit);
+		report.setRentPrice(rentPrice);
+		report.setSalaryPrice(salaryPrice);
+		
+		return report;
 	}
 		
 	

@@ -26,6 +26,8 @@ public interface ApplicationDao extends GenericDao<ApplicationEntity, Long> {
 	
 	List<ApplicationEntity> findByStoToDate(StoEntity sto,Date dateStart, Date dateFinish);
 	
+	List<ApplicationEntity> findToDate(Date dateStart, Date dateFinish);
+	
 	List<ApplicationEntity> findByMechanicToDate(MechanicEntity mechanic, Date dateStart, Date dateFinish);
 	
 	ApplicationEntity getApplicationByID(Long applicationId);

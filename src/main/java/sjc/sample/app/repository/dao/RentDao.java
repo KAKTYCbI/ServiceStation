@@ -10,5 +10,7 @@ import sjc.sample.app.repository.entity.StoEntity;
 public interface RentDao extends GenericDao<RentEntity, Long>{
 	
 	 List<RentEntity> findByRentToDate(StoEntity sto, Date dateStart, Date dateFinish);
+	 
+	 List<RentEntity> findByRentToDateAll(Date dateStart, Date dateFinish);
 
 }

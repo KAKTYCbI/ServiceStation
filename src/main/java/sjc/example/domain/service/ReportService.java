@@ -17,6 +17,8 @@ public interface ReportService {
  // метод возвращает зп за указаный переуд
  List<Salary> getListSalary(Date dateStart, Date dateFinish);
 
+ List<Salary> getListStoSalary(Sto sto,Date dateStart, Date dateFinish);
+ 
  // метод возвращает зп заданного директора за переуд
  List<Salary> getListDirectorSalary(Director director, Date dateStart, Date dateFinish);
 
@@ -27,9 +29,13 @@ public interface ReportService {
  // метод возвращает аренду заданного СТО за переуд
  List<Rent> getListSTORent(Sto sto, Date dateStart, Date dateFinish);
 
+ List<Rent> getlostRent(Date dateStart, Date dateFinish);
+ 
  // метод возвращает список выполненых заявок заданного СТО
  List<Application> getListStoApplicationToDate(Sto sto, Date dateStart, Date dateFinish);
 
+ List<Application> getListApplicationToDate(Date dateStart, Date dateFinish);
+ 
  // метод возвращает список выполненых заявок заданного механика
  List<Application> getListMechanicApplicationToDate(Mechanic mechanic,Date dateStart, Date dateFinish);
  

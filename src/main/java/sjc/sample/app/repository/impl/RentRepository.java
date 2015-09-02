@@ -25,4 +25,12 @@ AbstractHibernateDao<RentEntity, Long> implements RentDao{
 		return (List<RentEntity>) criteria.list();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RentEntity> findByRentToDateAll(Date dateStart, Date dateFinish) {
+		Criteria criteria = getSession().createCriteria(RentEntity.class).add(
+				Restrictions.between("start", dateStart, dateFinish));
+		return (List<RentEntity>) criteria.list();
+	}
+
 }

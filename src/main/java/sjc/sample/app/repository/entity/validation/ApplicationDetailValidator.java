@@ -15,7 +15,7 @@ public class ApplicationDetailValidator implements Validator {
 
 	@Override
 	public void validate(Object obj, Errors errors) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "date", "date.required", "date is required"); 
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dateDelivery", "date.required", "date is required"); 
 		
 	}
 

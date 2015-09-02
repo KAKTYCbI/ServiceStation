@@ -18,6 +18,8 @@ public class Salary {
 	private Director director;
 	
 	private Mechanic mechanic;
+	
+	private Sto sto;
 
 	public Long getId() {
 		return id;
@@ -57,6 +59,14 @@ public class Salary {
 
 	public void setMechanic(Mechanic mechanic) {
 		this.mechanic = mechanic;
+	}
+
+	public Sto getSto() {
+		return sto;
+	}
+
+	public void setSto(Sto sto) {
+		this.sto = sto;
 	}
 	
 	

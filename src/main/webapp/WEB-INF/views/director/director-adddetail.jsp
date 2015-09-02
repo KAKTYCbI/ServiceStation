@@ -32,7 +32,7 @@
         <td>
           <form:input path="price"/>
         </td>
-        <td><form:errors path="name" cssClass="error"/></td>
+        <td><form:errors path="price" cssClass="error"/></td>
       </tr>
       
       <tr>

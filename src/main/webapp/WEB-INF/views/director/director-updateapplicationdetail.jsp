@@ -15,7 +15,7 @@
 		<div class="reviewtop"></div>
 		<div class="reviewcenter">
 			<ul>
-				<form:form method="post" action="updateapplicationdetail"
+				<form:form method="post" action="../updateapplicationdetail/${applicationdetail.id }"
 					commandName="applicationdetail">
 					<table>
 						<tr>
@@ -31,7 +31,7 @@
 							<td><form:label path="dateDelivery">Дата поступления:</form:label>
 							</td>
 							<td><form:input type="date" path="dateDelivery" /></td>
-							<td><form:errors path="name" cssClass="error" /></td>
+							<td><form:errors path="dateDelivery" cssClass="error" /></td>
 
 						</tr>
 						<tr>

@@ -1,6 +1,7 @@
 package sjc.example.domain.service;
 
 
+import java.util.Date;
 import java.util.List;
 
 import sjc.example.domain.model.Application;
@@ -8,6 +9,7 @@ import sjc.example.domain.model.ApplicationDetail;
 import sjc.example.domain.model.Detail;
 import sjc.example.domain.model.Mechanic;
 import sjc.example.domain.model.Rent;
+import sjc.example.domain.model.Report;
 import sjc.example.domain.model.Salary;
 import sjc.example.domain.model.Service;
 import sjc.example.domain.model.Status;
@@ -20,6 +22,10 @@ public interface DirectorService {
 	List<Application> getApplication(Integer first, Integer max);
 	
 	Number getSizeAllApplication();
+	
+	Report getreportSto(Sto sto, Date dateStart, Date dateFinish);
+	
+	Report getreportAll(Date dateStart, Date dateFinish);
 	
 	//метод возращает список  всех заявок на детали
 	List<ApplicationDetail> getApplicationDetail(Integer first, Integer max);

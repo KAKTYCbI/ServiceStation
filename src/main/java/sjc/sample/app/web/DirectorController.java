@@ -30,6 +30,7 @@ import sjc.example.domain.model.Detail;
 import sjc.example.domain.model.Director;
 import sjc.example.domain.model.Mechanic;
 import sjc.example.domain.model.Rent;
+import sjc.example.domain.model.ReportInfo;
 import sjc.example.domain.model.Salary;
 import sjc.example.domain.model.Service;
 import sjc.example.domain.model.Status;
@@ -208,6 +209,38 @@ public class DirectorController {
 	};
 	
 	@PreAuthorize("isFullyAuthenticated()") 
+	@RequestMapping(value = "/getreport", method = RequestMethod.GET)
+	public ModelAndView  getreport(HttpSession session, Authentication auth){
+		ModelAndView mav = new ModelAndView();
+		UserPrincipal user = userService.getUserByName(auth.getName());
+        mav.addObject("user", user);
+        mav.addObject("reportinfo", new ReportInfo());
+        mav.addObject("stos", directorService.getSto());
+		mav.setViewName("director.getreport");
+		return mav;
+	};
+	
+	@RequestMapping(value = { "/getreport" }, method = { RequestMethod.POST })
+	public ModelAndView getreport(@ModelAttribute("reportinfo") ReportInfo reportinfo,  Model model, HttpSession session, Authentication auth) {
+		ModelAndView mav = new ModelAndView();
+		UserPrincipal user = userService.getUserByName(auth.getName());
+        mav.addObject("user", user);
+		if (reportinfo.getWhom().equals("sto"))
+		{
+			mav.addObject("report", directorService.getreportSto(reportinfo.getSto(), reportinfo.getDateStart(), reportinfo.getDateFinish()));
+			mav.addObject("reportinfo", reportinfo);
+			mav.setViewName("director.reportsto");
+		}else
+		{
+			mav.addObject("report", directorService.getreportAll(reportinfo.getDateStart(), reportinfo.getDateFinish()));
+			mav.addObject("reportinfo", reportinfo);
+			mav.setViewName("director.reportall");
+		}
+        
+	    return mav;
+	}
+	
+	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/addrent", method = RequestMethod.GET)
 	public ModelAndView  addrent(HttpSession session, Authentication auth){
 		ModelAndView mav = new ModelAndView();
@@ -258,17 +291,22 @@ public class DirectorController {
 	};
 	
 	@RequestMapping(value = { "/adddetail" }, method = { RequestMethod.POST })
-	public String adddetail(@ModelAttribute("service") Detail detail, BindingResult bindingResult,
-			Model model, HttpSession session) {
+	public ModelAndView adddetail(@ModelAttribute("detail") Detail detail, BindingResult bindingResult,
+			Model model, HttpSession session, Authentication auth) {
+		ModelAndView mav = new ModelAndView();
 		detailValidator.validate(detail, bindingResult);
 	    if (bindingResult.hasErrors()){
 	    	logger.info("Returning adddetail.jsp page");
-	    	return "director.adddetail";
+	    	UserPrincipal user = userService.getUserByName(auth.getName());
+	    	mav.addObject("user", user);
+	        
+	    	mav.setViewName("director.adddetail");
+	    	return mav;
 	    }
 
 	    directorService.addDetail(detail);
-        
-	    return "redirect:/home";
+		mav.setViewName("redirect:/home");
+	    return mav;
 	}
     
 	@PreAuthorize("isFullyAuthenticated()") 
@@ -283,17 +321,22 @@ public class DirectorController {
 	};
 	
 	@RequestMapping(value = { "/addsto" }, method = { RequestMethod.POST })
-	public String addsto(@ModelAttribute("sto") Sto sto,BindingResult bindingResult, 
-			Model model, HttpSession session) {
+	public ModelAndView addsto(@ModelAttribute("sto") Sto sto,BindingResult bindingResult, 
+			Model model, HttpSession session, Authentication auth) {
+		ModelAndView mav = new ModelAndView();
 		stoValidator.validate(sto, bindingResult);
 		if (bindingResult.hasErrors()){
+			UserPrincipal user = userService.getUserByName(auth.getName());
+	        mav.addObject("user", user);
 	    	logger.info("Returning addsto.jsp page");
-	    	return "director.addsto";
+	    	mav.setViewName("director.addsto");
+	    	return mav;
 	    }
 		
         sto.setRating((float)0);
 	    directorService.addSto(sto);
-	    return "redirect:/home";
+	    mav.setViewName("redirect:/home");
+	    return mav;
 	}
 	
 	@PreAuthorize("isFullyAuthenticated()") 
@@ -308,19 +351,25 @@ public class DirectorController {
 	};
 	
 	@RequestMapping(value = { "/updatesto/{id}" }, method = { RequestMethod.POST })
-	public String updatesto(@PathVariable Long id,@ModelAttribute("sto") Sto sto,BindingResult bindingResult,
-			Model model, HttpSession session) {
+	public ModelAndView updatesto(@PathVariable Long id,@ModelAttribute("sto") Sto sto,BindingResult bindingResult,
+			Model model, HttpSession session, Authentication auth) {
+		ModelAndView mav = new ModelAndView();
 		rentValidator.validate(sto, bindingResult);
 		if (bindingResult.hasErrors()){
 	    	logger.info("Returning updatesto.jsp page");
-	    	return "director.updatesto";
+	    	UserPrincipal user = userService.getUserByName(auth.getName());
+	        mav.addObject("user", user);
+	        mav.addObject("sto", directorService.getStoById(id));
+	    	mav.setViewName("director.updatesto");
+	    	return mav;
 	    }
 		
         Sto sto1 = directorService.getStoById(id);
         sto1.setName(sto.getName());
         sto1.setPrice(sto.getPrice());
 	    directorService.addSto(sto1);
-	    return "redirect:/home";
+	    mav.setViewName("redirect:/home");
+	    return mav;
 	}
 	
 	@PreAuthorize("isFullyAuthenticated()") 
@@ -335,18 +384,22 @@ public class DirectorController {
 	};
 	
 	@RequestMapping(value = { "/addservice" }, method = { RequestMethod.POST })
-	public String addservice(@ModelAttribute("service") Service service,BindingResult bindingResult, 
-			Model model, HttpSession session) {
+	public ModelAndView addservice(@ModelAttribute("service") Service service,BindingResult bindingResult, 
+			Model model, HttpSession session, Authentication auth) {
+		ModelAndView mav = new ModelAndView();
 		serviceValidator.validate(service, bindingResult);
 	    if (bindingResult.hasErrors()){
 	    	logger.info("Returning addservice.jsp page");
-	    	return "director.addservice";
+	    	UserPrincipal user = userService.getUserByName(auth.getName());
+	        mav.addObject("user", user);
+			mav.setViewName("director.addservice");
+	    	return mav;
 	    }
 
 
 	    directorService.addService(service);
-        
-	    return "redirect:/home";
+	    mav.setViewName("redirect:/home");
+	    return mav;
 	}
 	
 	@PreAuthorize("isFullyAuthenticated()") 
@@ -374,36 +427,35 @@ public class DirectorController {
 	};
 	
 	@RequestMapping(value = { "/updatemechanic/{id}" }, method = { RequestMethod.POST })
-	public String updatemechanic(@ModelAttribute("mechanic") Mechanic mechanic,  Model model, HttpSession session) {
-        
-		System.out.println("test test test name mechanic  =  " + mechanic.getName());
-		System.out.println("test test test name sto  =  " + mechanic.getSto().getName());
+	public ModelAndView updatemechanic(@ModelAttribute("mechanic") Mechanic mechanic,  Model model, HttpSession session, Authentication auth) {
+		ModelAndView mav = new ModelAndView();
 		Mechanic mechanic1 = directorService.getMechanicById(mechanic.getUserId());
 		mechanic.setLogin(mechanic.getName());
 		mechanic.setRating(mechanic1.getRating());
 		mechanic.setRole(UserRole.MECHANIC);
 	    directorService.saveOrUpdateMechanic(mechanic);
-        
-	    return "redirect:/home";
+        mav.setViewName("redirect:/home");
+	    return mav;
 	}
 	
 	@RequestMapping(value = { "/addmechanic" }, method = { RequestMethod.POST })
-	public String addmechanic(@ModelAttribute("mechanic") Mechanic mechanic, BindingResult bindingResult,
-			Model model, HttpSession session) {
+	public ModelAndView addmechanic(@ModelAttribute("mechanic") Mechanic mechanic, BindingResult bindingResult,
+			Model model, HttpSession session, Authentication auth) {
+		ModelAndView mav = new ModelAndView();
 		mechanicValidator.validate(mechanic, bindingResult);
 	    if (bindingResult.hasErrors()){
-	    	  	return "director.addmechanic";
+	    	UserPrincipal user = userService.getUserByName(auth.getName());
+	        mav.addObject("user", user);
+	    	mav.addObject("stos", directorService.getSto());
+			mav.setViewName("director.addmechanic");
+	    	  	return mav;
 	    }
-        
-		
-		System.out.println("test test test name mechanic  =  " + mechanic.getName());
-		System.out.println("test test test name sto  =  " + mechanic.getSto().getName());
 		mechanic.setLogin(mechanic.getName());
 		mechanic.setRating((float)0);
 		mechanic.setRole(UserRole.MECHANIC);
 	    directorService.saveOrUpdateMechanic(mechanic);
-        
-	    return "redirect:/home";
+	    mav.setViewName("redirect:/home");
+	    return mav;
 	}
 	
 	@PreAuthorize("isFullyAuthenticated()") 
@@ -447,11 +499,17 @@ public class DirectorController {
 	};
 	
 	@RequestMapping(value = { "/updateapplicationdetail/{id}" }, method = { RequestMethod.POST })
-	public String updateapplicationdetail(@ModelAttribute("applicationdetails") ApplicationDetail applicationDetail, BindingResult bindingResult,
-			Model model, HttpSession session) {
+	public ModelAndView updateapplicationdetail(@PathVariable Long id, @ModelAttribute("applicationdetails") ApplicationDetail applicationDetail, BindingResult bindingResult,
+			Model model, HttpSession session, Authentication auth) {
+		ModelAndView mav = new ModelAndView();
 		applicationDetailValidator.validate(applicationDetail, bindingResult);
 	    if (bindingResult.hasErrors()){
-	    	  	return "director.addservice";
+	    	UserPrincipal user = userService.getUserByName(auth.getName());
+	    	mav.addObject("statuss", directorService.getStatus());
+			mav.addObject("applicationdetail", directorService.getApplicationDetailById(id));
+	        mav.addObject("user", user);
+			mav.setViewName("director.updateapplicationdetail");
+	    	  	return mav;
 	    }
 		
         ApplicationDetail applicationDetail1= directorService.getApplicationDetailById(applicationDetail.getId());
@@ -459,8 +517,8 @@ public class DirectorController {
         applicationDetail1.setDateDelivery(applicationDetail.getDateDelivery());
        // applicationDetail.setId(1l);
 	    directorService.saveApplicationDetail(applicationDetail1);
-        
-	    return "redirect:/home";
+	    mav.setViewName("redirect:/home");
+	    return mav;
 	}
 	
 	@PreAuthorize("isFullyAuthenticated()") 

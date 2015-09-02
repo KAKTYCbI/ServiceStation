@@ -149,6 +149,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/director/director-addrent.jsp" />
 	</definition>
 	
+	<definition name="director.getreport" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/director/director-addreport.jsp" />
+	</definition>
+	
 	<definition name="director.addsto" extends="base.definition">
 		<put-attribute name="title" expression="TEST: ${user.name}" />
 		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
@@ -203,6 +209,18 @@
 		<put-attribute name="title" expression="TEST: ${user.name}" />
 		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/director/director-mechanicinfo.jsp" />
+	</definition>
+	
+	<definition name="director.reportsto" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/director/director-reportsto.jsp" />
+	</definition>
+	
+	<definition name="director.reportall" extends="base.definition">
+		<put-attribute name="title" expression="TEST: ${user.name}" />
+		<put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/director/director-reportall.jsp" />
 	</definition>
 	
 	<definition name="director.addmechanic" extends="base.definition">
