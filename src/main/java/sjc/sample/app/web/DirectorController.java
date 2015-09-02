@@ -236,9 +236,9 @@ public class DirectorController {
 		    	logger.info("Returning getreport.jsp page");
 		    	UserPrincipal user = userService.getUserByName(auth.getName());
 		    	mav.addObject("user", user);
-		    	mav.addObject("reportinfo", new ReportInfo());
+		    	
 		        mav.addObject("stos", directorService.getSto());
-		        mav.setViewName("director.addreport");
+		        mav.setViewName("director.getreport");
 		    	return mav;
 		    } else{
 		

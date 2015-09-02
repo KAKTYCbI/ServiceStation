@@ -18,6 +18,8 @@ public class ReportValidator implements Validator {
 	public void validate(Object obj, Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dateStart", "dateStart.required", "dateStart is required"); 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dateFinish", "dateFinish.required", "dateFinish is required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "whom", "О ком.required", "Выберете значение");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sto", "sto.required", "Выберете значение");
 		
 	}
 
