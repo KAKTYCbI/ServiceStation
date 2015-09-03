@@ -103,7 +103,7 @@ public class ClientController {
        Client client = clientService.getCilentById(user.getUserId());
        application.setClient(client);
        Status status = clientService.getStatusByName("zajavka ozhidaet obrabotku");
-        System.out.println("òåñò òåñò òåñò " + status.getStatus());
+        System.out.println("Ã²Ã¥Ã±Ã² Ã²Ã¥Ã±Ã² Ã²Ã¥Ã±Ã² " + status.getStatus());
         application.setStatus(status);
         clientService.addOrUpdateApplication(application);
         mav.setViewName("redirect:/home");
@@ -127,7 +127,7 @@ public class ClientController {
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = { "/addreview/{id}" }, method = { RequestMethod.POST })
-	public ModelAndView addreview(@PathVariable Long id,@ModelAttribute("addreiew") Review review, BindingResult bindingResult,
+	public ModelAndView addreview(@PathVariable Long id,@ModelAttribute("review") Review review, BindingResult bindingResult,
 			Model model, HttpSession session, Authentication auth) {
 		ModelAndView mav = new ModelAndView();
 		reviewValidator.validate(review, bindingResult);
@@ -138,15 +138,11 @@ public class ClientController {
 			Application application = mechanicService.getApplicationById(id);
 			mave.addObject("application", application);
 	        mave.addObject("user", user);
-	        mave.addObject("review", new Review());
-			mave.setViewName("client.addreview");
+	        mave.setViewName("client.addreview");
 			return mave;
-		};
+		}
 	    
-//	@PreAuthorize("isFullyAuthenticated()") 
-//	@RequestMapping(value = { "/addreview/{id}" }, method = { RequestMethod.POST })
-//	public String addreview( @PathVariable Long id, @ModelAttribute("review") Review review,  Model model, HttpSession session, Authentication auth) {
-        Application application = mechanicService.getApplicationById(id); 
+	    Application application = mechanicService.getApplicationById(id); 
         UserPrincipal user = userService.getUserByName(auth.getName());
         Client client =  application.getClient();
         review.setClient(client);

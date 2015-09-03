@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/main/java/sjc/sample/app/web/ClientController.java=UTF-8
 encoding//src/main/webapp/WEB-INF/tiles-base/header.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/tiles-base/menu.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/director/director-addservice.jsp=UTF-8
