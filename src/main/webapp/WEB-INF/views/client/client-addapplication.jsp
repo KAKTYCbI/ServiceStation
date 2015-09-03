@@ -48,6 +48,8 @@
           </c:forEach>
           </form:select>
         </td>
+        
+     
       
       </tr>
             <tr>
@@ -63,7 +65,7 @@
         </td>
 
       </tr>
-
+<td><form:errors path="services" cssClass="error"/></td>
       <tr>
         <td colspan="2"><input type="SUBMIT" value="addapplication"></td>
       </tr>

@@ -8,11 +8,14 @@ import javax.servlet.http.HttpSession;
 
 import net.sf.seaf.util.convert.simple.ConverterToInteger;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +29,7 @@ import sjc.example.domain.service.MechanicService;
 import sjc.example.domain.service.UserService;
 import sjc.example.domain.model.Application;
 import sjc.example.domain.model.Client;
+import sjc.example.domain.model.Detail;
 import sjc.example.domain.model.Guest;
 import sjc.example.domain.model.Mechanic;
 import sjc.example.domain.model.Message;
@@ -35,11 +39,15 @@ import sjc.example.domain.model.Status;
 import sjc.example.domain.model.Sto;
 import sjc.example.domain.model.UserPrincipal;
 import sjc.sample.app.repository.entity.MechanicEntity;
+import sjc.sample.app.repository.entity.validation.ApplicationValidator;
 
 @Controller
 @RequestMapping("/client")
 public class ClientController {
-
+	private static final Logger logger = LoggerFactory.getLogger(DirectorController.class);
+	
+	@Autowired
+	private ApplicationValidator applicationValidator;
 
 	@Autowired
 	private ClientService clientService;
@@ -68,20 +76,36 @@ public class ClientController {
 		mav.setViewName("client.addapplication");
 		return mav;
 	};
-	
-	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = { "/addapplication" }, method = { RequestMethod.POST })
-	public String addapplication(@ModelAttribute("application") Application application,  Model model, HttpSession session, Authentication auth) {
+	public ModelAndView adddetail(@ModelAttribute("application") Application application, BindingResult bindingResult,
+			Model model, HttpSession session, Authentication auth) {
+		ModelAndView mav = new ModelAndView();
+		applicationValidator.validate(application, bindingResult);
+	    if (bindingResult.hasErrors()){
+	    	logger.info("Returning addapplication.jsp page");
+	    	ModelAndView mave = new ModelAndView();
+			UserPrincipal user = userService.getUserByName(auth.getName());
+			mave.addObject("service", clientService.getService());
+			mave.addObject("stos",directorService.getSto());
+	        mave.addObject("user", user);
+	        mave.setViewName("client.addapplication");
+	    	return mave;
+	    }
+
+		
         application.setDateOrder(new java.util.Date());
-        UserPrincipal user = userService.getUserByName(auth.getName());
-        Client client = clientService.getCilentById(user.getUserId());
-         application.setClient(client);
+       UserPrincipal user = userService.getUserByName(auth.getName());
+       Client client = clientService.getCilentById(user.getUserId());
+       application.setClient(client);
         Status status = clientService.getStatusByName("zajavka ozhidaet obrabotku");
         System.out.println("тест тест тест " + status.getStatus());
         application.setStatus(status);
         clientService.addOrUpdateApplication(application);
-	    return "redirect:/home";
+        mav.setViewName("redirect:/home");
+    	return mav;
+	   
 	}
+
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/addreview/{id}", method = RequestMethod.GET)
