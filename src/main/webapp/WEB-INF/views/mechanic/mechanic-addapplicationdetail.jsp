@@ -16,7 +16,7 @@
     <table>
     <tr>
         <td>
-          <form:label path = "application">Статус:</form:label>
+          <form:label path = "application">Выберите заявку:</form:label>
         </td>
         <td>
           <form:select path="application">
@@ -25,8 +25,9 @@
 		  </c:forEach>
         </form:select>
         </td>
+        <td><form:errors path="application" cssClass="error"/></td>
       </tr> 
-    
+   
       <tr>
         <td>
           <form:label path = "name">Название детали:</form:label>

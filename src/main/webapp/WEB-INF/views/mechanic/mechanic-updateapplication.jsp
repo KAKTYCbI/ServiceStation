@@ -12,7 +12,7 @@
       <div class = "review">
          <div class = "reviewtop"></div>
             <div class = "reviewcenter">
-     <form:form method = "post" action = "updateapplication" commandName = "application">
+     <form:form method = "post" action = "../updateapplication/${application.id }" commandName = "application">
    
      <ul>
       <table>

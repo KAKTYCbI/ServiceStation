@@ -17,7 +17,7 @@ public class ApplicationValidator implements Validator{
 	public void validate(Object obj, Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mechanic", "mechanic.required", "mechanic is required"); 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "status", "status.required", "status is required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dateComlpetion", "dateComlpetion.required", "dateComlpetion is required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dateCompletion", "dateCompletion.required", "dateComlpetion is required");
 		
 	}
 

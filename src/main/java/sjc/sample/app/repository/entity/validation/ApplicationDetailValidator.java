@@ -18,6 +18,7 @@ public class ApplicationDetailValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dateDelivery", "date.required", "date is required"); 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "status", "status.required", "status is required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "name.required", "name is required"); 
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "application", "application.required", "application is required"); 
 		
 	}
 

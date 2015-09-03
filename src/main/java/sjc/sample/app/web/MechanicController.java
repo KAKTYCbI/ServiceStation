@@ -153,7 +153,7 @@ public class MechanicController {
 	};
 	
 	@RequestMapping(value = { "/addapplicationdetail" }, method = { RequestMethod.POST })
-	public ModelAndView addapplicationdetail(@ModelAttribute("applicationdetails") ApplicationDetail applicationDetail,Authentication auth,
+	public ModelAndView addapplicationdetail(@ModelAttribute("applicationdetail") ApplicationDetail applicationDetail,Authentication auth,
 			BindingResult bindingResult, Model model, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		applicationDetailValidator.validate(applicationDetail,bindingResult);
@@ -163,6 +163,7 @@ public class MechanicController {
 	    	Status status =clientService.getStatusByName("net nuznych detaley");
 	    	Number size1 = directorService.getSizeApplicationByStatus(status);
 			int size = Integer.parseInt(size1.toString());
+			//mav.addObject("applicationdetail", new ApplicationDetail());
 			mav.addObject("applications", directorService.getApplicationByStatus(status, 0, size));
 		    mav.addObject("user", user);
 			mav.setViewName("mechanic.addapplicationdetail");
