@@ -40,11 +40,15 @@ import sjc.example.domain.model.Sto;
 import sjc.example.domain.model.UserPrincipal;
 import sjc.sample.app.repository.entity.MechanicEntity;
 import sjc.sample.app.repository.entity.validation.ApplicationValidator;
+import sjc.sample.app.repository.entity.validation.ReviewValidator;
 
 @Controller
 @RequestMapping("/client")
 public class ClientController {
 	private static final Logger logger = LoggerFactory.getLogger(DirectorController.class);
+	@Autowired
+	private ReviewValidator reviewValidator;
+
 	
 	@Autowired
 	private ApplicationValidator applicationValidator;
@@ -76,6 +80,7 @@ public class ClientController {
 		mav.setViewName("client.addapplication");
 		return mav;
 	};
+	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = { "/addapplication" }, method = { RequestMethod.POST })
 	public ModelAndView adddetail(@ModelAttribute("application") Application application, BindingResult bindingResult,
 			Model model, HttpSession session, Authentication auth) {
@@ -122,7 +127,25 @@ public class ClientController {
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = { "/addreview/{id}" }, method = { RequestMethod.POST })
-	public String addreview( @PathVariable Long id, @ModelAttribute("review") Review review,  Model model, HttpSession session, Authentication auth) {
+	public ModelAndView addreview(@PathVariable Long id,@ModelAttribute("addreiew") Review review, BindingResult bindingResult,
+			Model model, HttpSession session, Authentication auth) {
+		ModelAndView mav = new ModelAndView();
+		reviewValidator.validate(review, bindingResult);
+	    if (bindingResult.hasErrors()){
+	    	logger.info("Returning addreview.jsp page");
+	    	ModelAndView mave = new ModelAndView();
+			UserPrincipal user = userService.getUserByName(auth.getName());
+			Application application = mechanicService.getApplicationById(id);
+			mave.addObject("application", application);
+	        mave.addObject("user", user);
+	        mave.addObject("review", new Review());
+			mave.setViewName("client.addreview");
+			return mave;
+		};
+	    
+//	@PreAuthorize("isFullyAuthenticated()") 
+//	@RequestMapping(value = { "/addreview/{id}" }, method = { RequestMethod.POST })
+//	public String addreview( @PathVariable Long id, @ModelAttribute("review") Review review,  Model model, HttpSession session, Authentication auth) {
         Application application = mechanicService.getApplicationById(id); 
         UserPrincipal user = userService.getUserByName(auth.getName());
         Client client =  application.getClient();
@@ -171,8 +194,8 @@ public class ClientController {
 			directorService.addSto(sto);
 		}
         
-        
-	    return "redirect:/home";
+        mav.setViewName("redirect:/home");
+	    return mav;
 	}
 	
 	@PreAuthorize("isFullyAuthenticated()") 

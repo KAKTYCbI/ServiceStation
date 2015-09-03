@@ -64,7 +64,7 @@
     <bean id="RentValidator" class="sjc.sample.app.repository.entity.validation.RentValidator" />
      <bean id="applicationValidator" class="sjc.sample.app.repository.entity.validation.ApplicationValidator" />
     <bean id="ReportValidator" class="sjc.sample.app.repository.entity.validation.ReportValidator" />
-    
+    <bean id="ReviewValidator" class="sjc.sample.app.repository.entity.validation.ReviewValidator" />
     
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
