@@ -12,7 +12,7 @@
          <div class = "reviewtop"></div>
             <div class = "reviewcenter">
 <form:form method = "post" action = "addapplication" commandName = "application">
-    <table>
+    <ul><table>
       <tr>
         <td>
           Имя:
@@ -48,7 +48,7 @@
           </c:forEach>
           </form:select>
         </td>
-        
+        <td><form:errors path="sto" cssClass="error"/></td>
      
       
       </tr>
@@ -63,13 +63,13 @@
           </c:forEach>
           </form:select>
         </td>
-
+          <td><form:errors path="services" cssClass="error"/></td>
       </tr>
-<td><form:errors path="services" cssClass="error"/></td>
+
       <tr>
         <td colspan="2"><input type="SUBMIT" value="addapplication"></td>
       </tr>
-    </table>
+    </table></ul>
 </form:form>
             </div>
           <div class = "reviewbottom"></div>

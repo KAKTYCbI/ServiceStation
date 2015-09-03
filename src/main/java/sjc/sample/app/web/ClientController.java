@@ -41,6 +41,7 @@ import sjc.example.domain.model.UserPrincipal;
 import sjc.sample.app.repository.entity.MechanicEntity;
 import sjc.sample.app.repository.entity.validation.ApplicationValidator;
 import sjc.sample.app.repository.entity.validation.ReviewValidator;
+import sjc.sample.app.repository.entity.validation.addApplicationValidator;
 
 @Controller
 @RequestMapping("/client")
@@ -51,7 +52,7 @@ public class ClientController {
 
 	
 	@Autowired
-	private ApplicationValidator applicationValidator;
+	private addApplicationValidator applicationValidator;
 
 	@Autowired
 	private ClientService clientService;
