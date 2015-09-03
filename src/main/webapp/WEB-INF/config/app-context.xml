@@ -61,9 +61,11 @@
 	<bean id="serviceValidator" class="sjc.sample.app.repository.entity.validation.ServiceValidator" />
     <bean id="stoValidator" class="sjc.sample.app.repository.entity.validation.StoValidator" />
     <bean id="applicationDetailValidator" class="sjc.sample.app.repository.entity.validation.ApplicationDetailValidator" />
+    <bean id="addapplicationDetailValidator" class="sjc.sample.app.repository.entity.validation.addApplicationDetailValidator" />
     <bean id="RentValidator" class="sjc.sample.app.repository.entity.validation.RentValidator" />
-     <bean id="applicationValidator" class="sjc.sample.app.repository.entity.validation.ApplicationValidator" />
-       <bean id="addapplicationValidator" class="sjc.sample.app.repository.entity.validation.addApplicationValidator" />
+    <bean id="applicationValidator" class="sjc.sample.app.repository.entity.validation.ApplicationValidator" />
+    <bean id="addapplicationValidator" class="sjc.sample.app.repository.entity.validation.addApplicationValidator" />
+     <bean id="updatemechanicapplicationValidator" class="sjc.sample.app.repository.entity.validation.updateApplicationMechanicValidator" />
     <bean id="ReportValidator" class="sjc.sample.app.repository.entity.validation.ReportValidator" />
     <bean id="ReviewValidator" class="sjc.sample.app.repository.entity.validation.ReviewValidator" />
     

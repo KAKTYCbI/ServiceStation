@@ -35,16 +35,18 @@ import sjc.example.domain.service.MechanicService;
 import sjc.example.domain.service.UserService;
 import sjc.sample.app.repository.entity.validation.ApplicationDetailValidator;
 import sjc.sample.app.repository.entity.validation.ApplicationValidator;
+import sjc.sample.app.repository.entity.validation.addApplicationDetailValidator;
+import sjc.sample.app.repository.entity.validation.updateApplicationMechanicValidator;
 
 @Controller
 @RequestMapping("/mechanic")
 public class MechanicController {
 	private static final Logger logger = LoggerFactory.getLogger(MechanicController.class);
 	@Autowired
-	private ApplicationValidator applicationValidator;
+	private updateApplicationMechanicValidator applicationValidator;
 	
 	@Autowired
-	private ApplicationDetailValidator applicationDetailValidator;
+	private addApplicationDetailValidator applicationDetailValidator;
 	
 	@Autowired
 	private MechanicService mechanicService;
@@ -67,16 +69,6 @@ public class MechanicController {
                 dateFormat, true));
     }
 	
-	/*@PreAuthorize("isFullyAuthenticated()") 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView mechanicHome(HttpSession session, Model model) {
-
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("reviews", userService.getReview());
-		mav.setViewName("review.list");
-		return mav;
-		
-	}*/
 	
 	@PreAuthorize("isFullyAuthenticated()") 
 	@RequestMapping(value = "/getapplication", method = RequestMethod.GET)
@@ -168,14 +160,13 @@ public class MechanicController {
 		    mav.addObject("user", user);
 			mav.setViewName("mechanic.addapplicationdetail");
 			return mav;
-		};
+		}
         
         applicationDetail.setDateOrder(new Date());
         Status status = clientService.getStatusByName("ozhidaetsia obrobotki directora");
         applicationDetail.setStatus(status);
-       // applicationDetail.setId(1l);
 	    directorService.saveApplicationDetail(applicationDetail);
-	    mav.setViewName("home");
+	    mav.setViewName("redirect:/home");
         
 	    return mav;
 	}
@@ -217,7 +208,7 @@ public class MechanicController {
         application1.setDetails(application.getDetails());
         application1.setStatus(application.getStatus());
 	    clientService.addOrUpdateApplication(application1);
-	    mav.setViewName("mechanic.updateapplication");
+	    mav.setViewName("redirect:/home");
 	    return mav;
 	}
 	

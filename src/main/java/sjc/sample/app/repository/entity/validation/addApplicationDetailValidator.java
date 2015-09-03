@@ -6,7 +6,7 @@ import org.springframework.validation.Validator;
 
 import sjc.sample.app.repository.entity.ApplicationDetailEntity;
 
-public class ApplicationDetailValidator implements Validator {
+public class addApplicationDetailValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> param) {
@@ -15,9 +15,8 @@ public class ApplicationDetailValidator implements Validator {
 
 	@Override
 	public void validate(Object obj, Errors errors) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dateDelivery", "date.required", "date is required"); 
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "status", "status.required", "status is required");
-		
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "name.required", "name is required"); 
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "application", "application.required", "application is required"); 
 		
 	}
 

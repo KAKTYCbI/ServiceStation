@@ -67,12 +67,14 @@
         </td>
         <td>
           <form:select path="status">
-          <form:option value="status" label="${application.status.status }" />
+          
           <c:forEach items="${statuss}" var="statuss" >
           <c:if test="${application.status.status ne statuss.status}">
 			<option path ="status">${statuss.status}</option>	
-		</c:if>
-		 </c:forEach>
+		  </c:if>
+		  </c:forEach>
+		
+		 <option path="status" >${application.status.status}</option>
         </form:select>
         </td>
         <td><form:errors path="status" cssClass="error" /></td>

@@ -16,11 +16,12 @@
    
      <ul>
       <table>
-     <b>О ком:</b> <td><form:errors path="whom" cssClass="error"/></td>
+     <b>О ком:
 				<form:radiobutton path="whom" value="all" /> All
-	            <form:radiobutton path="whom" value="sto" /> Sto</br></br>
+	            <form:radiobutton path="whom" value="sto" /> Sto
+	            </b> <form:errors path="whom" cssClass="error"/></br></br>
 	                    <form:label path = "sto">СТО</form:label>
-	                    <td><form:errors path="sto" cssClass="error"/></td>
+	                    <form:errors path="sto" cssClass="error"/>
         
         
                      <form:select path="sto">

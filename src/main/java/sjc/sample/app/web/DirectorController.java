@@ -572,9 +572,10 @@ public class DirectorController {
 	public ModelAndView updateapplication(@PathVariable Long id,@ModelAttribute("application") Application application,  Model model,BindingResult bindingResult,
 			HttpSession session,  Authentication auth) {
 		ModelAndView mav = new ModelAndView();
+		Application application1 = mechanicService.getApplicationById(id);
 		applicationValidator.validate(application, bindingResult);
 		if (bindingResult.hasErrors()){
-			Application application1 = mechanicService.getApplicationById(id);
+			
 			UserPrincipal user = userService.getUserByName(auth.getName());
 			Number size1 = directorService.getSizeMechanicOnSto(application1.getSto());
 			int size = Integer.parseInt(size1.toString());
@@ -586,7 +587,7 @@ public class DirectorController {
 	    	  	return mav;
 	    }
 
-		Application application1 = mechanicService.getApplicationById(application.getId());
+		
         application1.setMechanic(application.getMechanic());
         application1.setStatus(application.getStatus());
 	    clientService.addOrUpdateApplication(application1);

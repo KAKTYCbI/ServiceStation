@@ -13,7 +13,7 @@
 	<div class="review">
 		<div class="reviewtop"></div>
 		<div class="reviewcenter">
-		<ul>	<form:form method="post" action="updatemechanic" commandName="mechanic">
+		<ul>	<form:form method="post" action="../updatemechanic/${mechanic.userId }" commandName="mechanic">
 				<table>
 				    <tr>
 				        <td><form:label path="userId">№:</form:label></td>
