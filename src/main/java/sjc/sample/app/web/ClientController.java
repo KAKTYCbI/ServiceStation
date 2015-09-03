@@ -83,21 +83,21 @@ public class ClientController {
 		applicationValidator.validate(application, bindingResult);
 	    if (bindingResult.hasErrors()){
 	    	logger.info("Returning addapplication.jsp page");
-	    	ModelAndView mave = new ModelAndView();
+	    	
 			UserPrincipal user = userService.getUserByName(auth.getName());
-			mave.addObject("service", clientService.getService());
-			mave.addObject("stos",directorService.getSto());
-	        mave.addObject("user", user);
-	        mave.setViewName("client.addapplication");
-	    	return mave;
+			mav.addObject("service", clientService.getService());
+			mav.addObject("stos",directorService.getSto());
+	        mav.addObject("user", user);
+	        mav.setViewName("client.addapplication");
+	    	return mav;
 	    }
 
 		
-        application.setDateOrder(new java.util.Date());
+       application.setDateOrder(new java.util.Date());
        UserPrincipal user = userService.getUserByName(auth.getName());
        Client client = clientService.getCilentById(user.getUserId());
        application.setClient(client);
-        Status status = clientService.getStatusByName("zajavka ozhidaet obrabotku");
+       Status status = clientService.getStatusByName("zajavka ozhidaet obrabotku");
         System.out.println("тест тест тест " + status.getStatus());
         application.setStatus(status);
         clientService.addOrUpdateApplication(application);
