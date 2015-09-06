@@ -13,6 +13,7 @@
 	<div class="review">
 		<div class="reviewtop"></div>
 		<div class="reviewcenter">
+		<ul>
 			<form:form method="post" action="addmechanic" commandName="mechanic">
 				<table>
 					<tr>
@@ -56,12 +57,13 @@
 
 
 					<tr>
-						<td colspan="2"><input type="SUBMIT" value="addmechanic"></td>
+						<td colspan="2"><input type="SUBMIT" value="Добавить механика"></td>
 					</tr>
 
 				</table>
 
 			</form:form>
+			</ul>
 		</div>
 	<div class = "reviewbottom"></div>
 	</div>

@@ -39,7 +39,7 @@
       </tr>
       
       <tr>
-        <td colspan="2"><input type="SUBMIT" value="addapplicationdetail"></td>
+        <td colspan="2"><input type="SUBMIT" value="Дабавить заявку на деталь"></td>
       </tr>
     </table>
 </form:form>

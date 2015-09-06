@@ -30,7 +30,7 @@
 	            
 	          </br> 
 	          
-              <input type="SUBMIT" value="addreview">
+              <input type="SUBMIT" value="Добавить отзыв">
              </ul>
 			</form:form>
 

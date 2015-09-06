@@ -36,7 +36,7 @@
       </tr>
       
       <tr>
-        <td colspan="2"><input type="SUBMIT" value="updatesto"></td>
+        <td colspan="2"><input type="SUBMIT" value="Обновить"></td>
       </tr>
     </table>
   </form:form>

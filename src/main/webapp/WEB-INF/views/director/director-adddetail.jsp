@@ -36,7 +36,7 @@
       </tr>
       
       <tr>
-        <td colspan="2"><input type="SUBMIT" value="adddetail"></td>
+        <td colspan="2"><input type="SUBMIT" value="Добавить деталь"></td>
       </tr>
     </table>
   </form:form></ul>

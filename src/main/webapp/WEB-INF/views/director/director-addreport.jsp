@@ -53,7 +53,7 @@
       </tr>
       
       <tr>
-        <td colspan="2"><input type="SUBMIT" value="report"></td>
+        <td colspan="2"><input type="SUBMIT" value="Построить отчет"></td>
       </tr>          
               </table>
             </ul>

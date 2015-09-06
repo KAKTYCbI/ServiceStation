@@ -133,7 +133,7 @@
         </td>
       </tr>
       <tr>
-        <td colspan="2"><input type="SUBMIT" value="updateapplication"></td>
+        <td colspan="2"><input type="SUBMIT" value="Обновить"></td>
       </tr>          
               </table>
             </ul>

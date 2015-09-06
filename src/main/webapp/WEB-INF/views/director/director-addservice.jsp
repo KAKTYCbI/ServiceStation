@@ -36,7 +36,7 @@
       </tr>
       
       <tr>
-        <td colspan="2"><input type="SUBMIT" value="addservice"></td>
+        <td colspan="2"><input type="SUBMIT" value="Добавить услугу"></td>
       </tr>
     </table>
   </form:form></ul>

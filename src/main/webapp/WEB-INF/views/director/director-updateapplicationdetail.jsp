@@ -55,7 +55,7 @@
 
 						<tr>
 							<td colspan="2"><input type="SUBMIT"
-								value="updateapplicationdetail"></td>
+								value="Обновить"></td>
 						</tr>
 					</table>
 				</form:form>

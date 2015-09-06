@@ -67,7 +67,7 @@
       </tr>
 
       <tr>
-        <td colspan="2"><input type="SUBMIT" value="addapplication"></td>
+        <td colspan="2"><input type="SUBMIT" value="Добавить заявку"></td>
       </tr>
     </table></ul>
 </form:form>

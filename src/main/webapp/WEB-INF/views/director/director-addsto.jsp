@@ -36,7 +36,7 @@
       </tr>
       
       <tr>
-        <td colspan="2"><input type="SUBMIT" value="addsto"></td>
+        <td colspan="2"><input type="SUBMIT" value="Добавить СТО"></td>
       </tr>
     </table>
   </form:form></ul>

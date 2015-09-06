@@ -33,17 +33,7 @@
 
 	<definition name="custom.error" template="/WEB-INF/views/error-custom.jsp"/>
 	
-	<definition name="profile" extends="base.definition">
-		<put-attribute name="title" value="User Profile ${user.name} - no support" />
-		<put-attribute name="body" value="/WEB-INF/views/user/profile.jsp" />
-	</definition>
-
-	<definition name="client.list" extends="base.definition">
-		<put-attribute name="title" expression="TEST: ${user.name}" />
-		<put-attribute name="body" value="/WEB-INF/views/client/client-list.jsp" />
-	</definition>
-
-    <definition name="home" extends="base.definition">
+	<definition name="home" extends="base.definition">
 		<put-attribute name="title" expression="TEST: ${user.name}" />
 		<put-attribute name="body" value="/WEB-INF/views/user/home.jsp" />
 	    <put-attribute name="menu" value="/WEB-INF/tiles-base/menu.jsp" />
@@ -229,16 +219,5 @@
 		<put-attribute name="body" value="/WEB-INF/views/director/director-addmechanic.jsp" />
 	</definition>
 	
-	<definition name="client.form.edit" extends="base.definition">
-		<put-attribute name="title" expression="${clients.manager.title}" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/client/client-form-edit.jsp" />
-	</definition>
-
-	<definition name="client.details" extends="base.definition">
-		<put-attribute name="title" expression="${clients.manager.title}" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/client/client-details.jsp" />
-	</definition>
-
+	
 </tiles-definitions>

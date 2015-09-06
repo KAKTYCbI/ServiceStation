@@ -31,7 +31,7 @@
       
       
       <tr>
-        <td colspan="2"><input type="SUBMIT" value="addrent"></td>
+        <td colspan="2"><input type="SUBMIT" value="Оплатить"></td>
       </tr>
     </table>
   </form:form></ul>

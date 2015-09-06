@@ -58,7 +58,7 @@
 
 
 					<tr>
-						<td><input type="SUBMIT" value="updatemechanic"></td>
+						<td><input type="SUBMIT" value="Обновить"></td>
 						<td><a href="<c:url value='/director/addsalary/${mechanic.userId }' />">Выдать зарплату</a></td>
 						
 					</tr>
