@@ -22,7 +22,7 @@ public class ClientValidator implements Validator {
     	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "email.required", "email is required");  
     	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "contact", "contatc.required", "contatc is required");  
     	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "password.required", "password is required");  
-    	
+    	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "login", "login.required", "login is required");  
 
          
     }
